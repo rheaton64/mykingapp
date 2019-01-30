@@ -6,6 +6,8 @@
 //  Copyright © 2019 Ryan Heaton. All rights reserved.
 //
 
+// Test comment for git commit
+
 import UIKit
 
 class ViewController: UIViewController {
