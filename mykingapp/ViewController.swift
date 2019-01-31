@@ -20,9 +20,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print("Hello!")
         print ("spencer was here")
+        
+        natashasMethod()
+
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
+    func natashasMethod() {
+        print("hello everyone")
+    }
 
 }
 
