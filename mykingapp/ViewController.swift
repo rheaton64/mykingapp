@@ -19,9 +19,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Hello!")
+        
+        natashasMethod()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
+    func natashasMethod() {
+        print("hello everyone")
+    }
 
 }
 
