@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "KingLogo.App.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "KingLogo.App.png",
       "scale" : "2x"
     },
     {

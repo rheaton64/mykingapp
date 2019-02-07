@@ -8,22 +8,19 @@
 
 import UIKit
 
-class AssignmentsTableViewCell: UITableViewCell /* , UITableViewDelegate, UITableViewDataSource */ {
+class AssignmentsTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var assignmentNumber: UILabel!
+    @IBOutlet weak var assignmentClassLbl: UILabel!
+    @IBOutlet weak var assignmentDetailLbl: UILabel!
+    @IBOutlet weak var assignmentHeaderLbl: UILabel!
     
-    /*func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
-    }
+   
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }*/
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
