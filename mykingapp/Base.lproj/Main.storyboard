@@ -232,7 +232,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="ASSIGNMENTS" id="AVs-t5-qGC">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssignmentCell" rowHeight="135" id="PCM-KJ-q4I" customClass="AssignmentsTableViewCell" customModule="mykingapp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="135" id="PCM-KJ-q4I" customClass="AssignmentsTableViewCell" customModule="mykingapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="449" width="375" height="135"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PCM-KJ-q4I" id="Dtb-iI-NVM">
@@ -243,7 +243,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssignmentsCell" rowHeight="90" id="unY-5L-em0" customClass="AssignmentsTableViewCell" customModule="mykingapp" customModuleProvider="target">
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="AssignmentsCell" rowHeight="90" id="unY-5L-em0" customClass="AssignmentsTableViewCell" customModule="mykingapp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="unY-5L-em0" id="FJ8-fZ-qx1">
@@ -289,6 +289,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
+                                                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="zFw-QT-saD" firstAttribute="leading" secondItem="FJ8-fZ-qx1" secondAttribute="leadingMargin" id="BoA-Vd-JWC"/>
                                                                     <constraint firstItem="zFw-QT-saD" firstAttribute="top" secondItem="FJ8-fZ-qx1" secondAttribute="topMargin" id="Wci-zt-84H"/>
@@ -304,6 +305,10 @@
                                                             </connections>
                                                         </tableViewCell>
                                                     </prototypes>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="N9H-gd-SQg" id="R2t-zX-pRK"/>
+                                                        <outlet property="delegate" destination="N9H-gd-SQg" id="5lO-f3-yes"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                             <constraints>

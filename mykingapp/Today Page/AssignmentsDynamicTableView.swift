@@ -11,7 +11,7 @@ import UIKit
 class AssignmentsDynamicTableView: UITableViewController {
     
     var assignmentDetail: [String] = []
-    var assignmentClass: [String] = ["MATH"]
+    var assignmentClass: [String] = ["MATH", "ENGLISH", "PHYSICS"]
     var classColor: [UIColor] = []
     var assignmentHeader: [String] = []
 
@@ -35,7 +35,7 @@ class AssignmentsDynamicTableView: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let subcell = tableView.dequeueReusableCell(withIdentifier: "assignmentsCell") as? AssignmentsTableViewCell else {
+        guard let subcell = tableView.dequeueReusableCell(withIdentifier: "AssignmentsCell") as? AssignmentsTableViewCell else {
             fatalError("Could not dequeue a cell")
         }
         subcell.assignmentNumber.layer.borderWidth = 1

@@ -56,10 +56,11 @@ class TodaySuperTableViewController: UITableViewController {
         label.frame = CGRect(x: 16, y: 5, width: 200, height: 35)
         label.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
         label.textColor = colors[section]
-        
         view.addSubview(label)
         return view
     }
+    
+    
     
     // MARK: - Table view data source
 //CLOSED OFF FOR UI TESTING PURPOSES, WILL GET SIGBRT IF IT
@@ -130,7 +131,7 @@ class TodaySuperTableViewController: UITableViewController {
         var passwordTextField: UITextField?
         
         let alertController = UIAlertController(
-            title: "Log in",
+            title: "Sign in",
             message: "Please enter your credentials",
             preferredStyle: .alert)
 
