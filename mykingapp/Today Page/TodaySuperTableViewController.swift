@@ -56,33 +56,24 @@ class TodaySuperTableViewController: UITableViewController {
         label.frame = CGRect(x: 16, y: 5, width: 200, height: 35)
         label.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
         label.textColor = colors[section]
-        
         view.addSubview(label)
         return view
     }
     
+    
+    
     // MARK: - Table view data source
 //CLOSED OFF FOR UI TESTING PURPOSES, WILL GET SIGBRT IF IT
     //IS NOT CLOSED OFF 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+   /* override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
-    }
+    } */
 
     /*override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 3
     }*/
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -140,7 +131,7 @@ class TodaySuperTableViewController: UITableViewController {
         var passwordTextField: UITextField?
         
         let alertController = UIAlertController(
-            title: "Log in",
+            title: "Sign in",
             message: "Please enter your credentials",
             preferredStyle: .alert)
 
