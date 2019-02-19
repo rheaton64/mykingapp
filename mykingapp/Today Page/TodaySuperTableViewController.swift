@@ -8,8 +8,36 @@
 
 import UIKit
 
+class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
+    
+    var assignmentDetail: [String] = ["Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all"]
+    var assignmentClass: [String] = ["AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C"]
+    var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
+    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion"]
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return assignmentClass.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let subcell = tableView.dequeueReusableCell(withIdentifier: "dynamicCell", for: indexPath) as! AssignmentsTableViewCell
+        subcell.assignmentNumber.layer.cornerRadius = 21
+        subcell.assignmentNumber.layer.borderColor = UIColor.orange.cgColor
+        subcell.assignmentNumber.layer.borderWidth = 2
+        subcell.assignmentNumber.text = "\(indexPath.row + 1)"
+        subcell.assignmentClassLbl.text = assignmentClass[indexPath.row]
+        subcell.assignmentClassLbl.textColor = classColor[indexPath.row]
+        subcell.assignmentHeaderLbl.text = assignmentHeader[indexPath.row]
+        subcell.assignmentDetailLbl.text = assignmentDetail[indexPath.row]
+        
+        return subcell
+    }
+    
+}
+
 class TodaySuperTableViewController: UITableViewController {
 
+    @IBOutlet weak var dynamicTableView: UITableView!
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var assignmentsView: UIView!
     @IBOutlet weak var testsView: UIView!
@@ -17,11 +45,14 @@ class TodaySuperTableViewController: UITableViewController {
     
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
+    var datasource = DataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFunc()
         getTodayItemBorder()
+        dynamicTableView.dataSource = datasource
+        dynamicTableView.delegate = datasource
     }
     
     func getTodayItemBorder(){
@@ -44,7 +75,7 @@ class TodaySuperTableViewController: UITableViewController {
     func dateFunc(){
         let today = Date()
         let format = DateFormatter()
-        format.dateFormat = "EEEE MMMM d"
+        format.dateFormat = "EEEE    MMMM d"
         DateLabel.text = format.string(from: today).uppercased()
     }
     
@@ -60,20 +91,24 @@ class TodaySuperTableViewController: UITableViewController {
         return view
     }
     
-    
-    
-    // MARK: - Table view data source
-//CLOSED OFF FOR UI TESTING PURPOSES, WILL GET SIGBRT IF IT
-    //IS NOT CLOSED OFF 
-   /* override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return sections.count
-    } */
+    var height = Int()
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            height = 1
+        } else {
+            height = 40
+        }
+        return CGFloat(height)
+    }
 
-    /*override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
-    }*/
+    // MARK: - Table view data source
+   override func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
 
     /*
     // Override to support conditional editing of the table view.
