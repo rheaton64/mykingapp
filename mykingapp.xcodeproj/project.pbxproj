@@ -17,7 +17,6 @@
 		D58B97BF220BC0D0009BEA7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D58B97BE220BC0D0009BEA7F /* Assets.xcassets */; };
 		D5C598AB220A00B200538DEA /* AssignmentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C598A9220A00B100538DEA /* AssignmentsTableViewCell.swift */; };
 		D5C598AC220A00B200538DEA /* TodaySuperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C598AA220A00B100538DEA /* TodaySuperTableViewController.swift */; };
-		D5C598AE220A924600538DEA /* AssignmentsDynamicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C598AD220A924600538DEA /* AssignmentsDynamicTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		D58B97BE220BC0D0009BEA7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5C598A9220A00B100538DEA /* AssignmentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentsTableViewCell.swift; sourceTree = "<group>"; };
 		D5C598AA220A00B100538DEA /* TodaySuperTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaySuperTableViewController.swift; sourceTree = "<group>"; };
-		D5C598AD220A924600538DEA /* AssignmentsDynamicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsDynamicTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				D5C598AA220A00B100538DEA /* TodaySuperTableViewController.swift */,
-				D5C598AD220A924600538DEA /* AssignmentsDynamicTableView.swift */,
 				D5C598A9220A00B100538DEA /* AssignmentsTableViewCell.swift */,
 			);
 			path = "Today Page";
@@ -169,7 +166,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5C598AE220A924600538DEA /* AssignmentsDynamicTableView.swift in Sources */,
 				8FCA62852202116B00A87CAD /* ViewController.swift in Sources */,
 				0D46DDB722054103008165FC /* MoreClassInfo.swift in Sources */,
 				0D46DDAF2204B977008165FC /* ClassesVC.swift in Sources */,
