@@ -603,7 +603,7 @@
         <!--Schedule-->
         <scene sceneID="Hvz-Af-cq1">
             <objects>
-                <viewController title="Schedule" id="Nz6-jH-ncg" sceneMemberID="viewController">
+                <viewController title="Schedule" id="Nz6-jH-ncg" customClass="ScheduleViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="byZ-jP-yku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -618,7 +618,7 @@
         <!--Find a Teacher-->
         <scene sceneID="NOE-rz-UWy">
             <objects>
-                <viewController title="Find a Teacher" id="dnu-Vb-Ih9" sceneMemberID="viewController">
+                <viewController title="Find a Teacher" id="dnu-Vb-Ih9" customClass="FindTeachViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HK6-oZ-rHQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -633,7 +633,7 @@
         <!--Events-->
         <scene sceneID="o2x-tx-e0N">
             <objects>
-                <viewController title="Events" id="jQq-0y-xnt" sceneMemberID="viewController">
+                <viewController title="Events" id="jQq-0y-xnt" customClass="EventsViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2cd-pt-TFI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -648,7 +648,7 @@
         <!--Announcements-->
         <scene sceneID="oBV-tb-kQw">
             <objects>
-                <viewController title="Announcements" id="ggv-Z7-CP7" sceneMemberID="viewController">
+                <viewController title="Announcements" id="ggv-Z7-CP7" customClass="AnnounceViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iXa-YO-ayY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -663,7 +663,7 @@
         <!--Grades-->
         <scene sceneID="oGw-L6-I6W">
             <objects>
-                <viewController title="Grades" id="NZl-fr-5zO" sceneMemberID="viewController">
+                <viewController title="Grades" id="NZl-fr-5zO" customClass="GradesViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="v7n-Vy-kXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
