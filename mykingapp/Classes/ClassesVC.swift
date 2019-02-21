@@ -53,9 +53,12 @@ class ClassesVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "MoreInfo" {
-          let passingTo = segue.destination as! MoreClassInfo
-            passingTo.passedName = studentclass[selectedCell]
-            passingTo.passedColor = Colors[selectedCell]
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! MoreClassInfo
+                destinationController.passedName = studentclass[indexPath.row]
+                destinationController.passedColor = Colors[indexPath.row]
+                
+            }
         }
     }
     }
