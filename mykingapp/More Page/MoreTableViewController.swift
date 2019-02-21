@@ -37,23 +37,21 @@ class MoreTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //these make each of the disclosure indicators show up for each row 
+        let cell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath)
+        cell!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
-        let cell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! UITableViewCell
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        let cell1 = tableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath)
+        cell1!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
+        let cell2 = tableView.cellForRow(at: NSIndexPath(row: 2, section: 0) as IndexPath)
+        cell2!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
-        let cell1 = tableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath) as! UITableViewCell
-        cell1.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        let cell3 = tableView.cellForRow(at: NSIndexPath(row: 3, section: 0) as IndexPath)
+        cell3!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
-        
-        let cell2 = tableView.cellForRow(at: NSIndexPath(row: 2, section: 0) as IndexPath) as! UITableViewCell
-        cell2.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        
-        let cell3 = tableView.cellForRow(at: NSIndexPath(row: 3, section: 0) as IndexPath) as! UITableViewCell
-        cell3.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        
-        let cell4 = tableView.cellForRow(at: NSIndexPath(row: 4, section: 0) as IndexPath) as! UITableViewCell
-        cell4.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        let cell4 = tableView.cellForRow(at: NSIndexPath(row: 4, section: 0) as IndexPath)
+        cell4!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
     }
     
