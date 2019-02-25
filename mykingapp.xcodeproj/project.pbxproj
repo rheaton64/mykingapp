@@ -67,6 +67,13 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		6E684C14222426F5002B7278 /* Upcoming Page */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Upcoming Page";
+			sourceTree = "<group>";
+		};
 		6EBCA20B221DC0D40041E209 /* More Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				8FCA62862202116B00A87CAD /* Main.storyboard */,
+				6E684C14222426F5002B7278 /* Upcoming Page */,
 				6EBCA20B221DC0D40041E209 /* More Page */,
 				D5C598A8220A00B100538DEA /* Today Page */,
 				0D46DDAD2204B92C008165FC /* Classes */,
@@ -200,7 +208,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5C598AE220A924600538DEA /* AssignmentsDynamicTableView.swift in Sources */,
 				6EBCA20A221DBE6B0041E209 /* MoreTableViewController.swift in Sources */,
 				8FCA62852202116B00A87CAD /* ViewController.swift in Sources */,
 				6EC5CC08221F359E00551E17 /* AnnounceViewController.swift in Sources */,
