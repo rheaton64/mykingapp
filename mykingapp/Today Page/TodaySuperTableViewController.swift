@@ -15,6 +15,9 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
     var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
+   
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assignmentClass.count
     }
@@ -42,12 +45,35 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var assignmentsView: UIView!
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
+    @IBOutlet weak var periodProgressBar: UIProgressView!
+    
     
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
     
+    
+    
+    
+    
+    func ProgressBar()
+    {
+        let schedule = Days()
+        let day = "A"
+        let currentLetterDay = schedule.GetDay(LetterDay: day)
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = (calendar.component(.hour, from: date))%12
+        let minutes = calendar.component(.minute, from: date)
+        
+        
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
+       
         super.viewDidLoad()
         dateFunc()
         getTodayItemBorder()

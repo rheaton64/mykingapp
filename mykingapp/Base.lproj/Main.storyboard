@@ -555,6 +555,7 @@
                         <outlet property="assignmentsView" destination="KFg-iY-9NM" id="jwG-Ni-BFg"/>
                         <outlet property="dynamicTableView" destination="JxH-eN-HZY" id="ZDL-lb-XSY"/>
                         <outlet property="eventsView" destination="kr1-7a-hvp" id="2I5-jp-VwZ"/>
+                        <outlet property="periodProgressBar" destination="zIf-qk-0Og" id="Dp7-x9-bz3"/>
                         <outlet property="testsView" destination="UuP-FA-K9Y" id="ZmP-9T-vle"/>
                     </connections>
                 </tableViewController>
