@@ -16,6 +16,8 @@
 		6EC5CC04221F357700551E17 /* FindTeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5CC03221F357700551E17 /* FindTeachViewController.swift */; };
 		6EC5CC06221F358B00551E17 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5CC05221F358B00551E17 /* EventsViewController.swift */; };
 		6EC5CC08221F359E00551E17 /* AnnounceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5CC07221F359E00551E17 /* AnnounceViewController.swift */; };
+		6ED47C3F2225A65A004D18FE /* UpcomingSuperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */; };
+		6ED47C412225ACD3004D18FE /* UpcomingAssignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */; };
 		8FCA62832202116B00A87CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62822202116B00A87CAD /* AppDelegate.swift */; };
 		8FCA62852202116B00A87CAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62842202116B00A87CAD /* ViewController.swift */; };
 		8FCA62882202116B00A87CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FCA62862202116B00A87CAD /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 		6EC5CC03221F357700551E17 /* FindTeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTeachViewController.swift; sourceTree = "<group>"; };
 		6EC5CC05221F358B00551E17 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		6EC5CC07221F359E00551E17 /* AnnounceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceViewController.swift; sourceTree = "<group>"; };
+		6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSuperTableViewController.swift; sourceTree = "<group>"; };
+		6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAssignTableViewCell.swift; sourceTree = "<group>"; };
 		8FCA627F2202116B00A87CAD /* mykingapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mykingapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FCA62822202116B00A87CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FCA62842202116B00A87CAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 		6E684C14222426F5002B7278 /* Upcoming Page */ = {
 			isa = PBXGroup;
 			children = (
+				6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */,
+				6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */,
 			);
 			path = "Upcoming Page";
 			sourceTree = "<group>";
@@ -215,10 +221,12 @@
 				6EC5CC00221F352800551E17 /* GradesViewController.swift in Sources */,
 				0D46DDAF2204B977008165FC /* ClassesVC.swift in Sources */,
 				8FCA62832202116B00A87CAD /* AppDelegate.swift in Sources */,
+				6ED47C412225ACD3004D18FE /* UpcomingAssignTableViewCell.swift in Sources */,
 				6EC5CC06221F358B00551E17 /* EventsViewController.swift in Sources */,
 				D5C598AB220A00B200538DEA /* AssignmentsTableViewCell.swift in Sources */,
 				D5C598AC220A00B200538DEA /* TodaySuperTableViewController.swift in Sources */,
 				6EC5CC04221F357700551E17 /* FindTeachViewController.swift in Sources */,
+				6ED47C3F2225A65A004D18FE /* UpcomingSuperTableViewController.swift in Sources */,
 				6EC5CC02221F355300551E17 /* ScheduleViewController.swift in Sources */,
 				0D46DDB922054442008165FC /* ClassCell.swift in Sources */,
 			);
