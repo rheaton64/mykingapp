@@ -17,6 +17,35 @@ struct Colors {
     var purple = [0.3333, 0.102, 0.5451, 1.0] // #551a8b purple
     var pink = [1, 0.0784, 0.5765, 1.0] // #ff1493 pink
     var orange = [1, 0.6824, 0.098, 1.0] // #ffae19 orange
+    var grey = [0.502, 0.502, 0.502, 1.0] /* #808080 */
+    
+    func GetColor(color: String, RGBA: Int) -> Double
+    {
+        let colors = Colors()
+        switch color {
+        case "tan":
+            return colors.tan[RGBA]
+        case "blue":
+            return colors.blue[RGBA]
+        case "red":
+            return colors.red[RGBA]
+        case "green":
+            return colors.green[RGBA]
+        case "yellow":
+            return colors.yellow[RGBA]
+        case "purple":
+            return colors.purple[RGBA]
+        case "pink":
+            return colors.pink[RGBA]
+        case "orange":
+            return colors.orange[RGBA]
+        case "grey":
+            return colors.grey[RGBA]
+        
+        default: return 0
+            
+        }
+    }
 }
 
 

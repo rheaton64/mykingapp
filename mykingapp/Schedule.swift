@@ -10,14 +10,14 @@ import Foundation
 
 struct Days
 {
-    let aDay = [Period(Color: "Advisory", Start: 800, End: 810),
-                Period(Color: "Red", Start: 810, End: 910),
-                Period(Color: "Green", Start: 910, End: 1010),
-                Period(Color: "Clubs/Flex", Start: 1010, End: 1035),
-                Period(Color: "Yellow", Start: 1035, End: 1130),
-                Period(Color: "Blue", Start: 1130, End: 1250),
-                Period(Color: "Purple", Start: 120, End: 215),
-                Period(Color: "Tan", Start: 215, End: 315)]
+    let aDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "red", Start: 810, End: 910),
+                Period(Color: "green", Start: 910, End: 1010),
+                Period(Color: "grey", Start: 1010, End: 1035),
+                Period(Color: "yellow", Start: 1035, End: 1130),
+                Period(Color: "blue", Start: 1130, End: 1250),
+                Period(Color: "purple", Start: 120, End: 215),
+                Period(Color: "tan", Start: 215, End: 315)]
     
     func GetDay(LetterDay: String) -> [Period]
     {
@@ -28,6 +28,48 @@ struct Days
             return []
         }
     }
+    
+    func GetPeriod (time: Int) -> Int{
+        let day = Days()
+        let Letter = "A" // temp
+        let schedule = day.GetDay(LetterDay: Letter)
+        var period = 0
+        
+        if time < schedule[0].start{
+            period = 0
+        }
+        else if time >= schedule[0].start && time <= schedule[0].end{
+            period = 0
+        }
+        else if time >= schedule[1].start && time <= schedule[1].end{
+            period = 1
+        }
+        else if time >= schedule[2].start && time <= schedule[2].end{
+            period = 2
+        }
+       else if time >= schedule[3].start && time <= schedule[3].end{
+            period = 3
+        }
+       else if time >= schedule[4].start && time <= schedule[4].end{
+            period = 4
+        }
+       else if time >= schedule[5].start && time <= schedule[5].end{
+            period = 5
+        }
+       else if time >= schedule[6].start && time <= schedule[6].end{
+            period = 6
+        }
+       else if time >= schedule[7].start && time <= schedule[7].end{
+            period = 7
+        }
+       else if time > schedule[0].end{
+            period = 0
+        }
+        return period
+    }
+    
+    
+    
 }
 
 
