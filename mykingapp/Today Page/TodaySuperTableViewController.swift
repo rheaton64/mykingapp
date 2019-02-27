@@ -55,24 +55,28 @@ class TodaySuperTableViewController: UITableViewController {
     
     func ProgressBar()
     {
-        let day = Days()
-        let Letter = "A"
-        let schedule = day.GetDay(LetterDay: Letter)
-       // let date = Date()
-       // let calendar = Calendar.current
-       // let hour = (calendar.component(.hour, from: date))%12
-      //  let minutes = calendar.component(.minute, from: date)
-        let time = 930 //(hour * 100) + minutes
-        let period = day.GetPeriod(time: time)
-        let colors = Colors()
+        let day = Days() // creating instance of day struct
+        let Letter = "A" // replace with json request
+        let schedule = day.GetDay(LetterDay: Letter)//getting array of the curent scheduale
+        let date = Date()// creating date object
+        let calendar = Calendar.current// creating calender object
+        let hour = (calendar.component(.hour, from: date)) // getting curent hour 24 format
+        let minutes = calendar.component(.minute, from: date)// getting the current min
+        let time = (hour * 100) + minutes// combinding hours is HHMM format as int
+        let period = day.GetPeriod(time: time)//requetsting current period giving time HHMM
+        let colors = Colors() //Creating instace of color struct
         
+        //for each rgba value i call the get color function.
+        //I provide the current period's.color object for the color parameter
+        // i the provide the respective number for the rgba paramater
         periodProgressBar.trackTintColor = UIColor(
             red: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 0)),
             green: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 1)),
             blue: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 2)),
             alpha: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 3)))
         
-        if period <= 7 {
+        if period < 7 {
+            //same as above
         periodProgressBar.progressTintColor = UIColor(
             red: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 0)),
             green: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 1)),
@@ -80,7 +84,8 @@ class TodaySuperTableViewController: UITableViewController {
             alpha: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 3)))
         }
         else {
-            periodProgressBar.progressTintColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1.0)
+            //displaying white for no class
+            periodProgressBar.progressTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         }
         
         let interval = Double(schedule[period].end - schedule[period].start)
