@@ -18,6 +18,11 @@ class DataSource1: NSObject, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assignmentClass.count
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let subcell = tableView.dequeueReusableCell(withIdentifier: "reuseCell", for: indexPath) as! UpcomingAssignTableViewCell
@@ -49,16 +54,14 @@ class UpcomingSuperTableViewController: UITableViewController {
 
         dynamicView.dataSource = datasource1
         dynamicView.delegate = datasource1
+        dynamicView.separatorStyle = .none
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
+    //this function sets the "assignment" label above the inside table view to be
+    //larger and orange.
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor.white
