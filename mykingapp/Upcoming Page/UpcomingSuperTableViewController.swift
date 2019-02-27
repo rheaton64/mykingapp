@@ -15,13 +15,12 @@ class DataSource1: NSObject, UITableViewDelegate, UITableViewDataSource {
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
     var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
 
+    //the number six below needs to be a count variable of the number of
+    //items in the assignmentClass array
+    var assignmentIsDone = Array(repeating: false, count: 6)
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assignmentClass.count
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -35,7 +34,61 @@ class DataSource1: NSObject, UITableViewDelegate, UITableViewDataSource {
         subcell.assignHeaderLabel.text = assignmentHeader[indexPath.row]
         subcell.assignDetailLabel.text = assignmentDetail[indexPath.row]
 
+        
+        //handles assignments that are done to prevent reusable cell bug
+        subcell.assignmentNumber.layer.backgroundColor = assignmentIsDone[indexPath.row] ? UIColor.orange.cgColor : UIColor.white.cgColor
+        subcell.accessoryType = assignmentIsDone[indexPath.row] ? .checkmark : .none
+        
+        
         return subcell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //tableview swipe action
+    func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let doneCell = tableView.cellForRow(at: indexPath) as! UpcomingAssignTableViewCell
+        
+        let notDoneAction = UIContextualAction(style: .normal, title:  "Not Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            doneCell.assignmentNumber.textColor = UIColor.orange
+            doneCell.assignmentNumber.layer.backgroundColor = UIColor.white.cgColor
+            self.assignmentIsDone[indexPath.row] = false
+            print("Marked as not done")
+            success(true)
+        })
+        let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            doneCell.assignmentNumber.textColor = UIColor.white
+            doneCell.assignmentNumber.layer.backgroundColor = UIColor.orange.cgColor
+            self.assignmentIsDone[indexPath.row] = true
+            print("Marked as done")
+            success(true)
+        })
+        doneAction.backgroundColor = .green
+        notDoneAction.backgroundColor = .red
+        
+        //let notDone = UISwipeActionsConfiguration(actions: [notDoneAction])
+        var action = UIContextualAction()
+        if (self.assignmentIsDone[indexPath.row] == true){
+            action = notDoneAction
+        } else {
+            action = doneAction
+        }
+        let action1 = UISwipeActionsConfiguration(actions: [action])
+        action1.performsFirstActionWithFullSwipe = true
+        return action1
     }
 
 }

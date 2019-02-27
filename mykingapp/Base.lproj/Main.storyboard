@@ -88,7 +88,7 @@
                                                     <rect key="frame" x="0.0" y="10" width="375" height="649.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reuseCell" rowHeight="138" id="qvu-SY-BEY" customClass="UpcomingAssignTableViewCell" customModule="mykingapp" customModuleProvider="target">
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reuseCell" rowHeight="138" id="qvu-SY-BEY" customClass="UpcomingAssignTableViewCell" customModule="mykingapp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="28" width="375" height="138"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qvu-SY-BEY" id="E7u-NE-o3P">
@@ -499,7 +499,7 @@
                     <tabBarItem key="tabBarItem" title="Classes" image="ClassesIcon" selectedImage="ClassesIcon" id="DJO-qp-GW7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1MZ-ms-8JJ">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="107.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <color key="barTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
