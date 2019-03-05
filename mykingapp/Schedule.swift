@@ -30,9 +30,72 @@ struct Days
                 Period(Color: "green", Start: 910, End: 1010),
                 Period(Color: "grey", Start: 1010, End: 1035),
                 Period(Color: "yellow", Start: 1035, End: 1130),
-                Period(Color: "blue", Start: 1130, End: 1250),
+                Period(Color: "blue", Start: 1130, End: 1320),
                 Period(Color: "purple", Start: 1320, End: 1415),
                 Period(Color: "tan", Start: 1415, End: 1515)]
+    
+    let bDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "pink", Start: 810, End: 910),
+                Period(Color: "orange", Start: 910, End: 1010),
+                Period(Color: "grey", Start: 1010, End: 1035),
+                Period(Color: "red", Start: 1035, End: 1130),
+                Period(Color: "greem", Start: 1130, End: 1320),
+                Period(Color: "blue", Start: 1320, End: 1415),
+                Period(Color: "purple", Start: 1415, End: 1515)]
+    
+    let cDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "green", Start: 810, End: 905),
+                Period(Color: "tan", Start: 905, End: 1000),
+                Period(Color: "grey", Start: 1000, End: 1035),
+                Period(Color: "yellow", Start: 1035, End: 1130),
+                Period(Color: "pink", Start: 1130, End: 1320),
+                Period(Color: "red", Start: 1320, End: 1415),
+                Period(Color: "green", Start: 1415, End: 1515)]
+    
+    let dDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "blue", Start: 810, End: 905),
+                Period(Color: "purple", Start: 905, End: 1000),
+                Period(Color: "grey", Start: 10100, End: 1025),
+                Period(Color: "yellow", Start: 1025, End: 1130),
+                Period(Color: "tan", Start: 1130, End: 1320),
+                Period(Color: "pink", Start: 1320, End: 1415),
+                Period(Color: "orange", Start: 1415, End: 1515)]
+    
+    let eDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "green", Start: 810, End: 905),
+                Period(Color: "red", Start: 905, End: 1000),
+                Period(Color: "grey", Start: 1000, End: 1035),
+                Period(Color: "yellow", Start: 1035, End: 1135),
+                Period(Color: "purple", Start: 1130, End: 1320),
+                Period(Color: "blue", Start: 1320, End: 1415),
+                Period(Color: "tan", Start: 1415, End: 1515)]
+    
+    let fDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "orange", Start: 810, End: 910),
+                Period(Color: "pink", Start: 910, End: 1010),
+                Period(Color: "grey", Start: 1010, End: 1035),
+                Period(Color: "green", Start: 1035, End: 1130),
+                Period(Color: "red", Start: 1130, End: 1320),
+                Period(Color: "purple", Start: 1320, End: 1415),
+                Period(Color: "blue", Start: 1415, End: 1515)]
+    
+    let gDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "tan", Start: 810, End: 900),
+                Period(Color: "grey", Start: 900, End: 945),
+                Period(Color: "pink", Start: 945, End: 1035),
+                Period(Color: "yellow", Start: 1035, End: 1130),
+                Period(Color: "orange", Start: 1130, End: 1320),
+                Period(Color: "green", Start: 1320, End: 1415),
+                Period(Color: "red", Start: 1415, End: 1515)]
+    
+    let hDay = [Period(Color: "grey", Start: 800, End: 810),
+                Period(Color: "purple", Start: 810, End: 910),
+                Period(Color: "blue", Start: 910, End: 1010),
+                Period(Color: "grey", Start: 1010, End: 1035),
+                Period(Color: "yellow", Start: 1035, End: 1130),
+                Period(Color: "tan", Start: 1130, End: 1320),
+                Period(Color: "orange", Start: 1320, End: 1415),
+                Period(Color: "pink", Start: 1415, End: 1515)]
     
     // you can reguest to get the array of a specific day
     func GetDay(LetterDay: String) -> [Period]
