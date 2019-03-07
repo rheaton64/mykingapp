@@ -113,7 +113,7 @@ class TodaySuperTableViewController: UITableViewController {
     func ProgressBar()
     {
         let day = Days() // creating instance of day struct
-        let Letter = "A" // replace with json request
+        let Letter = "G" // replace with json request
         let schedule = day.GetDay(LetterDay: Letter)//getting array of the curent scheduale
         let date = Date()// creating date object
         let calendar = Calendar.current// creating calender object

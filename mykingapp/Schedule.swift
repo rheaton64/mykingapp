@@ -103,6 +103,20 @@ struct Days
         switch LetterDay{
         case "A":
             return aDay
+        case "B":
+            return bDay
+        case "C":
+            return cDay
+        case "D":
+            return dDay
+        case "E":
+            return eDay
+        case "F":
+            return fDay
+        case "G":
+            return gDay
+        case "H":
+            return hDay
         default:
             return []
         }
