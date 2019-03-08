@@ -102,12 +102,59 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var assignmentsView: UIView!
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
+    @IBOutlet weak var periodProgressBar: UIProgressView!
+    
     
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
     
+    
+    func ProgressBar()
+    {
+        let day = Days() // creating instance of day struct
+        let Letter = "G" // replace with json request
+        let schedule = day.GetDay(LetterDay: Letter)//getting array of the curent scheduale
+        let date = Date()// creating date object
+        let calendar = Calendar.current// creating calender object
+        let hour = (calendar.component(.hour, from: date)) // getting curent hour 24 format
+        let minutes = calendar.component(.minute, from: date)// getting the current min
+        let time = (hour * 100) + minutes// combinding hours is HHMM format as int
+        let period = day.GetPeriod(time: time)//requetsting current period giving time HHMM
+        let colors = Colors() //Creating instace of color struct
+        
+        //for each rgba value i call the get color function.
+        //I provide the current period's.color object for the color parameter
+        // i the provide the respective number for the rgba paramater
+        periodProgressBar.trackTintColor = UIColor(
+            red: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 3)))
+        
+        if period < 7 {
+            //same as above
+        periodProgressBar.progressTintColor = UIColor(
+            red: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 3)))
+        }
+        else {
+            //displaying white for no class
+            periodProgressBar.progressTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        }
+        
+        let interval = Double(schedule[period].end - schedule[period].start)
+        let timeLeft = Double(schedule[period].end - time)
+        periodProgressBar.setProgress(Float((interval - timeLeft) / 100), animated: false)
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
+       ProgressBar()
         super.viewDidLoad()
         dateFunc()
         getTodayItemBorder()
