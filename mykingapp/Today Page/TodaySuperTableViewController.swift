@@ -113,6 +113,10 @@ class TodaySuperTableViewController: UITableViewController {
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
+        
+        let dummyViewHeight = CGFloat(45)
+        //self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
+        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
     }
     
     func getTodayItemBorder(){
@@ -168,6 +172,13 @@ class TodaySuperTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let height = CGFloat(25)
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar!.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
     }
 
     /*
