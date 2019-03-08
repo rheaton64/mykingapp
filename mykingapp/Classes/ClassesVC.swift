@@ -11,17 +11,18 @@ import UIKit
 class ClassesVC: UITableViewController {
     //passing data
     var selectedCell = 0
-    
+  
     //test data
     // all classes
     var studentclass: [String] = ["Study Stratigies","Swift  App Development","Engineering","American Literature", "French 301", "Honors Pre-Calculus", "Honors Physics", "Honors US History"]
     
     var Colors: [UIColor] = [UIColor.blue, UIColor(red: 0.8196, green: 0.6627, blue: 0.4588, alpha: 1.0) /* #d1a975 tan */, UIColor.red, UIColor(red: 0, green: 0.8392, blue: 0.0275, alpha: 1.0) /* #00d607 Green */, UIColor(red: 1, green: 0.8157, blue: 0, alpha: 1.0) /* #ffd000 Yellow */, UIColor.purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0) /* #ff1493 Pink */, UIColor.orange]
-    var resynce = false
+
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        resynce = false
+    
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,9 +54,12 @@ class ClassesVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "MoreInfo" {
-          let passingTo = segue.destination as! MoreClassInfo
-            passingTo.passedName = studentclass[selectedCell]
-            passingTo.passedColor = Colors[selectedCell]
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! MoreClassInfo
+                destinationController.passedName = studentclass[indexPath.row]
+                destinationController.passedColor = Colors[indexPath.row]
+                
+            }
         }
     }
     }

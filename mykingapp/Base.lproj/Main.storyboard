@@ -203,7 +203,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="t69-lm-L0N" customClass="Class">
                                             <rect key="frame" x="36" y="11" width="303" height="58"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -543,9 +543,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <progressView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="zIf-qk-0Og">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
+                        <progressView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" id="zIf-qk-0Og">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="3"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" updatesFrequently="YES" adjustable="YES"/>
+                            </accessibility>
+                            <color key="progressTintColor" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="trackTintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </progressView>
                         <sections>
                             <tableViewSection id="XL9-wx-KCe">
@@ -842,6 +847,7 @@
                         <outlet property="assignmentsView" destination="KFg-iY-9NM" id="jwG-Ni-BFg"/>
                         <outlet property="dynamicTableView" destination="JxH-eN-HZY" id="ZDL-lb-XSY"/>
                         <outlet property="eventsView" destination="kr1-7a-hvp" id="2I5-jp-VwZ"/>
+                        <outlet property="periodProgressBar" destination="zIf-qk-0Og" id="Dp7-x9-bz3"/>
                         <outlet property="testsView" destination="UuP-FA-K9Y" id="ZmP-9T-vle"/>
                     </connections>
                 </tableViewController>
