@@ -152,6 +152,7 @@ class TodaySuperTableViewController: UITableViewController {
     }
     
     
+    public var dataStruct = [studentData]()
     
     override func viewDidLoad() {
        ProgressBar()
