@@ -160,6 +160,10 @@ class TodaySuperTableViewController: UITableViewController {
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
+        
+        let dummyViewHeight = CGFloat(45)
+        //self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
+        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
     }
     
     func getTodayItemBorder(){
@@ -182,7 +186,7 @@ class TodaySuperTableViewController: UITableViewController {
     func dateFunc(){
         let today = Date()
         let format = DateFormatter()
-        format.dateFormat = "EEEE    MMMM d"
+        format.dateFormat = "EEEE \nMMMM d"
         DateLabel.text = format.string(from: today).uppercased()
     }
     
@@ -215,6 +219,13 @@ class TodaySuperTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let height = CGFloat(25)
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar!.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
     }
 
     /*
@@ -261,54 +272,4 @@ class TodaySuperTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    //ALERT CONTROLLER LOGIN POP UP
-    //maybe encorporate faceID/finger print reading functionality...
-    override func viewDidAppear(_ animated: Bool) {
-        createAlertLogin()
-    }
-    
-    func createAlertLogin(){
-        var usernameTextField: UITextField?
-        var passwordTextField: UITextField?
-        
-        let alertController = UIAlertController(
-            title: "Sign in",
-            message: "Please enter your credentials",
-            preferredStyle: .alert)
-
-        let loginAction = UIAlertAction(
-        title: "Log in", style: .default) {
-            (action) -> Void in
-            
-            if let username = usernameTextField?.text {
-                print(" Username = \(username)")
-            } else {
-                print("No Username entered")
-            }
-            
-            if let password = passwordTextField?.text {
-                print("Password = \(password)")
-            } else {
-                print("No password entered")
-            }
-        }
-        
-        alertController.addTextField {
-            (txtUsername) -> Void in
-            usernameTextField = txtUsername
-            usernameTextField!.placeholder = "Username"
-        }
-        
-        alertController.addTextField {
-            (txtPassword) -> Void in
-            passwordTextField = txtPassword
-            passwordTextField?.isSecureTextEntry = true
-            passwordTextField?.placeholder = "Password"
-        }
-        
-        alertController.addAction(loginAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
 }
