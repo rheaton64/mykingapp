@@ -154,7 +154,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKa-DE-cX8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3932" y="-206.44677661169416"/>
-            <point key="canvasLocation" x="2992.8000000000002" y="-206.89655172413794"/>
         </scene>
         <!--CLASSES-->
         <scene sceneID="1DK-fC-e8N">
@@ -289,7 +288,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nz6-jH-ncg" kind="show" id="tWP-0Q-HIT"/>
+                                            <segue destination="Fyk-fO-LwR" kind="show" id="eQd-Fk-FrQ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="lsk-yu-vYm" rowHeight="60" style="IBUITableViewCellStyleDefault" id="5qk-gp-lVM" userLabel="Find a Teacher Cell">
@@ -366,21 +365,6 @@
             </objects>
             <point key="canvasLocation" x="4718" y="484"/>
         </scene>
-        <!--Schedule-->
-        <scene sceneID="Hvz-Af-cq1">
-            <objects>
-                <viewController title="Schedule" id="Nz6-jH-ncg" customClass="ScheduleViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="byZ-jP-yku">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="lkH-Tg-rIl"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jna-lS-eH0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6414" y="-206"/>
-        </scene>
         <!--Find a Teacher-->
         <scene sceneID="NOE-rz-UWy">
             <objects>
@@ -394,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efR-Gy-nuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5513" y="1221"/>
+            <point key="canvasLocation" x="5158" y="1283"/>
         </scene>
         <!--Events-->
         <scene sceneID="o2x-tx-e0N">
@@ -409,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0cZ-PC-5S7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6330" y="1220"/>
+            <point key="canvasLocation" x="5988" y="1283"/>
         </scene>
         <!--Announcements-->
         <scene sceneID="oBV-tb-kQw">
@@ -424,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Waz-wk-6gg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7175" y="1219"/>
+            <point key="canvasLocation" x="6887" y="1282"/>
         </scene>
         <!--Grades-->
         <scene sceneID="oGw-L6-I6W">
@@ -440,6 +424,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkA-AR-IGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5513" y="-206"/>
+        </scene>
+        <!--Schedule View-->
+        <scene sceneID="tie-ml-NQ8">
+            <objects>
+                <tableViewController id="Fyk-fO-LwR" customClass="ScheduleView" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VFS-QQ-u41" customClass="Sch">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zRM-p6-9vU">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zRM-p6-9vU" id="8Vp-k9-8h3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fyk-fO-LwR" id="1he-ah-YIL"/>
+                            <outlet property="delegate" destination="Fyk-fO-LwR" id="guO-da-INs"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xda-fK-Vej" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6464" y="-205"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lwV-By-hMN">
@@ -488,7 +500,6 @@
             </objects>
             <point key="canvasLocation" x="1296.8" y="996.25187406296857"/>
         </scene>
-        <!--Today Super Table View Controller-->
         <!--More-->
         <scene sceneID="86n-ue-GkO">
             <objects>
@@ -508,7 +519,7 @@
             </objects>
             <point key="canvasLocation" x="3932" y="483.50824587706148"/>
         </scene>
-        <!--Today-->
+        <!--Today Super Table View Controller-->
         <scene sceneID="5Av-JE-tbI">
             <objects>
                 <tableViewController id="Kae-PU-DJJ" customClass="TodaySuperTableViewController" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
