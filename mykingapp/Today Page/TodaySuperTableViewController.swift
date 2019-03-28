@@ -161,7 +161,9 @@ class TodaySuperTableViewController: UITableViewController {
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
-        print(dataStruct[2].assignmentDate)
+        
+        decodeData(indexOfJSON: 2)
+        //testing the decoding json 
     }
     
     func getTodayItemBorder(){
