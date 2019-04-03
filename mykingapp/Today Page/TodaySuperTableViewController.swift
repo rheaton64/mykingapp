@@ -162,8 +162,8 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
+        print(getClassData(dayArray: getIndivAssignmentArray(assignmentArray: (decodeData(indexOfJSON: 2)), dayIndex: 2)))
         
-        print(getIndivAssignmentArray(assignmentArray: (decodeData(indexOfJSON: 2)), dayIndex: 2))
         //testing the decoding json
         
         

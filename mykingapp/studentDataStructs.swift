@@ -40,14 +40,7 @@ struct studentData: Codable {
     }
 }
 
-struct assignmentData {
-    var className: String
-    var assignmentTitle: String
-    var assignDescript: String
-    var assignDate: String
-    
-}
-
+//Right now this function returns assignment data only
 func decodeData(indexOfJSON: Int) -> [[String]] {
     let decoder = JSONDecoder()
 
@@ -61,18 +54,25 @@ func decodeData(indexOfJSON: Int) -> [[String]] {
             print(error)
         }
     }
-    //return (data[indexOfJSON].assignmnets)
     return [[""]]
 }
 
 
-//function to get each assignment data, days of the week start on sunday
+//This function gets the assignment data for 1 day based on whichever day number you put into the parameters
+//(days of the week start on sunday)
+
 func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {
     return assignmentArray[dayIndex]
 }
 
-//separate each class from each other per day, using ,, separation
-func getClassData(dayArray: [String]) {
-    
-}
+//This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
+//The array that it returns has smaller arrays full of each individual class' data in those strings
 
+func getClassData(dayArray: [String]) -> [[String]] {
+    var newArray = [[String]]()
+    
+    for classInfo in dayArray {
+        newArray.append(classInfo.components(separatedBy: ",,"))
+    }
+    return newArray
+}
