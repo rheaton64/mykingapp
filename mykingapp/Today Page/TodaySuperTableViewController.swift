@@ -151,8 +151,9 @@ class TodaySuperTableViewController: UITableViewController {
         
     }
     
-    
+    //instance of the class w/ json stuff
     public var dataStruct = [studentData]()
+    var array = [[String]]()
     
     override func viewDidLoad() {
        ProgressBar()
@@ -162,8 +163,10 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
-        print(getClassData(dayArray: getIndivAssignmentArray(assignmentArray: (decodeData(indexOfJSON: 2)), dayIndex: 2)))
-        
+        array = getClassData(dayArray: getIndivAssignmentArray(assignmentArray:(decodeAssignments(indexOfJSON: 2)), dayIndex: 2))
+        print(array[0][0]) //accessing first array, first element
+        print(array)
+        print(decodeName(indexOfJSON: 2))
         //testing the decoding json
         
         
