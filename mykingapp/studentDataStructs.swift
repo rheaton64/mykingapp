@@ -20,8 +20,8 @@ struct studentData: Codable {
     var name: String
     var assignmentDate: String
     var numAssign: [String: String]
-    var assignments: [[String]] //[assignmentData]
-    //ASSIGNMENTS IS MISSPELLED
+    var assignments: [[String]]
+   
     
     //changing names for struct variables to match ones in json
     enum CodingKeys: String, CodingKey {
@@ -38,8 +38,41 @@ struct studentData: Codable {
         numAssign = try values.decode([String: String].self, forKey: .numAssign)
         assignments = try values.decode([[String]].self, forKey: .assignments)
     }
-}
+    
+//    static func decodeAssignments2(firstName: String, lastName: String, gradYear: Int, completionHandler: @escaping (studentData) -> Void) {
+//        let urlString = "10.0.1.200:5000/get/testdata/Aysseh,%20Natasha%20’19"
+//
+//        if let url = URL.init(string: urlString) {
+//            let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+//                print(String.init(data: data!, encoding: .ascii) ?? "no data")
+//                if let newData = try? JSONDecoder().decode(studentData.self, from: data!) {
+//                    print(newData.assignmentDate)
+//                    completionHandler(newData)
+//                }
+//            })
+//            task.resume()
+//        }
+//    }
+    
+//    static func decodeAssignments3() {
+//
+//        guard let urlString = URL(string: "10.0.1.200:5000/get/testdata/Aysseh,%20Natasha%20’19") else { return }
+//
+//        let request = URLRequest(url: urlString)
+//        let task = URLSession.shared.dataTask(with: request, completionHandler:
+//        { (data, response, error) -> Void in
+//            if let error = error {
+//                print(error)
+//                return
+//            }
+////            if let data = data {
+////                self.random = self.parseJsonData(data: data)
+////            }
+//        })
+//        task.resume()
+//    }
 
+}
 
 
 //This function decodes assigment data
@@ -77,6 +110,8 @@ func decodeName(indexOfJSON: Int) -> String {
 }
 
 
+
+
 //This function gets the assignment data for 1 day based on whichever day number you put into the parameters
 //(days of the week start on sunday)
 func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {
@@ -86,7 +121,7 @@ func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [Str
 
 //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
 //The array that it returns has smaller arrays full of each individual class' data in those strings
-//Setup of the array: [[class title
+//Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
 func getClassData(dayArray: [String]) -> [[String]] {
     var newArray = [[String]]()
     

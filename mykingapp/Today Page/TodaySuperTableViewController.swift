@@ -164,12 +164,16 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.delegate = datasource
         
         array = getClassData(dayArray: getIndivAssignmentArray(assignmentArray:(decodeAssignments(indexOfJSON: 2)), dayIndex: 2))
-        print(array[0][0]) //accessing first array, first element
+        //print(array[0][0]) //accessing first array, first element
         print(array)
-        print(decodeName(indexOfJSON: 2))
+        //print(decodeName(indexOfJSON: 2))
+        
         //testing the decoding json
         
-        
+//        studentData.decodeAssignments2(firstName: "natasha", lastName: "aysseh", gradYear: 2019) {
+//            (newData) in print(newData.name)
+//        }
+        studentData.decodeAssignments3()
     }
     
     func getTodayItemBorder(){
