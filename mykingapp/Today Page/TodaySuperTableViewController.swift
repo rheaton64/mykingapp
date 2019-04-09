@@ -152,8 +152,9 @@ class TodaySuperTableViewController: UITableViewController {
     }
     
     //instance of the class w/ json stuff
-    public var dataStruct = [studentData]()
-    var array = [[String]]()
+    //public var dataStruct = [studentData]()
+    private var studentArray = [studentData]()
+    //var array = [[String]]()
     
     override func viewDidLoad() {
        ProgressBar()
@@ -163,17 +164,51 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
-        array = getClassData(dayArray: getIndivAssignmentArray(assignmentArray:(decodeAssignments(indexOfJSON: 2)), dayIndex: 2))
+        //array = getClassData(dayArray: getIndivAssignmentArray(assignmentArray:(decodeAssignments(indexOfJSON: 2)), dayIndex: 2))
         //print(array[0][0]) //accessing first array, first element
-        print(array)
+        //print(array)
         //print(decodeName(indexOfJSON: 2))
         
         //testing the decoding json
         
-//        studentData.decodeAssignments2(firstName: "natasha", lastName: "aysseh", gradYear: 2019) {
-//            (newData) in print(newData.name)
-//        }
-        studentData.decodeAssignments3()
+        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 2019)
+        //print("hello today page")
+    }
+    
+    func getLatestData(lastName: String, firstName: String, gradYear: Int) {
+        guard let studentURL = URL(string: "10.0.1.200:5000/get/testdata/Aysseh,%20Natasha%20’19") else {return}
+        
+        let request = URLRequest(url: studentURL)
+        let task = URLSession.shared.dataTask(with: request, completionHandler:
+        { (data, response, error) -> Void in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            if let data = data {
+                self.studentArray = self.parseJsonData(data: data)
+            }
+            
+        })
+        
+        task.resume()
+    }
+    
+    func parseJsonData(data: Data) -> [studentData] {
+        
+        let decoder = JSONDecoder()
+        var studentValues = [studentData]()
+        
+        do {
+            let jsonDataStore = try decoder.decode(JSONDataStore.self, from: data)
+            studentValues = jsonDataStore.jsonDatas
+            
+        } catch {
+            print(error)
+        }
+        print(studentValues)
+        return studentValues
     }
     
     func getTodayItemBorder(){
