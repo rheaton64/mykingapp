@@ -109,7 +109,6 @@ class TodaySuperTableViewController: UITableViewController {
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
     
-    
     func ProgressBar()
     {
         let day = Days() // creating instance of day struct
@@ -151,8 +150,6 @@ class TodaySuperTableViewController: UITableViewController {
         
     }
     
-    
-    
     override func viewDidLoad() {
        ProgressBar()
         super.viewDidLoad()
@@ -161,11 +158,17 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
+        //code to fix header for IPhone X
         let dummyViewHeight = CGFloat(45)
-        //self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
         self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+        
+        //STRINGS HOLDING NAME AND GRADE, FOR JSON
+        let name = String(describing: loginInfo.name!)
+        let grade = String(describing: loginInfo.grade!)
+        print("Entered Name: \(name), Entered Grade: \(grade)")
     }
     
+    //UI Stuff
     func getTodayItemBorder(){
         let blueColor = UIColor(red: 81/255, green: 150/255, blue: 255/255, alpha: 0.75)
         assignmentsView.layer.borderWidth = 3

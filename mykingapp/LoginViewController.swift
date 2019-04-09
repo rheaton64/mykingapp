@@ -9,60 +9,34 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var gradeTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        nameTextField.layer.cornerRadius = 10
+        gradeTextField.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = 10
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        createAlertLogin()
-    }
     
-    func createAlertLogin(){
-        var usernameTextField: UITextField?
-        var passwordTextField: UITextField?
-        
-        let alertController = UIAlertController(
-            title: "Sign in",
-            message: "Please enter your credentials",
-            preferredStyle: .alert)
-        
-        let loginAction = UIAlertAction(
-        title: "Log in", style: .default) {
-            (action) -> Void in
-//login in code goes here
-            if let username = usernameTextField?.text {
-                print(" Username = \(username)")
-            } else {
-                print("No Username entered")
-            }
-            if let password = passwordTextField?.text {
-                print("Password = \(password)")
-            } else {
-                print("No password entered")
-            }
-            
-            self.performSegue(withIdentifier: "LoginSegue", sender: nil)
-            
+    @IBAction func loginButton(_ sender: Any) {
+        guard let enteredName = nameTextField.text, enteredName != "",
+            let enteredGrade = gradeTextField.text, enteredGrade != "" else {
+                let alertController = UIAlertController(title: "Login Error", message: "Both fields must not be blank.", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okayAction)
+                present(alertController, animated: true, completion: nil)
+                return
         }
-        
-        alertController.addTextField {
-            (txtUsername) -> Void in
-            usernameTextField = txtUsername
-            usernameTextField!.placeholder = "Username"
-        }
-        
-        alertController.addTextField {
-            (txtPassword) -> Void in
-            passwordTextField = txtPassword
-            passwordTextField?.isSecureTextEntry = true
-            passwordTextField?.placeholder = "Password"
-        }
-        
-        alertController.addAction(loginAction)
-        present(alertController, animated: true, completion: nil)
+        performSegue(withIdentifier: "LoginSegue", sender: nil)
+        loginInfo.name = enteredName
+        loginInfo.grade = enteredGrade
+        //var userLogin = loginInfo(username: name, grade: grade)
     }
-    
     
 }
+
+
