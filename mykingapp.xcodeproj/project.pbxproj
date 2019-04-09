@@ -10,9 +10,10 @@
 		0D46DDAF2204B977008165FC /* ClassesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DDAE2204B977008165FC /* ClassesVC.swift */; };
 		0D46DDB722054103008165FC /* MoreClassInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DDB622054103008165FC /* MoreClassInfo.swift */; };
 		0D46DDB922054442008165FC /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DDB822054442008165FC /* ClassCell.swift */; };
-		0D7D308D224D285F005366A1 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D308C224D285F005366A1 /* ScheduleView.swift */; };
+		0D5E72B122568C0F00739F1C /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E72B022568C0F00739F1C /* ScheduleView.swift */; };
 		0D970C3B221EE59400FC903F /* Color Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D970C3A221EE59400FC903F /* Color Struct.swift */; };
 		0D970C3D221EF20700FC903F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D970C3C221EF20700FC903F /* Schedule.swift */; };
+		0DC4761A224D2F94000251D5 /* Schedule Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC47619224D2F94000251D5 /* Schedule Decode.swift */; };
 		6EBCA20A221DBE6B0041E209 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBCA209221DBE6B0041E209 /* MoreTableViewController.swift */; };
 		6EC5CC00221F352800551E17 /* GradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5CBFF221F352800551E17 /* GradesViewController.swift */; };
 		6EC5CC04221F357700551E17 /* FindTeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5CC03221F357700551E17 /* FindTeachViewController.swift */; };
@@ -33,10 +34,11 @@
 		0D46DDAE2204B977008165FC /* ClassesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesVC.swift; sourceTree = "<group>"; };
 		0D46DDB622054103008165FC /* MoreClassInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreClassInfo.swift; sourceTree = "<group>"; };
 		0D46DDB822054442008165FC /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
-		0D7D308C224D285F005366A1 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		0D5E72B022568C0F00739F1C /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleView.swift; path = ../../ScheduleView.swift; sourceTree = "<group>"; };
 		0D7D3092224D2BEF005366A1 /* sch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sch.json; sourceTree = "<group>"; };
 		0D970C3A221EE59400FC903F /* Color Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color Struct.swift"; sourceTree = "<group>"; };
 		0D970C3C221EF20700FC903F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		0DC47619224D2F94000251D5 /* Schedule Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule Decode.swift"; sourceTree = "<group>"; };
 		6EBCA209221DBE6B0041E209 /* MoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		6EC5CBFF221F352800551E17 /* GradesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesViewController.swift; sourceTree = "<group>"; };
 		6EC5CC03221F357700551E17 /* FindTeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTeachViewController.swift; sourceTree = "<group>"; };
@@ -80,8 +82,9 @@
 		0D7D3085224D241E005366A1 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				0D5E72B022568C0F00739F1C /* ScheduleView.swift */,
 				0D7D3092224D2BEF005366A1 /* sch.json */,
-				0D7D308C224D285F005366A1 /* ScheduleView.swift */,
+				0DC47619224D2F94000251D5 /* Schedule Decode.swift */,
 				0D970C3C221EF20700FC903F /* Schedule.swift */,
 				0D970C3A221EE59400FC903F /* Color Struct.swift */,
 			);
@@ -233,8 +236,9 @@
 				6EBCA20A221DBE6B0041E209 /* MoreTableViewController.swift in Sources */,
 				6EC5CC08221F359E00551E17 /* AnnounceViewController.swift in Sources */,
 				0D970C3B221EE59400FC903F /* Color Struct.swift in Sources */,
+				0DC4761A224D2F94000251D5 /* Schedule Decode.swift in Sources */,
 				0D46DDB722054103008165FC /* MoreClassInfo.swift in Sources */,
-				0D7D308D224D285F005366A1 /* ScheduleView.swift in Sources */,
+				0D5E72B122568C0F00739F1C /* ScheduleView.swift in Sources */,
 				6EC5CC00221F352800551E17 /* GradesViewController.swift in Sources */,
 				0D970C3D221EF20700FC903F /* Schedule.swift in Sources */,
 				0D46DDAF2204B977008165FC /* ClassesVC.swift in Sources */,
