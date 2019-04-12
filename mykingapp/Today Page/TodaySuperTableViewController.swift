@@ -153,7 +153,7 @@ class TodaySuperTableViewController: UITableViewController {
     
     //instance of the class w/ json stuff
     //public var dataStruct = [studentData]()
-    private var studentArray = [studentData]()
+    public var studentArray = [studentData]()
     //var array = [[String]]()
     
     override func viewDidLoad() {
@@ -176,7 +176,14 @@ class TodaySuperTableViewController: UITableViewController {
     }
     
     func getLatestData(lastName: String, firstName: String, gradYear: Int) {
-        guard let studentURL = URL(string: "10.0.1.200:5000/get/testdata/Aysseh,%20Natasha%20’19") else {return}
+        print("Hello")
+        
+        guard let studentURL = URL(string: "10.0.1.200:5000/get/testdata/Aysseh,%20Natasha%20’19") else {print("no print"); return}
+        
+        //guard let studentURL = URL(string: "https://api.kivaws.org/v1/loans/newest.json") else {return}
+        
+        
+        print("test")
         
         let request = URLRequest(url: studentURL)
         let task = URLSession.shared.dataTask(with: request, completionHandler:
