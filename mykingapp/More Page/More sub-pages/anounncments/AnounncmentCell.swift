@@ -8,8 +8,12 @@
 
 import UIKit
 
-class AnouncmentCell: UITableViewCell {
-
+class AnounncmentCell: UITableViewCell {
+    @IBOutlet weak var anounncementTitle: UILabel!
+    @IBOutlet weak var anounncmentType: UILabel!
+    @IBOutlet weak var anouncmentDescription: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

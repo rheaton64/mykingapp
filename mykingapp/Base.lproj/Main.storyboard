@@ -345,7 +345,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ggv-Z7-CP7" kind="show" id="4BX-tm-oCh"/>
+                                            <segue destination="5dy-Ej-MFb" kind="show" id="zZA-XO-DhB"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -392,22 +392,74 @@
             </objects>
             <point key="canvasLocation" x="5513" y="1221"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Anounncments Table View-->
         <scene sceneID="1w0-D9-xKc">
             <objects>
-                <tableViewController id="5dy-Ej-MFb" sceneMemberID="viewController">
+                <tableViewController id="5dy-Ej-MFb" customClass="AnounncmentsTableView" customModule="mykingapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FEL-vE-zuG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Tbl-Kl-WY8">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="120" id="Tbl-Kl-WY8" customClass="AnounncmentCell" customModule="mykingapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tbl-Kl-WY8" id="vTa-wf-Sw5">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="119.66666666666667"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mil-jI-jS3">
+                                            <rect key="frame" x="30" y="21" width="354" height="30"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="rF2-Gg-T08">
+                                                    <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-22-Jlj">
+                                                            <rect key="frame" x="0.0" y="0.0" width="265" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="265" id="FKa-OF-8xZ"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQZ-li-Eto">
+                                                            <rect key="frame" x="295" y="0.0" width="59" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.3058574282" green="0.57906787429999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rF2-Gg-T08" firstAttribute="top" secondItem="Mil-jI-jS3" secondAttribute="top" id="881-VL-X9n"/>
+                                                <constraint firstItem="rF2-Gg-T08" firstAttribute="leading" secondItem="Mil-jI-jS3" secondAttribute="leading" id="I0J-lC-bTA"/>
+                                                <constraint firstAttribute="trailing" secondItem="rF2-Gg-T08" secondAttribute="trailing" id="uah-ru-0wf"/>
+                                            </constraints>
+                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkQ-PG-rkx">
+                                            <rect key="frame" x="30" y="56" width="354" height="48"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Mil-jI-jS3" firstAttribute="leading" secondItem="vTa-wf-Sw5" secondAttribute="leadingMargin" constant="10" id="C8z-bb-j3e"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="TkQ-PG-rkx" secondAttribute="bottom" constant="5" id="Ya4-Tp-tux"/>
+                                        <constraint firstItem="TkQ-PG-rkx" firstAttribute="leading" secondItem="vTa-wf-Sw5" secondAttribute="leadingMargin" constant="10" id="a8w-A7-DT6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="TkQ-PG-rkx" secondAttribute="trailing" constant="10" id="b1F-it-3TL"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Mil-jI-jS3" secondAttribute="trailing" constant="10" id="f1p-4L-eQx"/>
+                                        <constraint firstItem="TkQ-PG-rkx" firstAttribute="top" secondItem="Mil-jI-jS3" secondAttribute="bottom" constant="5" id="oJr-Kd-20T"/>
+                                        <constraint firstItem="Mil-jI-jS3" firstAttribute="top" secondItem="vTa-wf-Sw5" secondAttribute="topMargin" constant="10" id="xwK-bH-e8Q"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="anouncmentDescription" destination="TkQ-PG-rkx" id="dk5-OB-gRR"/>
+                                    <outlet property="anounncementTitle" destination="xQI-22-Jlj" id="LaK-5j-4Am"/>
+                                    <outlet property="anounncmentType" destination="dQZ-li-Eto" id="Bbs-2X-D7g"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -418,7 +470,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3UT-AJ-74F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6322" y="1220"/>
+            <point key="canvasLocation" x="6321.739130434783" y="1219.5652173913045"/>
         </scene>
         <!--Announcements-->
         <scene sceneID="oBV-tb-kQw">
@@ -480,7 +532,7 @@
                     <tabBarItem key="tabBarItem" title="Classes" image="ClassesIcon" selectedImage="ClassesIcon" id="DJO-qp-GW7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1MZ-ms-8JJ">
-                        <rect key="frame" x="0.0" y="20" width="414" height="107.66666666666666"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <color key="barTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
