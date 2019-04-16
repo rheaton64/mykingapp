@@ -17,26 +17,26 @@ let json = """
 
 //assignment arrays are grouped by day -- sunday, monday ... saturday
 struct studentData: Codable {
-    var name: String
+    var assignments: [[String]]
     var assignmentDate: String
     var numAssign: [String: String]
-    var assignments: [[String]]
+    var name: String
    
     
     //changing names for struct variables to match ones in json
     enum CodingKeys: String, CodingKey {
-        case name = "student_name"
+        case assignments = "assignmnets"
         case assignmentDate = "date"
         case numAssign = "number_of_assignments"
-        case assignments = "assignmnets"
+        case name = "student_name"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        name = try values.decode(String.self, forKey: .name)
+        assignments = try values.decode([[String]].self, forKey: .assignments)
         assignmentDate = try values.decode(String.self, forKey: .assignmentDate)
         numAssign = try values.decode([String: String].self, forKey: .numAssign)
-        assignments = try values.decode([[String]].self, forKey: .assignments)
+        name = try values.decode(String.self, forKey: .name)
     }
 
 }
