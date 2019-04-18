@@ -21,7 +21,7 @@ struct studentData: Codable {
     var assignmentDate: String
     var numAssign: [String: String]
     var name: String
-   
+    
     
     //changing names for struct variables to match ones in json
     enum CodingKeys: String, CodingKey {
@@ -46,26 +46,11 @@ struct JSONDataStore: Codable {
     var jsonDatas: [studentData]
 }
 
-//func parseJsonData(data: Data) -> [studentData] {
-//    let decoder = JSONDecoder()
-//    var studentArray = [studentData]()
-//    
-//    do {
-//        let jsonDataStore = try decoder.decode(JSONDataStore.self, from: data)
-//        studentArray = jsonDataStore.jsonDatas
-//    } catch {
-//        print(error)
-//    }
-//  
-//    return studentArray
-//}
-
-
-
 
 
 //This function decodes assigment data
 //the index parameter is because of the given json above, w server it'll be different
+/*
 func decodeAssignments(indexOfJSON: Int) -> [[String]] {
     let decoder = JSONDecoder()
 
@@ -81,10 +66,12 @@ func decodeAssignments(indexOfJSON: Int) -> [[String]] {
     }
     return [[""]]
 }
+ */
 
 //This function decodes the name inside the array, returns the name part of the json
 //this might not be necessary???
-func decodeName(indexOfJSON: Int) -> String {
+/*
+ func decodeName(indexOfJSON: Int) -> String {
     let decoder = JSONDecoder()
     if let jsonData = json.data(using: .utf8) {
         
@@ -97,7 +84,7 @@ func decodeName(indexOfJSON: Int) -> String {
     }
     return ""
 }
-
+*/
 
 //This function gets the assignment data for 1 day based on whichever day number you put into the parameters
 //(days of the week start on sunday)

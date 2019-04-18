@@ -183,14 +183,20 @@ class TodaySuperTableViewController: UITableViewController {
         let request = URLRequest(url: studentURL)
         let task = URLSession.shared.dataTask(with: request, completionHandler:
         { (data, response, error) -> Void in
+            
+            if let data = data {
+                self.studentArray = self.parseJsonData(data: data)
+                //test this once connected
+                //print(self.studentArray)
+            }
+            
             if let error = error {
+                print("this error is annoying")
                 print(error)
                 return
             }
             
-            if let data = data {
-                self.studentArray = self.parseJsonData(data: data)
-            }
+            
             
         })
         
@@ -203,13 +209,18 @@ class TodaySuperTableViewController: UITableViewController {
         var studentValues = [studentData]()
         
         do {
+            print("pls fix")
             let jsonDataStore = try decoder.decode(JSONDataStore.self, from: data)
             studentValues = jsonDataStore.jsonDatas
+            for file in jsonDataStore.jsonDatas {
+                print(file)
+            }
             
         } catch {
+            print("why is there an error!!")
             print(error)
         }
-        print(studentValues)
+        //print(studentValues)
         return studentValues
     }
     
