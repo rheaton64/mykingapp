@@ -14,8 +14,6 @@ struct assignments {
 
 class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
-
-    
     @IBOutlet weak var dynamicTableView: UITableView!
     
     var assignmentDetail: [String] = ["Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all", "Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all"]
@@ -114,7 +112,7 @@ class TodaySuperTableViewController: UITableViewController {
     func ProgressBar()
     {
         let day = Days() // creating instance of day struct
-        let Letter = "A" // replace with json request
+        let Letter = "G" // replace with json request
         let schedule = day.GetDay(LetterDay: Letter)//getting array of the curent scheduale
         let date = Date()// creating date object
         let calendar = Calendar.current// creating calender object
@@ -123,7 +121,7 @@ class TodaySuperTableViewController: UITableViewController {
         let time = (hour * 100) + minutes// combinding hours is HHMM format as int
         let period = day.GetPeriod(time: time)//requetsting current period giving time HHMM
         let colors = Colors() //Creating instace of color struct
-        //I have spent 4 HOURS strait on this god forsaken code
+        
         //for each rgba value i call the get color function.
         //I provide the current period's.color object for the color parameter
         // i the provide the respective number for the rgba paramater
@@ -151,8 +149,6 @@ class TodaySuperTableViewController: UITableViewController {
         periodProgressBar.setProgress(Float((interval - timeLeft) / 100), animated: false)
         
     }
-    // finaly I am done now Ryan will let me see my family again
-    
     
     override func viewDidLoad() {
        ProgressBar()
