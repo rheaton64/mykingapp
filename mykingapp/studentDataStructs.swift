@@ -19,7 +19,7 @@ let json = """
 struct studentData: Codable {
     var assignments: [[String]]
     var assignmentDate: String
-    var numAssign: [String: String]
+    var numAssign: Int
     var name: String
     
     
@@ -35,7 +35,7 @@ struct studentData: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         assignments = try values.decode([[String]].self, forKey: .assignments)
         assignmentDate = try values.decode(String.self, forKey: .assignmentDate)
-        numAssign = try values.decode([String: String].self, forKey: .numAssign)
+        numAssign = try values.decode(Int.self, forKey: .numAssign)
         name = try values.decode(String.self, forKey: .name)
     }
 

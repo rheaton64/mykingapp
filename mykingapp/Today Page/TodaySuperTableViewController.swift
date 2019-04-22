@@ -195,9 +195,6 @@ class TodaySuperTableViewController: UITableViewController {
                 print(error)
                 return
             }
-            
-            
-            
         })
         
         task.resume()
@@ -212,9 +209,6 @@ class TodaySuperTableViewController: UITableViewController {
             print("pls fix")
             let jsonDataStore = try decoder.decode(JSONDataStore.self, from: data)
             studentValues = jsonDataStore.jsonDatas
-            for file in jsonDataStore.jsonDatas {
-                print(file)
-            }
             
         } catch {
             print("why is there an error!!")
