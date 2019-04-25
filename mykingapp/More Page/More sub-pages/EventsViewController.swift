@@ -28,3 +28,11 @@ class EventsViewController: UIViewController {
     */
 
 }
+
+
+
+
+
+
+
+//bullets dont work on ryan

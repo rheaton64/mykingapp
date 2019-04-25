@@ -90,6 +90,15 @@
 			path = anounncments;
 			sourceTree = "<group>";
 		};
+		0DE647D92271E136006275D7 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				0D970C3C221EF20700FC903F /* Schedule.swift */,
+				0D970C3A221EE59400FC903F /* Color Struct.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
 		6E684C14222426F5002B7278 /* Upcoming Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,8 +148,7 @@
 		8FCA62812202116B00A87CAD /* mykingapp */ = {
 			isa = PBXGroup;
 			children = (
-				0D970C3C221EF20700FC903F /* Schedule.swift */,
-				0D970C3A221EE59400FC903F /* Color Struct.swift */,
+				0DE647D92271E136006275D7 /* Schedule */,
 				8FCA62862202116B00A87CAD /* Main.storyboard */,
 				D522B390222F06AB0017A1EF /* LoginViewController.swift */,
 				D53E39DB224BB75000D661E9 /* loginInfo.swift */,
