@@ -150,9 +150,9 @@ class TodaySuperTableViewController: UITableViewController {
         periodProgressBar.setProgress(Float((interval - timeLeft) / 100), animated: false)
         
     }
+   
     
-    private var studentArray = [studentData]()
-    //var array = [[String]]()
+    private var studentArray = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
     
     override func viewDidLoad() {
        ProgressBar()
@@ -162,16 +162,31 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
-        //array = getClassData(dayArray: getIndivAssignmentArray(assignmentArray:(decodeAssignments(indexOfJSON: 2)), dayIndex: 2))
-        //print(array[0][0]) //accessing first array, first element
-        //print(array)
-        //print(decodeName(indexOfJSON: 2))
         
-        //testing the decoding json
         
         getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
-        //print("hello today page")
+        
+        //need to pause so that the server can be accessed
+        while studentArray.name == "" {
+            sleep(UInt32(0.01))
+        }
+        print(decodeAssignments(JSON: studentArray))
+        
     }
+    
+    
+    func decodeAssignments(JSON: studentData) -> [[String]] {
+        return JSON.assignments
+    }
+    
+    //This function gets the assignment data for 1 day based on whichever day number you put into the parameters
+    //(days of the week start on sunday)
+    func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {
+        return assignmentArray[dayIndex]
+    }
+    
+    
+    
     
     func getLatestData(lastName: String, firstName: String, gradYear: Int) {
 
@@ -187,7 +202,7 @@ class TodaySuperTableViewController: UITableViewController {
             if let data = data {
                 self.studentArray = self.parseJsonData(data: data)
                 //test this once connected
-                print(self.studentArray)
+                //print(self.studentArray)
             }
             
             if let error = error {
@@ -199,16 +214,18 @@ class TodaySuperTableViewController: UITableViewController {
         task.resume()
     }
     
-    func parseJsonData(data: Data) -> [studentData] {
+    func parseJsonData(data: Data) -> studentData {
         
         let decoder = JSONDecoder()
-        var studentValues = [studentData]()
+        var studentValues = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
         
         do {
-            let data = try decoder.decode(studentData.self, from: data)
+            let jsonDataReturn = try decoder.decode(studentData.self, from: data)
+            studentValues = jsonDataReturn.self
+            //let data = try decoder.decode(JSONDataStore.self, from: data)
+            //studentValues = data.jsonDatas
             
-            //studentValues = jsonDataStore.jsonDatas
-            print(data)
+            //print(jsonDataReturn)
             
         } catch {
             print(error)
