@@ -26,18 +26,19 @@ struct studentData: Codable {
     //changing names for struct variables to match ones in json
     enum CodingKeys: String, CodingKey {
         case assignments = "assignmnets"
+        //once ryan fixes assignment name, change this
         case assignmentDate = "date"
         case numAssign = "number_of_assignments"
         case name = "student_name"
     }
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        assignments = try values.decode([[String]].self, forKey: .assignments)
-        assignmentDate = try values.decode(String.self, forKey: .assignmentDate)
-        numAssign = try values.decode(Int.self, forKey: .numAssign)
-        name = try values.decode(String.self, forKey: .name)
-    }
+//    init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        assignments = try values.decode([[String]].self, forKey: .assignments)
+//        assignmentDate = try values.decode(String.self, forKey: .assignmentDate)
+//        numAssign = try values.decode(Int.self, forKey: .numAssign)
+//        name = try values.decode(String.self, forKey: .name)
+//    }
 
 }
 

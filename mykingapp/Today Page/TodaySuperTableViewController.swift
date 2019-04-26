@@ -169,7 +169,7 @@ class TodaySuperTableViewController: UITableViewController {
         
         //testing the decoding json
         
-        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 2019)
+        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
         //print("hello today page")
     }
     
@@ -178,7 +178,7 @@ class TodaySuperTableViewController: UITableViewController {
         //a space is %20
         //comma is %2C
         //apostrophe %27
-        guard let studentURL = URL(string: "http://10.0.1.200:5000/get/testdata/Aysseh%2C%20Natasha%20%2719") else {return}
+        guard let studentURL = URL(string: "http://10.0.1.200:5000/get/testdata/\(lastName)%2C%20\(firstName)%20%27\(gradYear)") else {return}
     
         let request = URLRequest(url: studentURL)
         let task = URLSession.shared.dataTask(with: request, completionHandler:
@@ -187,11 +187,10 @@ class TodaySuperTableViewController: UITableViewController {
             if let data = data {
                 self.studentArray = self.parseJsonData(data: data)
                 //test this once connected
-                //print(self.studentArray)
+                print(self.studentArray)
             }
             
             if let error = error {
-                print("this error is annoying")
                 print(error)
                 return
             }
@@ -206,12 +205,12 @@ class TodaySuperTableViewController: UITableViewController {
         var studentValues = [studentData]()
         
         do {
-            print("pls fix")
-            let jsonDataStore = try decoder.decode(JSONDataStore.self, from: data)
-            studentValues = jsonDataStore.jsonDatas
+            let data = try decoder.decode(studentData.self, from: data)
+            
+            //studentValues = jsonDataStore.jsonDatas
+            print(data)
             
         } catch {
-            print("why is there an error!!")
             print(error)
         }
         //print(studentValues)
