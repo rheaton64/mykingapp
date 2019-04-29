@@ -46,24 +46,6 @@ func decodeAssignments(JSON: studentData) -> [[String]] {
 }
 
 
-//This function decodes the name inside the array, returns the name part of the json
-//this might not be necessary???
-/*
- func decodeName(indexOfJSON: Int) -> String {
-    let decoder = JSONDecoder()
-    if let jsonData = json.data(using: .utf8) {
-        
-        do {
-            let data = try decoder.decode([studentData].self, from: jsonData)
-            return (data[indexOfJSON].name)
-        } catch {
-            print(error)
-        }
-    }
-    return ""
-}
-*/
-
 //This function gets the assignment data for 1 DAY based on whichever day number you put into the parameters
 //(days of the week start on sunday)
 func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {

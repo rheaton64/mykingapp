@@ -152,7 +152,12 @@ class TodaySuperTableViewController: UITableViewController {
     }
    
     
-    private var studentArray = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
+    public var studentArray = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
+    public var assignmentOfDay = [String]()
+    public var classData = [[String]]()
+    public var dayOfWeek = Int()
+    
+    
     
     override func viewDidLoad() {
        ProgressBar()
@@ -163,21 +168,26 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.delegate = datasource
         
         
-        
         getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
         
-        //need to pause so that the server can be accessed
+        //need to pause so that the server can be accessed!!! need this!!
         while studentArray.name == "" {
             sleep(UInt32(0.01))
         }
-        print(decodeAssignments(JSON: studentArray))
+        //print(studentArray)
+        classData = decodeAssignments(JSON: studentArray)
         
+        assignmentOfDay = getIndivAssignmentArray(assignmentArray: classData, dayIndex: getCurrentDay())
+        
+        var classDataForDay = getClassData(dayArray: assignmentOfDay)
+        print(classDataForDay)
     }
     
-    
+    //This function returns the assignments of the accessed data
     func decodeAssignments(JSON: studentData) -> [[String]] {
         return JSON.assignments
     }
+    
     
     //This function gets the assignment data for 1 day based on whichever day number you put into the parameters
     //(days of the week start on sunday)
@@ -186,10 +196,22 @@ class TodaySuperTableViewController: UITableViewController {
     }
     
     
+    //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
+    //The array that it returns has smaller arrays full of each individual class' data in those strings
+    //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
+    //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
+    //To make this work, call the getIndivAssignmentArray function and put in the parameters
+    func getClassData(dayArray: [String]) -> [[String]] {
+        var newArray = [[String]]()
+        
+        for classInfo in dayArray {
+            newArray.append(classInfo.components(separatedBy: ",,"))
+        }
+        return newArray
+    }
     
     
     func getLatestData(lastName: String, firstName: String, gradYear: Int) {
-
         //a space is %20
         //comma is %2C
         //apostrophe %27
@@ -200,17 +222,15 @@ class TodaySuperTableViewController: UITableViewController {
         { (data, response, error) -> Void in
             
             if let data = data {
+                //this assigns the studentArray variable (made a private variable outside) to what parseJsonData returns
                 self.studentArray = self.parseJsonData(data: data)
-                //test this once connected
-                //print(self.studentArray)
-            }
             
+            }
             if let error = error {
                 print(error)
                 return
             }
         })
-        
         task.resume()
     }
     
@@ -222,17 +242,40 @@ class TodaySuperTableViewController: UITableViewController {
         do {
             let jsonDataReturn = try decoder.decode(studentData.self, from: data)
             studentValues = jsonDataReturn.self
-            //let data = try decoder.decode(JSONDataStore.self, from: data)
-            //studentValues = data.jsonDatas
-            
-            //print(jsonDataReturn)
             
         } catch {
             print(error)
         }
-        //print(studentValues)
         return studentValues
     }
+    
+    func getCurrentDay() -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        let dayValue = calendar.component(.weekday, from: date)
+        
+        switch dayValue {
+        case 1:
+            dayOfWeek = 0
+        case 2:
+            dayOfWeek = 1
+        case 3:
+            dayOfWeek = 2
+        case 4:
+            dayOfWeek = 3
+        case 5:
+            dayOfWeek = 4
+        case 6:
+            dayOfWeek = 5
+        case 7:
+            dayOfWeek = 6
+        default:
+            return 0
+        }
+        
+        return dayOfWeek
+    }
+    
     
     func getTodayItemBorder(){
         let blueColor = UIColor(red: 81/255, green: 150/255, blue: 255/255, alpha: 0.75)
