@@ -25,20 +25,30 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     //items in the assignmentClass array
     var assignmentIsDone = Array(repeating: false, count: 6)
     
+//    let instanceOfTodayView = TodaySuperTableViewController()
+//    var classData = [[String]]()
+//    var assignmentOfDay = [String]()
+//    var classDataForDay = [[String]]()
+    
+    let instanceOfTodayView = TodaySuperTableViewController()
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return assignmentClass.count
+        return instanceOfTodayView.assignmentOfDay.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let subcell = tableView.dequeueReusableCell(withIdentifier: "dynamicCell", for: indexPath) as! AssignmentsTableViewCell
+        
         subcell.assignmentNumber.layer.cornerRadius = 21
         subcell.assignmentNumber.layer.borderColor = UIColor.orange.cgColor
         subcell.assignmentNumber.layer.borderWidth = 2
         subcell.assignmentNumber.text = "\(indexPath.row + 1)"
-        subcell.assignmentClassLbl.text = assignmentClass[indexPath.row]
+        subcell.assignmentClassLbl.text = instanceOfTodayView.classDataForDay[indexPath.row][0]
         subcell.assignmentClassLbl.textColor = classColor[indexPath.row]
-        subcell.assignmentHeaderLbl.text = assignmentHeader[indexPath.row]
-        subcell.assignmentDetailLbl.text = assignmentDetail[indexPath.row]
+        subcell.assignmentHeaderLbl.text = instanceOfTodayView.classDataForDay[indexPath.row][2]
+        subcell.assignmentDetailLbl.text = instanceOfTodayView.assignmentOfDay[indexPath.row]
         
         //handles assignments that are done to prevent reusable cell bug
         subcell.assignmentNumber.layer.backgroundColor = assignmentIsDone[indexPath.row] ? UIColor.orange.cgColor : UIColor.white.cgColor
@@ -158,8 +168,30 @@ class TodaySuperTableViewController: UITableViewController {
     public var dayOfWeek = Int()
     
     
+
+    var classDataForDay = [[String]]()
+    
+    
     
     override func viewDidLoad() {
+        
+        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
+        //need to pause to access the server after calling the parsing method (like in the TodaySuperTableViewController file)
+        while studentArray.name == "" {
+            sleep(UInt32(0.01))
+        }
+        classData = decodeAssignments(JSON: studentArray)
+        assignmentOfDay = getIndivAssignmentArray(assignmentArray: classData, dayIndex: getCurrentDay())
+        
+        //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
+        //The array that it returns has smaller arrays full of each individual class' data in those strings
+        //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
+        //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
+        //To make this work, call the getIndivAssignmentArray function and put in the parameters
+        classDataForDay = getClassData(dayArray: assignmentOfDay)
+        
+        
+        
        ProgressBar()
         super.viewDidLoad()
         dateFunc()
@@ -168,6 +200,9 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.delegate = datasource
         
         
+        
+/*
+    
         getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
         
         //need to pause so that the server can be accessed!!! need this!!
@@ -181,6 +216,7 @@ class TodaySuperTableViewController: UITableViewController {
         
         var classDataForDay = getClassData(dayArray: assignmentOfDay)
         print(classDataForDay)
+ */
     }
     
     //This function returns the assignments of the accessed data
