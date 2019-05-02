@@ -16,21 +16,24 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var dynamicTableView: UITableView!
     
-    var assignmentDetail: [String] = ["Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all", "Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all"]
-    var assignmentClass: [String] = ["AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C", "AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C"]
+//    var assignmentDetail: [String] = ["Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all", "Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all"]
+//    var assignmentClass: [String] = ["AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C", "AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C"]
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
-    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
+//    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
+    
+    
+    let instanceOfTodayView = TodaySuperTableViewController()
     
     //the number six below needs to be a count variable of the number of
     //items in the assignmentClass array
-    var assignmentIsDone = Array(repeating: false, count: 6)
+    var assignmentIsDone = Array(repeating: false, count: TodaySuperTableViewController().assignmentOfDay.count)
     
 //    let instanceOfTodayView = TodaySuperTableViewController()
 //    var classData = [[String]]()
 //    var assignmentOfDay = [String]()
 //    var classDataForDay = [[String]]()
     
-    let instanceOfTodayView = TodaySuperTableViewController()
+    
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -175,6 +178,15 @@ class TodaySuperTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         
+    
+       ProgressBar()
+        super.viewDidLoad()
+        dateFunc()
+        getTodayItemBorder()
+        dynamicTableView.dataSource = datasource
+        dynamicTableView.delegate = datasource
+        
+        
         getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
         //need to pause to access the server after calling the parsing method (like in the TodaySuperTableViewController file)
         while studentArray.name == "" {
@@ -190,14 +202,6 @@ class TodaySuperTableViewController: UITableViewController {
         //To make this work, call the getIndivAssignmentArray function and put in the parameters
         classDataForDay = getClassData(dayArray: assignmentOfDay)
         
-        
-        
-       ProgressBar()
-        super.viewDidLoad()
-        dateFunc()
-        getTodayItemBorder()
-        dynamicTableView.dataSource = datasource
-        dynamicTableView.delegate = datasource
         
         
         
@@ -251,7 +255,7 @@ class TodaySuperTableViewController: UITableViewController {
         //a space is %20
         //comma is %2C
         //apostrophe %27
-        guard let studentURL = URL(string: "http://10.0.1.200:5000/get/testdata/\(lastName)%2C%20\(firstName)%20%27\(gradYear)") else {return}
+        guard let studentURL = URL(string: "http://10.0.1.200:5000/assignments/get/testdata/\(lastName)%2C%20\(firstName)%20%27\(gradYear)") else {return}
     
         let request = URLRequest(url: studentURL)
         let task = URLSession.shared.dataTask(with: request, completionHandler:
