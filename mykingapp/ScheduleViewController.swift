@@ -35,6 +35,8 @@ class ScheduleViewController: UITableViewController {
 //    }
     
     @IBAction func AButton(_ sender: Any) {
+        //when button s bushed info is put in
+        //to be replaces later
         class1.text = "Advaced Seminar Swift"
         class1.sizeToFit()
         time1.text = "1:15 (60)"
@@ -120,3 +122,8 @@ class ScheduleViewController: UITableViewController {
     */
 
 }
+
+
+
+
+//day 14 without natural light and my eyes can now see in the dark
