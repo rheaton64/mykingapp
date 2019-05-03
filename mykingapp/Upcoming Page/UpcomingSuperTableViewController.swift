@@ -101,7 +101,7 @@ class UpcomingSuperTableViewController: UITableViewController {
     let colors: [UIColor] = [.white, .orange]
     var datasource1 = DataSource1()
     
-    let instanceOfTodayView = TodaySuperTableViewController()
+    //let instanceOfTodayView = TodaySuperTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,14 +110,14 @@ class UpcomingSuperTableViewController: UITableViewController {
         dynamicView.delegate = datasource1
         dynamicView.separatorStyle = .none
         
-        instanceOfTodayView.getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
+        //instanceOfTodayView.getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
         
         //need to pause to access the server after calling the parsing method (like in the TodaySuperTableViewController file)
-        while instanceOfTodayView.studentArray.name == "" {
-            sleep(UInt32(0.01))
-        }
+//        while instanceOfTodayView.studentArray.name == "" {
+//            sleep(UInt32(0.01))
+//        }
         
-        print(instanceOfTodayView.studentArray)
+        //print(instanceOfTodayView.studentArray)
         
     }
 
