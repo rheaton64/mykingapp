@@ -36,7 +36,9 @@ class ClassesVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassCell", for: indexPath) as! ClassCell
         cell.classLable.text = studentclass[indexPath.row]
-        cell.classLable.backgroundColor = Colors[indexPath.row]
+        cell.classLable.textColor = Colors[indexPath.row]
+        cell.classLable.layer.borderColor = Colors[indexPath.row].cgColor
+        cell.classLable.layer.borderWidth = 3
         return cell
     }
     //setting cell sizes to 100
