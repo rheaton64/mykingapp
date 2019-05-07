@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = 10
     }
     
-    
     @IBAction func loginButton(_ sender: Any) {
         guard let enteredName = nameTextField.text, enteredName != "",
             let enteredGrade = gradeTextField.text, enteredGrade != "" else {
