@@ -9,14 +9,63 @@
 import UIKit
 
 class ScheduleViewController: UITableViewController {
+     @IBOutlet weak var Cell1: UITableViewCell!
     @IBOutlet weak var class1: UILabel!
     @IBOutlet weak var time1: UILabel!
     @IBOutlet weak var teacher1: UILabel!
     @IBOutlet weak var room1: UILabel!
-    @IBOutlet weak var Cell1: UITableViewCell!
+   
+    @IBOutlet weak var Cell2: UITableViewCell!
+    @IBOutlet weak var Class2: UILabel!
+    @IBOutlet weak var teacher2: UILabel!
+    @IBOutlet weak var room2: UILabel!
+    @IBOutlet weak var time2: UILabel!
+    
+    @IBOutlet weak var Cell3: UITableViewCell!
+    @IBOutlet weak var class3: UILabel!
+    @IBOutlet weak var teacher3: UILabel!
+    @IBOutlet weak var room3: UILabel!
+    @IBOutlet weak var time3: UILabel!
+    
+    @IBOutlet weak var Cell4: UITableViewCell!
+    @IBOutlet weak var class4: UILabel!
+    @IBOutlet weak var teacher4: UILabel!
+    @IBOutlet weak var room4: UILabel!
+    @IBOutlet weak var time4: UILabel!
+    
+    @IBOutlet weak var Cell5: UITableViewCell!
+    @IBOutlet weak var class5: UILabel!
+    @IBOutlet weak var teacher5: UILabel!
+    @IBOutlet weak var room5: UILabel!
+    @IBOutlet weak var time5: UILabel!
+    
+    @IBOutlet weak var Cell6: UITableViewCell!
+    @IBOutlet weak var teacher6: UILabel!
+    @IBOutlet weak var room6: UILabel!
+    @IBOutlet weak var class6: UILabel!
+    @IBOutlet weak var time6: UILabel!
+    
+    @IBOutlet weak var Cell7: UITableViewCell!
+    @IBOutlet weak var class7: UILabel!
+    @IBOutlet weak var teacher7: UILabel!
+    @IBOutlet weak var room7: UILabel!
+    @IBOutlet weak var time7: UILabel!
+    
     
     override func viewDidLoad() {
         
+        class1.text = "Advaced Seminar Swift"
+        class1.sizeToFit()
+        time1.text = "1:15 (60)"
+        teacher1.text = "Dionisius, Isabelle"
+        teacher1.sizeToFit()
+        room1.text = "Rm: 215"
+        let colors = Colors()
+        Cell1.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: "tan", RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: "tan", RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: "tan", RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: "tan", RGBA: 3)))
        
         
         super.viewDidLoad()
@@ -37,18 +86,7 @@ class ScheduleViewController: UITableViewController {
     @IBAction func AButton(_ sender: Any) {
         //when button s bushed info is put in
         //to be replaces later
-        class1.text = "Advaced Seminar Swift"
-        class1.sizeToFit()
-        time1.text = "1:15 (60)"
-        teacher1.text = "Dionisius, Isabelle"
-        teacher1.sizeToFit()
-        room1.text = "Rm: 215"
-        let colors = Colors()
-        Cell1.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: "tan", RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: "tan", RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: "tan", RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: "tan", RGBA: 3)))
+      
     }
     
    
