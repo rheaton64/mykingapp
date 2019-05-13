@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QNW-Ef-ztU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QNW-Ef-ztU">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1347,6 +1347,7 @@
                         <outlet property="assignmentsView" destination="KFg-iY-9NM" id="jwG-Ni-BFg"/>
                         <outlet property="dynamicTableView" destination="JxH-eN-HZY" id="ZDL-lb-XSY"/>
                         <outlet property="eventsView" destination="kr1-7a-hvp" id="2I5-jp-VwZ"/>
+                        <outlet property="letterDayLabel" destination="IbN-7Q-JQX" id="GgQ-YP-szd"/>
                         <outlet property="periodProgressBar" destination="zIf-qk-0Og" id="Dp7-x9-bz3"/>
                         <outlet property="testsView" destination="UuP-FA-K9Y" id="ZmP-9T-vle"/>
                     </connections>

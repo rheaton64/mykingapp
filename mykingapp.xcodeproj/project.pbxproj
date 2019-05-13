@@ -21,6 +21,7 @@
 		6EC5CC06221F358B00551E17 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5CC05221F358B00551E17 /* EventsViewController.swift */; };
 		6ED47C3F2225A65A004D18FE /* UpcomingSuperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */; };
 		6ED47C412225ACD3004D18FE /* UpcomingAssignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */; };
+		8F1CCAAB2288CB5800988D34 /* jsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CCAAA2288CB5800988D34 /* jsonData.swift */; };
 		8FCA62832202116B00A87CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62822202116B00A87CAD /* AppDelegate.swift */; };
 		8FCA62852202116B00A87CAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62842202116B00A87CAD /* ViewController.swift */; };
 		8FCA62882202116B00A87CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FCA62862202116B00A87CAD /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		6EC5CC05221F358B00551E17 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSuperTableViewController.swift; sourceTree = "<group>"; };
 		6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAssignTableViewCell.swift; sourceTree = "<group>"; };
+		8F1CCAAA2288CB5800988D34 /* jsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonData.swift; sourceTree = "<group>"; };
 		8FCA627F2202116B00A87CAD /* mykingapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mykingapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FCA62822202116B00A87CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FCA62842202116B00A87CAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,13 @@
 			path = "More sub-pages";
 			sourceTree = "<group>";
 		};
+		8F1CCAA92288CB3B00988D34 /* Server Interaction */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Server Interaction";
+			sourceTree = "<group>";
+		};
 		8FCA62762202116B00A87CAD = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +157,7 @@
 		8FCA62812202116B00A87CAD /* mykingapp */ = {
 			isa = PBXGroup;
 			children = (
+				8F1CCAA92288CB3B00988D34 /* Server Interaction */,
 				0DE647D92271E136006275D7 /* Schedule */,
 				8FCA62862202116B00A87CAD /* Main.storyboard */,
 				D522B390222F06AB0017A1EF /* LoginViewController.swift */,
@@ -168,6 +178,7 @@
 		D5C598A8220A00B100538DEA /* Today Page */ = {
 			isa = PBXGroup;
 			children = (
+				8F1CCAAA2288CB5800988D34 /* jsonData.swift */,
 				D5C598AA220A00B100538DEA /* TodaySuperTableViewController.swift */,
 				D5C598A9220A00B100538DEA /* AssignmentsTableViewCell.swift */,
 			);
@@ -247,6 +258,7 @@
 			files = (
 				6EBCA20A221DBE6B0041E209 /* MoreTableViewController.swift in Sources */,
 				8FCA62852202116B00A87CAD /* ViewController.swift in Sources */,
+				8F1CCAAB2288CB5800988D34 /* jsonData.swift in Sources */,
 				D53E39DC224BB75000D661E9 /* loginInfo.swift in Sources */,
 				0D970C3B221EE59400FC903F /* Color Struct.swift in Sources */,
 				0D46DDB722054103008165FC /* MoreClassInfo.swift in Sources */,
