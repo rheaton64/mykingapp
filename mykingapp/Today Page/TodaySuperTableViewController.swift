@@ -99,6 +99,7 @@ class TodaySuperTableViewController: UITableViewController {
 
     @IBOutlet weak var dynamicTableView: UITableView!
     @IBOutlet weak var DateLabel: UILabel!
+    @IBOutlet weak var letterDayLabel: UILabel!
     @IBOutlet weak var assignmentsView: UIView!
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
@@ -112,8 +113,8 @@ class TodaySuperTableViewController: UITableViewController {
     func ProgressBar()
     {
         let day = Days() // creating instance of day struct
-        let Letter = "G" // replace with json request
-        let schedule = day.GetDay(LetterDay: Letter)//getting array of the curent scheduale
+        let letter = Letter.getLetterDay() // replace with json request
+        let schedule = day.GetDay(LetterDay: letter)//getting array of the curent scheduale
         let date = Date()// creating date object
         let calendar = Calendar.current// creating calender object
         let hour = (calendar.component(.hour, from: date)) // getting curent hour 24 format
@@ -121,6 +122,8 @@ class TodaySuperTableViewController: UITableViewController {
         let time = (hour * 100) + minutes// combinding hours is HHMM format as int
         let period = day.GetPeriod(time: time)//requetsting current period giving time HHMM
         let colors = Colors() //Creating instace of color struct
+        
+        letterDayLabel.text? = letter
         
         //for each rgba value i call the get color function.
         //I provide the current period's.color object for the color parameter
