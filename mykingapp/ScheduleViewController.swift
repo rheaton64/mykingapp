@@ -51,8 +51,12 @@ class ScheduleViewController: UITableViewController {
     @IBOutlet weak var room7: UILabel!
     @IBOutlet weak var time7: UILabel!
     
+    var scheduleData: schData?
+    
     
     override func viewDidLoad() {
+        
+        let letterDay = Letter.getLetterDay()
         
         class1.text = "Advaced Seminar Swift"
         class1.sizeToFit()
@@ -69,6 +73,9 @@ class ScheduleViewController: UITableViewController {
        
         
         super.viewDidLoad()
+        
+        scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: "21")
+        print("Data that I have now: \(scheduleData!.name)")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
