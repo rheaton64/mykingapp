@@ -10,6 +10,9 @@
 		0D46DDAF2204B977008165FC /* ClassesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DDAE2204B977008165FC /* ClassesVC.swift */; };
 		0D46DDB722054103008165FC /* MoreClassInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DDB622054103008165FC /* MoreClassInfo.swift */; };
 		0D46DDB922054442008165FC /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DDB822054442008165FC /* ClassCell.swift */; };
+		0D970C3B221EE59400FC903F /* Color Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D970C3A221EE59400FC903F /* Color Struct.swift */; };
+		0D970C3D221EF20700FC903F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D970C3C221EF20700FC903F /* Schedule.swift */; };
+		6E420A842232E12D0000BA16 /* studentDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E420A832232E12D0000BA16 /* studentDataStructs.swift */; };
 		0D5EB4572260BFA400FCA510 /* AnounncmentsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5EB4562260BFA400FCA510 /* AnounncmentsTableView.swift */; };
 		0D5EB45A2260C02600FCA510 /* AnounncmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5EB4592260C02600FCA510 /* AnounncmentCell.swift */; };
 		0D970C3B221EE59400FC903F /* Color Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D970C3A221EE59400FC903F /* Color Struct.swift */; };
@@ -24,7 +27,6 @@
 		8F1CCAAB2288CB5800988D34 /* jsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CCAAA2288CB5800988D34 /* jsonData.swift */; };
 		8F1CCAAF228AEFF000988D34 /* jsonDataSch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CCAAE228AEFF000988D34 /* jsonDataSch.swift */; };
 		8FCA62832202116B00A87CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62822202116B00A87CAD /* AppDelegate.swift */; };
-		8FCA62852202116B00A87CAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62842202116B00A87CAD /* ViewController.swift */; };
 		8FCA62882202116B00A87CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FCA62862202116B00A87CAD /* Main.storyboard */; };
 		8FCA628D2202116B00A87CAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FCA628B2202116B00A87CAD /* LaunchScreen.storyboard */; };
 		D522B391222F06AB0017A1EF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D522B390222F06AB0017A1EF /* LoginViewController.swift */; };
@@ -38,6 +40,9 @@
 		0D46DDAE2204B977008165FC /* ClassesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesVC.swift; sourceTree = "<group>"; };
 		0D46DDB622054103008165FC /* MoreClassInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreClassInfo.swift; sourceTree = "<group>"; };
 		0D46DDB822054442008165FC /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
+		0D970C3A221EE59400FC903F /* Color Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color Struct.swift"; sourceTree = "<group>"; };
+		0D970C3C221EF20700FC903F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		6E420A832232E12D0000BA16 /* studentDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentDataStructs.swift; sourceTree = "<group>"; };
 		0D5EB4562260BFA400FCA510 /* AnounncmentsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnounncmentsTableView.swift; sourceTree = "<group>"; };
 		0D5EB4592260C02600FCA510 /* AnounncmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnounncmentCell.swift; sourceTree = "<group>"; };
 		0D970C3A221EE59400FC903F /* Color Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color Struct.swift"; sourceTree = "<group>"; };
@@ -53,7 +58,6 @@
 		8F1CCAAE228AEFF000988D34 /* jsonDataSch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonDataSch.swift; sourceTree = "<group>"; };
 		8FCA627F2202116B00A87CAD /* mykingapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mykingapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FCA62822202116B00A87CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8FCA62842202116B00A87CAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8FCA62872202116B00A87CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8FCA628C2202116B00A87CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FCA628E2202116B00A87CAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,6 +164,9 @@
 		8FCA62812202116B00A87CAD /* mykingapp */ = {
 			isa = PBXGroup;
 			children = (
+				0D970C3C221EF20700FC903F /* Schedule.swift */,
+				0D970C3A221EE59400FC903F /* Color Struct.swift */,
+				6E420A832232E12D0000BA16 /* studentDataStructs.swift */,
 				8F1CCAA92288CB3B00988D34 /* Server Interaction */,
 				0DE647D92271E136006275D7 /* Schedule */,
 				8FCA62862202116B00A87CAD /* Main.storyboard */,
@@ -170,7 +177,6 @@
 				D5C598A8220A00B100538DEA /* Today Page */,
 				0D46DDAD2204B92C008165FC /* Classes */,
 				8FCA62822202116B00A87CAD /* AppDelegate.swift */,
-				8FCA62842202116B00A87CAD /* ViewController.swift */,
 				D58B97BE220BC0D0009BEA7F /* Assets.xcassets */,
 				8FCA628B2202116B00A87CAD /* LaunchScreen.storyboard */,
 				8FCA628E2202116B00A87CAD /* Info.plist */,
@@ -260,6 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBCA20A221DBE6B0041E209 /* MoreTableViewController.swift in Sources */,
+				6E420A842232E12D0000BA16 /* studentDataStructs.swift in Sources */,
+				6EC5CC08221F359E00551E17 /* AnnounceViewController.swift in Sources */,
 				8FCA62852202116B00A87CAD /* ViewController.swift in Sources */,
 				8F1CCAAF228AEFF000988D34 /* jsonDataSch.swift in Sources */,
 				8F1CCAAB2288CB5800988D34 /* jsonData.swift in Sources */,
