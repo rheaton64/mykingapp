@@ -8,6 +8,8 @@
 
 import Foundation
 
+//need this
+
 //the structer of a period containing color start time and end time
 struct Period
 {

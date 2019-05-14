@@ -8,6 +8,8 @@
 
 import Foundation
 
+//need this
+
 struct Colors {
     // array of all colors we use stored as [red,green,blue,alpha]
     //used for UIColor(red:CGFloat , green:CGFloat, blue:CGFloat, alpha:CGFloat)
