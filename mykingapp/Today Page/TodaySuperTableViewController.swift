@@ -219,7 +219,19 @@ class TodaySuperTableViewController: UITableViewController {
         
         var classDataForDay = getClassData(dayArray: assignmentOfDay)
         print(classDataForDay)
+         
+         
  */
+        
+        
+        //code to fix header for IPhone X
+        let dummyViewHeight = CGFloat(45)
+        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+        
+        //STRINGS HOLDING NAME AND GRADE, FOR JSON
+        let name = String(describing: loginInfo.name!)
+        let grade = String(describing: loginInfo.grade!)
+        print("Entered Name: \(name), Entered Grade: \(grade)")
     }
     
     //This function returns the assignments of the accessed data
@@ -314,17 +326,6 @@ class TodaySuperTableViewController: UITableViewController {
         }
         
         return dayOfWeek
-    }
-    
-    
-        //code to fix header for IPhone X
-        let dummyViewHeight = CGFloat(45)
-        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
-        
-        //STRINGS HOLDING NAME AND GRADE, FOR JSON
-        let name = String(describing: loginInfo.name!)
-        let grade = String(describing: loginInfo.grade!)
-        print("Entered Name: \(name), Entered Grade: \(grade)")
     }
     
     //UI Stuff
