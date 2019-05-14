@@ -117,6 +117,15 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
     
+    static var studentArray = AssignmentData.getAssignmentData(fName: "Natasha", lName: "Aysseh", grade: 19)
+    static var classData = decodeAssignments(JSON: TodaySuperTableViewController.studentArray)
+    static var assignmentOfDay = getIndivAssignmentArray(assignmentArray: TodaySuperTableViewController.classData, dayIndex: AssignmentData.getCurrentDay())
+    //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
+    //The array that it returns has smaller arrays full of each individual class' data in those strings
+    //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
+    //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
+    //To make this work, call the getIndivAssignmentArray function and put in the parameters
+    static var classDataForDay = getClassData(dayArray: TodaySuperTableViewController.assignmentOfDay)
     
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
@@ -164,14 +173,6 @@ class TodaySuperTableViewController: UITableViewController {
         periodProgressBar.setProgress(Float((interval - timeLeft) / 100), animated: false)
         
     }
-   
-    
-    static var studentArray = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
-    static var assignmentOfDay = [String]()
-    static var classData = [[String]]()
-    static var classDataForDay = [[String]]()
-    
-    public var dayOfWeek = Int()
     
    
     override func viewDidLoad() {
@@ -184,46 +185,6 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
-        
-        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
-        //need to pause to access the server after calling the parsing method (like in the TodaySuperTableViewController file)
-        while TodaySuperTableViewController.studentArray.name == "" {
-            sleep(UInt32(0.01))
-        }
-        TodaySuperTableViewController.classData = decodeAssignments(JSON: TodaySuperTableViewController.studentArray)
-        
-        TodaySuperTableViewController.assignmentOfDay = getIndivAssignmentArray(assignmentArray: TodaySuperTableViewController.classData, dayIndex: getCurrentDay())
-        
-        //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
-        //The array that it returns has smaller arrays full of each individual class' data in those strings
-        //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
-        //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
-        //To make this work, call the getIndivAssignmentArray function and put in the parameters
-        TodaySuperTableViewController.classDataForDay = getClassData(dayArray: TodaySuperTableViewController.assignmentOfDay)
-        
-        
-        
-        
-/*
-    
-        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
-        
-        //need to pause so that the server can be accessed!!! need this!!
-        while studentArray.name == "" {
-            sleep(UInt32(0.01))
-        }
-        //print(studentArray)
-        classData = decodeAssignments(JSON: studentArray)
-        
-        assignmentOfDay = getIndivAssignmentArray(assignmentArray: classData, dayIndex: getCurrentDay())
-        
-        var classDataForDay = getClassData(dayArray: assignmentOfDay)
-        print(classDataForDay)
-         
-         
- */
-        
-        
         //code to fix header for IPhone X
         let dummyViewHeight = CGFloat(45)
         self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
@@ -232,100 +193,6 @@ class TodaySuperTableViewController: UITableViewController {
         let name = String(describing: loginInfo.name!)
         let grade = String(describing: loginInfo.grade!)
         print("Entered Name: \(name), Entered Grade: \(grade)")
-    }
-    
-    //This function returns the assignments of the accessed data
-    func decodeAssignments(JSON: studentData) -> [[String]] {
-        return JSON.assignments
-    }
-    
-    
-    //This function gets the assignment data for 1 day based on whichever day number you put into the parameters
-    //(days of the week start on sunday)
-    func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {
-        return assignmentArray[dayIndex]
-    }
-    
-    
-    //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
-    //The array that it returns has smaller arrays full of each individual class' data in those strings
-    //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
-    //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
-    //To make this work, call the getIndivAssignmentArray function and put in the parameters
-    func getClassData(dayArray: [String]) -> [[String]] {
-        var newArray = [[String]]()
-        
-        for classInfo in dayArray {
-            newArray.append(classInfo.components(separatedBy: ",,"))
-        }
-        return newArray
-    }
-    
-    
-    func getLatestData(lastName: String, firstName: String, gradYear: Int) {
-        //a space is %20
-        //comma is %2C
-        //apostrophe %27
-        guard let studentURL = URL(string: "http://10.0.1.200:5000/assignments/get/testdata/\(lastName)%2C%20\(firstName)%20%27\(gradYear)") else {return}
-    
-        let request = URLRequest(url: studentURL)
-        let task = URLSession.shared.dataTask(with: request, completionHandler:
-        { (data, response, error) -> Void in
-            
-            if let data = data {
-                //this assigns the studentArray variable (made a private variable outside) to what parseJsonData returns
-                
-                TodaySuperTableViewController.studentArray = self.parseJsonData(data: data)
-            
-            }
-            if let error = error {
-                print(error)
-                return
-            }
-        })
-        task.resume()
-    }
-    
-    func parseJsonData(data: Data) -> studentData {
-        
-        let decoder = JSONDecoder()
-        var studentValues = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
-        
-        do {
-            let jsonDataReturn = try decoder.decode(studentData.self, from: data)
-            studentValues = jsonDataReturn.self
-            
-        } catch {
-            print(error)
-        }
-        return studentValues
-    }
-    
-    func getCurrentDay() -> Int {
-        let date = Date()
-        let calendar = Calendar.current
-        let dayValue = calendar.component(.weekday, from: date)
-        
-        switch dayValue {
-        case 1:
-            dayOfWeek = 0
-        case 2:
-            dayOfWeek = 1
-        case 3:
-            dayOfWeek = 2
-        case 4:
-            dayOfWeek = 3
-        case 5:
-            dayOfWeek = 4
-        case 6:
-            dayOfWeek = 5
-        case 7:
-            dayOfWeek = 6
-        default:
-            return 0
-        }
-        
-        return dayOfWeek
     }
     
     //UI Stuff

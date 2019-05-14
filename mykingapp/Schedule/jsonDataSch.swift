@@ -8,7 +8,7 @@
 
 import Foundation
 
-func getSchDataFromServer(fName: String, lName: String, grade: String) {
+func getSchDataFromServer(fName: String, lName: String, grade: Int) {
     
     var output = schData(name: "", schedule: [[]], isFirstLunch: [])
     
@@ -20,7 +20,6 @@ func getSchDataFromServer(fName: String, lName: String, grade: String) {
     { (data, response, error) -> Void in
         
         if let data = data {
-            //this assigns the studentArray variable (made a private variable outside) to what parseJsonData returns
             output = parseJsonData(data: data)
             ScheduleData.scheduleJsonData = output
             
@@ -78,7 +77,7 @@ struct schData: Decodable{
 class ScheduleData {
     static var scheduleJsonData: schData?
     
-    static func getScheduleData(fName: String, lName: String, grade: String) -> schData {
+    static func getScheduleData(fName: String, lName: String, grade: Int) -> schData {
         if let scheduleJsonData = scheduleJsonData {
             return scheduleJsonData
         }
