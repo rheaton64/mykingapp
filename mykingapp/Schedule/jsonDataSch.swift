@@ -8,11 +8,11 @@
 
 import Foundation
 
-func getDataFromServer(studentFName: String, studentLName: String, studentGrade: String) -> schData {
+func getSchDataFromServer(fName: String, lName: String, grade: String) {
     
     var output = schData(name: "", schedule: [[]], isFirstLunch: [])
     
-    guard let serverURL = URL(string: "http://10.0.1.200:5000/get/testsch/\(studentLName)%2C%20\(studentFName)%20%27\(studentGrade)") else { fatalError("URL not found") }
+    guard let serverURL = URL(string: "http://10.0.1.200:5000/get/testsch/\(lName)%2C%20\(fName)%20%27\(grade)") else { fatalError("URL not found") }
     
     let request = URLRequest(url: serverURL)
     
@@ -21,8 +21,8 @@ func getDataFromServer(studentFName: String, studentLName: String, studentGrade:
         
         if let data = data {
             //this assigns the studentArray variable (made a private variable outside) to what parseJsonData returns
-            
             output = parseJsonData(data: data)
+            ScheduleData.scheduleJsonData = output
             
         }
         if let error = error {
@@ -31,7 +31,6 @@ func getDataFromServer(studentFName: String, studentLName: String, studentGrade:
         }
     })
     task.resume()
-    return output
 }
 
 func parseJsonData(data: Data) -> schData {
@@ -41,8 +40,8 @@ func parseJsonData(data: Data) -> schData {
     
     do {
         let output = try decoder.decode(schData.self, from: data)
-        
-        schVals = output.self
+        //print(output)
+        schVals = output
     } catch {
         print(error)
     }
@@ -59,19 +58,33 @@ struct schData: Decodable{
     enum CodingKeys: String, CodingKey {
         case name = "student_name"
         case schedule = "schedule"
-        case isFistLunch = "isFirstLunch"
+        case isFirstLunch = "isFirstLunch"
     }
     
     init(from decoder:Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         schedule = try values.decode([[String]].self, forKey: .schedule)
-        isFirstLunch = try values.decode([Bool].self, forKey: .isFistLunch)
+        isFirstLunch = try values.decode([Bool].self, forKey: .isFirstLunch)
     }
     
     init(name: String, schedule: [[String]], isFirstLunch: [Bool]) {
         self.name = name
         self.schedule = schedule
         self.isFirstLunch = isFirstLunch
+    }
+}
+
+class ScheduleData {
+    static var scheduleJsonData: schData?
+    
+    static func getScheduleData(fName: String, lName: String, grade: String) -> schData {
+        if let scheduleJsonData = scheduleJsonData {
+            return scheduleJsonData
+        }
+        getSchDataFromServer(fName: fName, lName: lName, grade: grade)
+        while scheduleJsonData == nil {}
+        return scheduleJsonData!
+        
     }
 }
