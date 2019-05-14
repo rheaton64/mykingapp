@@ -39,3 +39,16 @@ class LoginViewController: UIViewController {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+//my parents left me three days ago food is running low send help

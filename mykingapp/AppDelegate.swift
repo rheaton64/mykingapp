@@ -90,3 +90,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 }
 
+
+
+
+
+
+//.... being set free
