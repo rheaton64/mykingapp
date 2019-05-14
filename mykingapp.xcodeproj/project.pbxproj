@@ -22,7 +22,7 @@
 		6ED47C3F2225A65A004D18FE /* UpcomingSuperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */; };
 		6ED47C412225ACD3004D18FE /* UpcomingAssignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */; };
 		8F1CCAAB2288CB5800988D34 /* jsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CCAAA2288CB5800988D34 /* jsonData.swift */; };
-		8F1CCAAD2289E4D800988D34 /* jsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CCAAC2289E4D800988D34 /* jsonData.swift */; };
+		8F1CCAAF228AEFF000988D34 /* jsonDataSch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CCAAE228AEFF000988D34 /* jsonDataSch.swift */; };
 		8FCA62832202116B00A87CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62822202116B00A87CAD /* AppDelegate.swift */; };
 		8FCA62852202116B00A87CAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA62842202116B00A87CAD /* ViewController.swift */; };
 		8FCA62882202116B00A87CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FCA62862202116B00A87CAD /* Main.storyboard */; };
@@ -50,7 +50,7 @@
 		6ED47C3E2225A65A004D18FE /* UpcomingSuperTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSuperTableViewController.swift; sourceTree = "<group>"; };
 		6ED47C402225ACD3004D18FE /* UpcomingAssignTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAssignTableViewCell.swift; sourceTree = "<group>"; };
 		8F1CCAAA2288CB5800988D34 /* jsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonData.swift; sourceTree = "<group>"; };
-		8F1CCAAC2289E4D800988D34 /* jsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonData.swift; sourceTree = "<group>"; };
+		8F1CCAAE228AEFF000988D34 /* jsonDataSch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonDataSch.swift; sourceTree = "<group>"; };
 		8FCA627F2202116B00A87CAD /* mykingapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mykingapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FCA62822202116B00A87CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FCA62842202116B00A87CAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			children = (
 				0D970C3C221EF20700FC903F /* Schedule.swift */,
 				0D970C3A221EE59400FC903F /* Color Struct.swift */,
-				8F1CCAAC2289E4D800988D34 /* jsonData.swift */,
+				8F1CCAAE228AEFF000988D34 /* jsonDataSch.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -261,8 +261,8 @@
 			files = (
 				6EBCA20A221DBE6B0041E209 /* MoreTableViewController.swift in Sources */,
 				8FCA62852202116B00A87CAD /* ViewController.swift in Sources */,
+				8F1CCAAF228AEFF000988D34 /* jsonDataSch.swift in Sources */,
 				8F1CCAAB2288CB5800988D34 /* jsonData.swift in Sources */,
-				8F1CCAAD2289E4D800988D34 /* jsonData.swift in Sources */,
 				D53E39DC224BB75000D661E9 /* loginInfo.swift in Sources */,
 				0D970C3B221EE59400FC903F /* Color Struct.swift in Sources */,
 				0D46DDB722054103008165FC /* MoreClassInfo.swift in Sources */,

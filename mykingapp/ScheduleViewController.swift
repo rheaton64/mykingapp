@@ -69,6 +69,8 @@ class ScheduleViewController: UITableViewController {
        
         
         super.viewDidLoad()
+        
+       // print(getDataFromServer(studentFName: <#T##String#>, studentLName: <#T##String#>, studentGrade: <#T##String#>))
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
