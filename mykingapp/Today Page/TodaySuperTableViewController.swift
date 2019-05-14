@@ -111,6 +111,7 @@ class TodaySuperTableViewController: UITableViewController {
 
     @IBOutlet weak var dynamicTableView: UITableView!
     @IBOutlet weak var DateLabel: UILabel!
+    @IBOutlet weak var letterDayLabel: UILabel!
     @IBOutlet weak var assignmentsView: UIView!
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
@@ -121,12 +122,11 @@ class TodaySuperTableViewController: UITableViewController {
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
     
-    
     func ProgressBar()
     {
         let day = Days() // creating instance of day struct
-        let Letter = "G" // replace with json request
-        let schedule = day.GetDay(LetterDay: Letter)//getting array of the curent scheduale
+        let letter = Letter.getLetterDay() // replace with json request
+        let schedule = day.GetDay(LetterDay: letter)//getting array of the curent scheduale
         let date = Date()// creating date object
         let calendar = Calendar.current// creating calender object
         let hour = (calendar.component(.hour, from: date)) // getting curent hour 24 format
@@ -134,6 +134,8 @@ class TodaySuperTableViewController: UITableViewController {
         let time = (hour * 100) + minutes// combinding hours is HHMM format as int
         let period = day.GetPeriod(time: time)//requetsting current period giving time HHMM
         let colors = Colors() //Creating instace of color struct
+        
+        letterDayLabel.text? = letter
         
         //for each rgba value i call the get color function.
         //I provide the current period's.color object for the color parameter
@@ -171,7 +173,7 @@ class TodaySuperTableViewController: UITableViewController {
     
     public var dayOfWeek = Int()
     
-    
+   
     override func viewDidLoad() {
         
     
@@ -315,6 +317,17 @@ class TodaySuperTableViewController: UITableViewController {
     }
     
     
+        //code to fix header for IPhone X
+        let dummyViewHeight = CGFloat(45)
+        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+        
+        //STRINGS HOLDING NAME AND GRADE, FOR JSON
+        let name = String(describing: loginInfo.name!)
+        let grade = String(describing: loginInfo.grade!)
+        print("Entered Name: \(name), Entered Grade: \(grade)")
+    }
+    
+    //UI Stuff
     func getTodayItemBorder(){
         let blueColor = UIColor(red: 81/255, green: 150/255, blue: 255/255, alpha: 0.75)
         assignmentsView.layer.borderWidth = 3
@@ -335,7 +348,7 @@ class TodaySuperTableViewController: UITableViewController {
     func dateFunc(){
         let today = Date()
         let format = DateFormatter()
-        format.dateFormat = "EEEE    MMMM d"
+        format.dateFormat = "EEEE \nMMMM d"
         DateLabel.text = format.string(from: today).uppercased()
     }
     
@@ -368,6 +381,13 @@ class TodaySuperTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let height = CGFloat(25)
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar!.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
     }
 
     /*
@@ -414,54 +434,13 @@ class TodaySuperTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    //ALERT CONTROLLER LOGIN POP UP
-    //maybe encorporate faceID/finger print reading functionality...
-    override func viewDidAppear(_ animated: Bool) {
-        createAlertLogin()
-    }
-    
-    func createAlertLogin(){
-        var usernameTextField: UITextField?
-        var passwordTextField: UITextField?
-        
-        let alertController = UIAlertController(
-            title: "Sign in",
-            message: "Please enter your credentials",
-            preferredStyle: .alert)
-
-        let loginAction = UIAlertAction(
-        title: "Log in", style: .default) {
-            (action) -> Void in
-            
-            if let username = usernameTextField?.text {
-                print(" Username = \(username)")
-            } else {
-                print("No Username entered")
-            }
-            
-            if let password = passwordTextField?.text {
-                print("Password = \(password)")
-            } else {
-                print("No password entered")
-            }
-        }
-        
-        alertController.addTextField {
-            (txtUsername) -> Void in
-            usernameTextField = txtUsername
-            usernameTextField!.placeholder = "Username"
-        }
-        
-        alertController.addTextField {
-            (txtPassword) -> Void in
-            passwordTextField = txtPassword
-            passwordTextField?.isSecureTextEntry = true
-            passwordTextField?.placeholder = "Password"
-        }
-        
-        alertController.addAction(loginAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
 }
+
+
+
+
+
+
+
+
+//he can smell you, you know

@@ -1,16 +1,19 @@
 //
-//  ClassCell.swift
+//  AnouncmentCell.swift
 //  mykingapp
 //
-//  Created by Spencer Creveling on 2/1/19.
+//  Created by Spencer Creveling on 4/12/19.
 //  Copyright © 2019 Ryan Heaton. All rights reserved.
 //
 
 import UIKit
 
-class ClassCell: UITableViewCell {
-
-    @IBOutlet weak var classLable: UILabel!
+class AnounncmentCell: UITableViewCell {
+    @IBOutlet weak var anounncementTitle: UILabel!
+    @IBOutlet weak var anounncmentType: UILabel!
+    @IBOutlet weak var anouncmentDescription: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,16 +26,3 @@ class ClassCell: UITableViewCell {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//i love brownies and.........
