@@ -117,7 +117,7 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
     
-    static var studentArray = AssignmentData.getAssignmentData(fName: "Natasha", lName: "Aysseh", grade: 19)
+    static var studentArray = AssignmentData.getAssignmentData(fName: "Ryan", lName: "Heaton", grade: 21)
     static var classData = decodeAssignments(JSON: TodaySuperTableViewController.studentArray)
     static var assignmentOfDay = getIndivAssignmentArray(assignmentArray: TodaySuperTableViewController.classData, dayIndex: AssignmentData.getCurrentDay())
     //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
