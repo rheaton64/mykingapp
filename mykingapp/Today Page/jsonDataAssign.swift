@@ -130,6 +130,16 @@ class AssignmentData {
     }
 }
 
+//This needs to save data
+//please
+class FinishedAssignments: Codable{
+    var isDoneMonday: Array<Bool>?
+    var isDoneTuesday: Array<Bool>?
+    var isDoneWednesday: Array<Bool>?
+    var isDoneThursday: Array<Bool>?
+    var isDoneFriday: Array<Bool>?
+}
+
 //This function returns assigment data
 func decodeAssignments(JSON: studentData) -> [[String]] {
     return JSON.assignments
