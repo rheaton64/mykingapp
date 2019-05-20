@@ -26,7 +26,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     //the number six below needs to be a count variable of the number of
     //items in the assignmentClass array
-    var assignmentIsDone = Array(repeating: false, count: TodaySuperTableViewController.assignmentOfDay.count)
+    var assignmentIsDone = Array(repeating: false, count: SavedAssignments.assignmentsList[AssignmentData.getCurrentDay()].count)
     
 //    let instanceOfTodayView = TodaySuperTableViewController()
 //    var classData = [[String]]()
@@ -176,7 +176,6 @@ class TodaySuperTableViewController: UITableViewController {
     
    
     override func viewDidLoad() {
-        
     
        ProgressBar()
         super.viewDidLoad()
