@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 struct assignments {
     var assignmentIsDone = Bool()
@@ -21,20 +22,6 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
 //    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
-    
-    //let instanceOfTodayView = TodaySuperTableViewController()
-    //the number six below needs to be a count variable of the number of
-    //items in the assignmentClass array
-    var assignmentIsDone = Array(repeating: false, count: SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay()))
-    
-    var assignmentsToday = SavedAssignments.assignmentsList[AssignmentData.getCurrentDay()]
-    
-    
-    
-//    let instanceOfTodayView = TodaySuperTableViewController()
-//    var classData = [[String]]()
-//    var assignmentOfDay = [String]()
-//    var classDataForDay = [[String]]()
 
     
 
@@ -125,17 +112,7 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
-    
-//    //static var studentArray = AssignmentData.getAssignmentData(fName: "Ryan", lName: "Heaton", grade: 21)
-//    static var classData = decodeAssignments(JSON: TodaySuperTableViewController.studentArray)
-//    static var assignmentOfDay = getIndivAssignmentArray(assignmentArray: TodaySuperTableViewController.classData, dayIndex: AssignmentData.getCurrentDay())
-//    //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
-//    //The array that it returns has smaller arrays full of each individual class' data in those strings
-//    //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
-//    //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
-//    //To make this work, call the getIndivAssignmentArray function and put in the parameters
-//    static var classDataForDay = getClassData(dayArray: TodaySuperTableViewController.assignmentOfDay)
-    
+ 
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
@@ -186,13 +163,14 @@ class TodaySuperTableViewController: UITableViewController {
    
     override func viewDidLoad() {
 
-    
        ProgressBar()
         super.viewDidLoad()
         dateFunc()
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
+        //method for notifications
+        setupLocalNotification()
         
         //code to fix header for IPhone X
         let dummyViewHeight = CGFloat(45)
@@ -240,7 +218,7 @@ class TodaySuperTableViewController: UITableViewController {
         view.addSubview(label)
         return view
     }
-    
+
     var height = Int()
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
@@ -265,6 +243,22 @@ class TodaySuperTableViewController: UITableViewController {
         let height = CGFloat(25)
         let navigationBar = self.navigationController?.navigationBar
         navigationBar!.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
+    }
+    
+    //sets up local notification
+    func setupLocalNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Notification Title"
+        content.body = "Notification Body"
+        content.sound = UNNotificationSound.default
+        var date = DateComponents()
+        date.hour = 21
+        date.minute = 45
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     /*

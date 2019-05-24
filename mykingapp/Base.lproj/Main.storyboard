@@ -356,7 +356,9 @@
                             <outlet property="delegate" destination="OU6-Si-hl5" id="QwC-e0-SpP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="gz4-v3-28L"/>
+                    <navigationItem key="navigationItem" id="hrG-pP-6sp">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="RvE-jj-20u"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nq8-TI-FSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
