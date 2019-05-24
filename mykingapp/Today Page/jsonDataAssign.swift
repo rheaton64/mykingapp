@@ -96,15 +96,11 @@ class AssignmentData {
         }
         getAssignDataFromServer(fName: fName, lName: lName, grade: grade)
         while assignmentJsonData == nil {}
-        SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: assignmentJsonData!))
+        //SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: assignmentJsonData!))
         return assignmentJsonData!
         
     }
     
-    //finish this please for the love of all things good and holy
-    static func initAndDayCount(day: Int) {
-        SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: assignmentJsonData!))
-    }
     
     static func getCurrentDay() -> Int {
         
@@ -137,26 +133,6 @@ class AssignmentData {
     }
 }
 
-//This needs to save data
-//please
-class FinishedAssignments: Codable{
-    static var isDoneMonday: Array<Bool>?
-    static var isDoneTuesday: Array<Bool>?
-    static var isDoneWednesday: Array<Bool>?
-    static var isDoneThursday: Array<Bool>?
-    static var isDoneFriday: Array<Bool>?
-    
-    //follow template of TodaySuperTableViewController's indivAssign array
-    
-    static func initArrays(classData: [[String]]) {
-        isDoneMonday = Array(repeating: false, count: getIndivAssignmentArray(assignmentArray: classData, dayIndex: 1).count)
-        isDoneTuesday = Array(repeating: false, count: getIndivAssignmentArray(assignmentArray: classData, dayIndex: 2).count)
-        isDoneWednesday = Array(repeating: false, count: getIndivAssignmentArray(assignmentArray: classData, dayIndex: 3).count)
-        isDoneThursday = Array(repeating: false, count: getIndivAssignmentArray(assignmentArray: classData, dayIndex: 4).count)
-        isDoneFriday = Array(repeating: false, count: getIndivAssignmentArray(assignmentArray: classData, dayIndex: 5).count)
-    }
-}
-
 
 //for assignInfo in dayData {
 //    let tempAssign = singleAssignment(className: assignInfo[0], type: assignInfo[1], name: assignInfo[2], dateAssigned: assignInfo[3], weekdayDue: Int(assignInfo[4])!, isDone: false)
@@ -165,6 +141,7 @@ class FinishedAssignments: Codable{
 
 class SavedAssignments: Codable {
     static var assignmentsList = [[]]
+    static var isInit = false
     
     static func parseToArrObs(classData: [[String]]) {
         var count = 0
@@ -183,6 +160,16 @@ class SavedAssignments: Codable {
             print(day)
         }
     }
+    
+    static func initAndDayCount(day: Int) -> Int{
+        if !isInit {
+        AssignmentData.getAssignmentData(fName: "Ryan", lName: "Heaton", grade: 21)
+        SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: AssignmentData.assignmentJsonData!))
+        isInit = true
+        }
+        return assignmentsList[day].count
+    }
+    
 }
 
 struct singleAssignment {
@@ -196,6 +183,8 @@ struct singleAssignment {
     mutating func toggleDone() {
         self.isDone = !self.isDone
     }
+    
+    
 }
 
 //This function returns assigment data
