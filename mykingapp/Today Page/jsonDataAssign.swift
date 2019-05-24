@@ -90,14 +90,17 @@ class AssignmentData {
     static var assignmentJsonData: studentData?
     
     static func getAssignmentData(fName: String, lName: String, grade: Int) -> studentData {
+        print(getCurrentDay())
         if let assignmentJsonData = assignmentJsonData {
             return assignmentJsonData
         }
         getAssignDataFromServer(fName: fName, lName: lName, grade: grade)
         while assignmentJsonData == nil {}
+        //SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: assignmentJsonData!))
         return assignmentJsonData!
         
     }
+    
     
     static func getCurrentDay() -> Int {
         
@@ -130,14 +133,58 @@ class AssignmentData {
     }
 }
 
-//This needs to save data
-//please
-class FinishedAssignments: Codable{
-    var isDoneMonday: Array<Bool>?
-    var isDoneTuesday: Array<Bool>?
-    var isDoneWednesday: Array<Bool>?
-    var isDoneThursday: Array<Bool>?
-    var isDoneFriday: Array<Bool>?
+
+//for assignInfo in dayData {
+//    let tempAssign = singleAssignment(className: assignInfo[0], type: assignInfo[1], name: assignInfo[2], dateAssigned: assignInfo[3], weekdayDue: Int(assignInfo[4])!, isDone: false)
+//    assignMonday?.append(tempAssign)
+//}
+
+class SavedAssignments: Codable {
+    static var assignmentsList = [[]]
+    static var isInit = false
+    
+    static func parseToArrObs(classData: [[String]]) {
+        var count = 0
+        for arr in classData {
+            if count != 6 {
+                assignmentsList.append([])
+            }
+            let dayData = getClassData(dayArray: arr)
+            for assignInfo in dayData {
+                let tempAssign = singleAssignment(className: assignInfo[0], type: assignInfo[1], name: assignInfo[2], dateAssigned: assignInfo[3], weekdayDue: Int(assignInfo[4])!, isDone: false)
+                assignmentsList[count].append(tempAssign)
+            }
+        count += 1
+        }
+        for day in assignmentsList{
+            print(day)
+        }
+    }
+    
+    static func initAndDayCount(day: Int) -> Int{
+        if !isInit {
+        AssignmentData.getAssignmentData(fName: "Ryan", lName: "Heaton", grade: 21)
+        SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: AssignmentData.assignmentJsonData!))
+        isInit = true
+        }
+        return assignmentsList[day].count
+    }
+    
+}
+
+struct singleAssignment {
+    let className: String
+    let type: String
+    let name: String
+    let dateAssigned: String
+    let weekdayDue: Int
+    var isDone = false
+    
+    mutating func toggleDone() {
+        self.isDone = !self.isDone
+    }
+    
+    
 }
 
 //This function returns assigment data

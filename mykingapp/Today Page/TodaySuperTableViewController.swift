@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 struct assignments {
     var assignmentIsDone = Bool()
@@ -21,22 +22,11 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
 //    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
-    
-    //let instanceOfTodayView = TodaySuperTableViewController()
-    
-    //the number six below needs to be a count variable of the number of
-    //items in the assignmentClass array
-    var assignmentIsDone = Array(repeating: false, count: TodaySuperTableViewController.assignmentOfDay.count)
-    
-//    let instanceOfTodayView = TodaySuperTableViewController()
-//    var classData = [[String]]()
-//    var assignmentOfDay = [String]()
-//    var classDataForDay = [[String]]()
 
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TodaySuperTableViewController.assignmentOfDay.count
+        return SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay())
         
     }
     
@@ -47,14 +37,14 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         subcell.assignmentNumber.layer.borderColor = UIColor.orange.cgColor
         subcell.assignmentNumber.layer.borderWidth = 2
         subcell.assignmentNumber.text = "\(indexPath.row + 1)"
-        subcell.assignmentClassLbl.text = TodaySuperTableViewController.classDataForDay[indexPath.row][0]
+        subcell.assignmentClassLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).className
         subcell.assignmentClassLbl.textColor = classColor[indexPath.row]
-        subcell.assignmentHeaderLbl.text = TodaySuperTableViewController.classDataForDay[indexPath.row][2]
-        subcell.assignmentDetailLbl.text = TodaySuperTableViewController.assignmentOfDay[indexPath.row]
+        subcell.assignmentHeaderLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).name
+        subcell.assignmentDetailLbl.text = "This is a description"
         
         //handles assignments that are done to prevent reusable cell bug
-        subcell.assignmentNumber.layer.backgroundColor = assignmentIsDone[indexPath.row] ? UIColor.orange.cgColor : UIColor.white.cgColor
-        subcell.accessoryType = assignmentIsDone[indexPath.row] ? .checkmark : .none
+        subcell.assignmentNumber.layer.backgroundColor = (assignmentsToday[indexPath.row] as! singleAssignment).isDone  ? UIColor.orange.cgColor : UIColor.white.cgColor
+        subcell.accessoryType = (assignmentsToday[indexPath.row] as! singleAssignment).isDone ? .checkmark : .none
         
         return subcell
     }
@@ -79,7 +69,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         let notDoneAction = UIContextualAction(style: .normal, title:  "Not Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             doneCell.assignmentNumber.textColor = UIColor.orange
             doneCell.assignmentNumber.layer.backgroundColor = UIColor.white.cgColor
-            self.assignmentIsDone[indexPath.row] = false
+            self.toggleDoneForAssign(index: indexPath.row)
             print("Marked as not done")
             success(true)
         })
@@ -87,7 +77,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
             
             doneCell.assignmentNumber.textColor = UIColor.white
             doneCell.assignmentNumber.layer.backgroundColor = UIColor.orange.cgColor
-            self.assignmentIsDone[indexPath.row] = true
+            self.toggleDoneForAssign(index: indexPath.row)
             print("Marked as done")
             success(true)
         })
@@ -96,7 +86,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         
         //let notDone = UISwipeActionsConfiguration(actions: [notDoneAction])
         var action = UIContextualAction()
-            if (self.assignmentIsDone[indexPath.row] == true){
+            if ((assignmentsToday[indexPath.row] as! singleAssignment).isDone == true){
                 action = notDoneAction
             } else {
                 action = doneAction
@@ -104,6 +94,12 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
             let action1 = UISwipeActionsConfiguration(actions: [action])
             action1.performsFirstActionWithFullSwipe = true
             return action1
+    }
+    
+    func toggleDoneForAssign(index: Int) {
+        if var assign = assignmentsToday[index] as? singleAssignment {
+            assign.toggleDone()
+        }
     }
 }
 
@@ -116,17 +112,7 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
-    
-    static var studentArray = AssignmentData.getAssignmentData(fName: "Ryan", lName: "Heaton", grade: 21)
-    static var classData = decodeAssignments(JSON: TodaySuperTableViewController.studentArray)
-    static var assignmentOfDay = getIndivAssignmentArray(assignmentArray: TodaySuperTableViewController.classData, dayIndex: AssignmentData.getCurrentDay())
-    //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
-    //The array that it returns has smaller arrays full of each individual class' data in those strings
-    //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
-    //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
-    //To make this work, call the getIndivAssignmentArray function and put in the parameters
-    static var classDataForDay = getClassData(dayArray: TodaySuperTableViewController.assignmentOfDay)
-    
+ 
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
@@ -176,14 +162,15 @@ class TodaySuperTableViewController: UITableViewController {
     
    
     override func viewDidLoad() {
-        
-    
+
        ProgressBar()
         super.viewDidLoad()
         dateFunc()
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
+        //method for notifications
+        setupLocalNotification()
         
         //code to fix header for IPhone X
         let dummyViewHeight = CGFloat(45)
@@ -231,7 +218,7 @@ class TodaySuperTableViewController: UITableViewController {
         view.addSubview(label)
         return view
     }
-    
+
     var height = Int()
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
@@ -256,6 +243,22 @@ class TodaySuperTableViewController: UITableViewController {
         let height = CGFloat(25)
         let navigationBar = self.navigationController?.navigationBar
         navigationBar!.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
+    }
+    
+    //sets up local notification
+    func setupLocalNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Notification Title"
+        content.body = "Notification Body"
+        content.sound = UNNotificationSound.default
+        var date = DateComponents()
+        date.hour = 21
+        date.minute = 45
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     /*
