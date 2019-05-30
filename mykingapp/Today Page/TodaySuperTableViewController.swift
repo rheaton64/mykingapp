@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UserNotifications
 
 struct assignments {
     var assignmentIsDone = Bool()
@@ -112,7 +111,7 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
- 
+
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
@@ -169,8 +168,6 @@ class TodaySuperTableViewController: UITableViewController {
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
-        //method for notifications
-        setupLocalNotification()
         
         //code to fix header for IPhone X
         let dummyViewHeight = CGFloat(45)
@@ -218,7 +215,7 @@ class TodaySuperTableViewController: UITableViewController {
         view.addSubview(label)
         return view
     }
-
+    
     var height = Int()
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
@@ -243,22 +240,6 @@ class TodaySuperTableViewController: UITableViewController {
         let height = CGFloat(25)
         let navigationBar = self.navigationController?.navigationBar
         navigationBar!.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
-    }
-    
-    //sets up local notification
-    func setupLocalNotification() {
-        let content = UNMutableNotificationContent()
-        content.title = "Notification Title"
-        content.body = "Notification Body"
-        content.sound = UNNotificationSound.default
-        var date = DateComponents()
-        date.hour = 21
-        date.minute = 45
-        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     /*
