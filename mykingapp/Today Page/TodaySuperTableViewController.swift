@@ -21,22 +21,11 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
 //    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
-    
-    //let instanceOfTodayView = TodaySuperTableViewController()
-    
-    //the number six below needs to be a count variable of the number of
-    //items in the assignmentClass array
-    var assignmentIsDone = Array(repeating: false, count: TodaySuperTableViewController.assignmentOfDay.count)
-    
-//    let instanceOfTodayView = TodaySuperTableViewController()
-//    var classData = [[String]]()
-//    var assignmentOfDay = [String]()
-//    var classDataForDay = [[String]]()
 
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TodaySuperTableViewController.assignmentOfDay.count
+        return SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay())
         
     }
     
@@ -47,14 +36,14 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         subcell.assignmentNumber.layer.borderColor = UIColor.orange.cgColor
         subcell.assignmentNumber.layer.borderWidth = 2
         subcell.assignmentNumber.text = "\(indexPath.row + 1)"
-        subcell.assignmentClassLbl.text = TodaySuperTableViewController.classDataForDay[indexPath.row][0]
+        subcell.assignmentClassLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).className
         subcell.assignmentClassLbl.textColor = classColor[indexPath.row]
-        subcell.assignmentHeaderLbl.text = TodaySuperTableViewController.classDataForDay[indexPath.row][2]
-        subcell.assignmentDetailLbl.text = TodaySuperTableViewController.assignmentOfDay[indexPath.row]
+        subcell.assignmentHeaderLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).name
+        subcell.assignmentDetailLbl.text = "This is a description"
         
         //handles assignments that are done to prevent reusable cell bug
-        subcell.assignmentNumber.layer.backgroundColor = assignmentIsDone[indexPath.row] ? UIColor.orange.cgColor : UIColor.white.cgColor
-        subcell.accessoryType = assignmentIsDone[indexPath.row] ? .checkmark : .none
+        subcell.assignmentNumber.layer.backgroundColor = (assignmentsToday[indexPath.row] as! singleAssignment).isDone  ? UIColor.orange.cgColor : UIColor.white.cgColor
+        subcell.accessoryType = (assignmentsToday[indexPath.row] as! singleAssignment).isDone ? .checkmark : .none
         
         return subcell
     }
@@ -79,7 +68,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         let notDoneAction = UIContextualAction(style: .normal, title:  "Not Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             doneCell.assignmentNumber.textColor = UIColor.orange
             doneCell.assignmentNumber.layer.backgroundColor = UIColor.white.cgColor
-            self.assignmentIsDone[indexPath.row] = false
+            self.toggleDoneForAssign(index: indexPath.row)
             print("Marked as not done")
             success(true)
         })
@@ -87,7 +76,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
             
             doneCell.assignmentNumber.textColor = UIColor.white
             doneCell.assignmentNumber.layer.backgroundColor = UIColor.orange.cgColor
-            self.assignmentIsDone[indexPath.row] = true
+            self.toggleDoneForAssign(index: indexPath.row)
             print("Marked as done")
             success(true)
         })
@@ -96,7 +85,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         
         //let notDone = UISwipeActionsConfiguration(actions: [notDoneAction])
         var action = UIContextualAction()
-            if (self.assignmentIsDone[indexPath.row] == true){
+            if ((assignmentsToday[indexPath.row] as! singleAssignment).isDone == true){
                 action = notDoneAction
             } else {
                 action = doneAction
@@ -104,6 +93,12 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
             let action1 = UISwipeActionsConfiguration(actions: [action])
             action1.performsFirstActionWithFullSwipe = true
             return action1
+    }
+    
+    func toggleDoneForAssign(index: Int) {
+        if var assign = assignmentsToday[index] as? singleAssignment {
+            assign.toggleDone()
+        }
     }
 }
 
@@ -116,8 +111,7 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
-    
-    
+
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
@@ -164,65 +158,16 @@ class TodaySuperTableViewController: UITableViewController {
         periodProgressBar.setProgress(Float((interval - timeLeft) / 100), animated: false)
         
     }
-   
-    
-    static var studentArray = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
-    static var assignmentOfDay = [String]()
-    static var classData = [[String]]()
-    static var classDataForDay = [[String]]()
-    
-    public var dayOfWeek = Int()
     
    
     override func viewDidLoad() {
-        
-    
+
        ProgressBar()
         super.viewDidLoad()
         dateFunc()
         getTodayItemBorder()
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
-        
-        
-        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
-        //need to pause to access the server after calling the parsing method (like in the TodaySuperTableViewController file)
-        while TodaySuperTableViewController.studentArray.name == "" {
-            sleep(UInt32(0.01))
-        }
-        TodaySuperTableViewController.classData = decodeAssignments(JSON: TodaySuperTableViewController.studentArray)
-        
-        TodaySuperTableViewController.assignmentOfDay = getIndivAssignmentArray(assignmentArray: TodaySuperTableViewController.classData, dayIndex: getCurrentDay())
-        
-        //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
-        //The array that it returns has smaller arrays full of each individual class' data in those strings
-        //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
-        //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
-        //To make this work, call the getIndivAssignmentArray function and put in the parameters
-        TodaySuperTableViewController.classDataForDay = getClassData(dayArray: TodaySuperTableViewController.assignmentOfDay)
-        
-        
-        
-        
-/*
-    
-        getLatestData(lastName: "Aysseh", firstName: "Natasha", gradYear: 19)
-        
-        //need to pause so that the server can be accessed!!! need this!!
-        while studentArray.name == "" {
-            sleep(UInt32(0.01))
-        }
-        //print(studentArray)
-        classData = decodeAssignments(JSON: studentArray)
-        
-        assignmentOfDay = getIndivAssignmentArray(assignmentArray: classData, dayIndex: getCurrentDay())
-        
-        var classDataForDay = getClassData(dayArray: assignmentOfDay)
-        print(classDataForDay)
-         
-         
- */
-        
         
         //code to fix header for IPhone X
         let dummyViewHeight = CGFloat(45)
@@ -232,100 +177,6 @@ class TodaySuperTableViewController: UITableViewController {
         let name = String(describing: loginInfo.name!)
         let grade = String(describing: loginInfo.grade!)
         print("Entered Name: \(name), Entered Grade: \(grade)")
-    }
-    
-    //This function returns the assignments of the accessed data
-    func decodeAssignments(JSON: studentData) -> [[String]] {
-        return JSON.assignments
-    }
-    
-    
-    //This function gets the assignment data for 1 day based on whichever day number you put into the parameters
-    //(days of the week start on sunday)
-    func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {
-        return assignmentArray[dayIndex]
-    }
-    
-    
-    //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation
-    //The array that it returns has smaller arrays full of each individual class' data in those strings
-    //Setup of the array: [["class title", "assignment type", "assignment name", "date assigned"], [], [], []]
-    //To access the first class and its title, you would call the assigned variable (ex: assignDay) and use a 2D array --> assignDay[0][0]
-    //To make this work, call the getIndivAssignmentArray function and put in the parameters
-    func getClassData(dayArray: [String]) -> [[String]] {
-        var newArray = [[String]]()
-        
-        for classInfo in dayArray {
-            newArray.append(classInfo.components(separatedBy: ",,"))
-        }
-        return newArray
-    }
-    
-    
-    func getLatestData(lastName: String, firstName: String, gradYear: Int) {
-        //a space is %20
-        //comma is %2C
-        //apostrophe %27
-        guard let studentURL = URL(string: "http://10.0.1.200:5000/assignments/get/testdata/\(lastName)%2C%20\(firstName)%20%27\(gradYear)") else {return}
-    
-        let request = URLRequest(url: studentURL)
-        let task = URLSession.shared.dataTask(with: request, completionHandler:
-        { (data, response, error) -> Void in
-            
-            if let data = data {
-                //this assigns the studentArray variable (made a private variable outside) to what parseJsonData returns
-                
-                TodaySuperTableViewController.studentArray = self.parseJsonData(data: data)
-            
-            }
-            if let error = error {
-                print(error)
-                return
-            }
-        })
-        task.resume()
-    }
-    
-    func parseJsonData(data: Data) -> studentData {
-        
-        let decoder = JSONDecoder()
-        var studentValues = studentData(assignments: [[]], assignmentDate: "", numAssign: 0, name: "")
-        
-        do {
-            let jsonDataReturn = try decoder.decode(studentData.self, from: data)
-            studentValues = jsonDataReturn.self
-            
-        } catch {
-            print(error)
-        }
-        return studentValues
-    }
-    
-    func getCurrentDay() -> Int {
-        let date = Date()
-        let calendar = Calendar.current
-        let dayValue = calendar.component(.weekday, from: date)
-        
-        switch dayValue {
-        case 1:
-            dayOfWeek = 0
-        case 2:
-            dayOfWeek = 1
-        case 3:
-            dayOfWeek = 2
-        case 4:
-            dayOfWeek = 3
-        case 5:
-            dayOfWeek = 4
-        case 6:
-            dayOfWeek = 5
-        case 7:
-            dayOfWeek = 6
-        default:
-            return 0
-        }
-        
-        return dayOfWeek
     }
     
     //UI Stuff
