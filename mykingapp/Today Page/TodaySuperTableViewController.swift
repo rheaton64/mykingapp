@@ -23,6 +23,13 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
 
     
+    
+    var assignmentIsDone = Array(repeating: false, count: SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay()))
+    
+    var assignmentsToday = SavedAssignments.assignmentsList[AssignmentData.getCurrentDay()]
+
+
+    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay())
