@@ -22,9 +22,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
 //    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
     
-    //let instanceOfTodayView = TodaySuperTableViewController()
-    //the number six below needs to be a count variable of the number of
-    //items in the assignmentClass array
+    
     var assignmentIsDone = Array(repeating: false, count: SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay()))
     
     var assignmentsToday = SavedAssignments.assignmentsList[AssignmentData.getCurrentDay()]
