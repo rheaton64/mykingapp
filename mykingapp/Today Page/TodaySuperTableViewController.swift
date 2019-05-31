@@ -16,33 +16,41 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var dynamicTableView: UITableView!
     
-    var assignmentDetail: [String] = ["Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all", "Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all"]
-    var assignmentClass: [String] = ["AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C", "AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C"]
+//    var assignmentDetail: [String] = ["Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all", "Do problems 1-21 odd on page 324, circle any questions you do not know how to do", "Omit #1, 22, 24, 25, 26, 27, 31, 33, 34, 35, be prepared to show me in class", "Review packet questions 1-10 all"]
+//    var assignmentClass: [String] = ["AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C", "AP CALCULUS AB", "AP COMPUTER SCIENCE A", "AP PHYSICS C"]
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
-    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
+//    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
-    //the number six below needs to be a count variable of the number of
-    //items in the assignmentClass array
-    var assignmentIsDone = Array(repeating: false, count: 6)
+
     
+    
+    var assignmentIsDone = Array(repeating: false, count: SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay()))
+    
+    var assignmentsToday = SavedAssignments.assignmentsList[AssignmentData.getCurrentDay()]
+
+
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return assignmentClass.count
+        return SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay())
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let subcell = tableView.dequeueReusableCell(withIdentifier: "dynamicCell", for: indexPath) as! AssignmentsTableViewCell
+        
         subcell.assignmentNumber.layer.cornerRadius = 21
         subcell.assignmentNumber.layer.borderColor = UIColor.orange.cgColor
         subcell.assignmentNumber.layer.borderWidth = 2
         subcell.assignmentNumber.text = "\(indexPath.row + 1)"
-        subcell.assignmentClassLbl.text = assignmentClass[indexPath.row]
+        subcell.assignmentClassLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).className
         subcell.assignmentClassLbl.textColor = classColor[indexPath.row]
-        subcell.assignmentHeaderLbl.text = assignmentHeader[indexPath.row]
-        subcell.assignmentDetailLbl.text = assignmentDetail[indexPath.row]
+        subcell.assignmentHeaderLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).name
+        subcell.assignmentDetailLbl.text = "This is a description"
         
         //handles assignments that are done to prevent reusable cell bug
-        subcell.assignmentNumber.layer.backgroundColor = assignmentIsDone[indexPath.row] ? UIColor.orange.cgColor : UIColor.white.cgColor
-        subcell.accessoryType = assignmentIsDone[indexPath.row] ? .checkmark : .none
+        subcell.assignmentNumber.layer.backgroundColor = (assignmentsToday[indexPath.row] as! singleAssignment).isDone  ? UIColor.orange.cgColor : UIColor.white.cgColor
+        subcell.accessoryType = (assignmentsToday[indexPath.row] as! singleAssignment).isDone ? .checkmark : .none
         
         return subcell
     }
@@ -67,7 +75,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         let notDoneAction = UIContextualAction(style: .normal, title:  "Not Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             doneCell.assignmentNumber.textColor = UIColor.orange
             doneCell.assignmentNumber.layer.backgroundColor = UIColor.white.cgColor
-            self.assignmentIsDone[indexPath.row] = false
+            self.toggleDoneForAssign(index: indexPath.row)
             print("Marked as not done")
             success(true)
         })
@@ -75,7 +83,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
             
             doneCell.assignmentNumber.textColor = UIColor.white
             doneCell.assignmentNumber.layer.backgroundColor = UIColor.orange.cgColor
-            self.assignmentIsDone[indexPath.row] = true
+            self.toggleDoneForAssign(index: indexPath.row)
             print("Marked as done")
             success(true)
         })
@@ -84,7 +92,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         
         //let notDone = UISwipeActionsConfiguration(actions: [notDoneAction])
         var action = UIContextualAction()
-            if (self.assignmentIsDone[indexPath.row] == true){
+            if ((assignmentsToday[indexPath.row] as! singleAssignment).isDone == true){
                 action = notDoneAction
             } else {
                 action = doneAction
@@ -92,6 +100,12 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
             let action1 = UISwipeActionsConfiguration(actions: [action])
             action1.performsFirstActionWithFullSwipe = true
             return action1
+    }
+    
+    func toggleDoneForAssign(index: Int) {
+        if var assign = assignmentsToday[index] as? singleAssignment {
+            assign.toggleDone()
+        }
     }
 }
 
@@ -104,8 +118,7 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var testsView: UIView!
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var periodProgressBar: UIProgressView!
-    
-    
+
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
     let colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
@@ -153,7 +166,9 @@ class TodaySuperTableViewController: UITableViewController {
         
     }
     
+   
     override func viewDidLoad() {
+
        ProgressBar()
         super.viewDidLoad()
         dateFunc()

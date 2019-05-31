@@ -59,7 +59,8 @@ class ScheduleViewController: UITableViewController {
     
     override func viewDidLoad() {
         
-        let letterDay = Letter.getLetterDay()
+        //use this to get the current letterday
+        //let letterDay = Letter.getLetterDay()
         
         class1.text = "Advaced Seminar Swift"
         class1.sizeToFit()
@@ -73,8 +74,11 @@ class ScheduleViewController: UITableViewController {
             green: CGFloat(colors.GetColor(color: "tan", RGBA: 1)),
             blue: CGFloat(colors.GetColor(color: "tan", RGBA: 2)),
             alpha: CGFloat(colors.GetColor(color: "tan", RGBA: 3)))
-       
-        scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: "21")
+
+        super.viewDidLoad()
+        
+        scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
+
         print("Data that I have now: \(scheduleData!.name)")
         
         week = scheduleData!.schedule

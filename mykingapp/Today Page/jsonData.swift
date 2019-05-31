@@ -22,7 +22,7 @@ func getLetterFromServer(){
             }
         }
         else   {
-            print(error)
+            print(error!)
         }
 
     })
