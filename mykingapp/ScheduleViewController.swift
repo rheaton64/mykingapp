@@ -52,7 +52,13 @@ class ScheduleViewController: UITableViewController {
     @IBOutlet weak var time7: UILabel!
     
     var scheduleData: schData?
+    var week = [[]]
     
+    func DisplayDay(letterDay: Int)
+    {
+        let currentDay = week[letterDay]
+        print(currentDay)
+    }
     
     override func viewDidLoad() {
         
@@ -77,6 +83,35 @@ class ScheduleViewController: UITableViewController {
         
         scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
         print("Data that I have now: \(scheduleData!.name)")
+        
+        week = scheduleData!.schedule
+        
+        var day = 0
+        switch letterDay {
+        case "A":
+            day = 0
+        case "B":
+            day = 1
+        case "C":
+            day = 2
+        case "D":
+            day = 3
+        case "E":
+            day = 4
+        case "F":
+            day = 5
+        case "G":
+            day = 6
+        case "H":
+            day = 7
+        default:
+            day = 0
+            
+            DisplayDay(letterDay:day)
+        }
+        
+        
+       
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -91,11 +126,7 @@ class ScheduleViewController: UITableViewController {
 //        cell!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 //    }
     
-    @IBAction func AButton(_ sender: Any) {
-        //when button s bushed info is put in
-        //to be replaces later
-      
-    }
+    
     
    
     
