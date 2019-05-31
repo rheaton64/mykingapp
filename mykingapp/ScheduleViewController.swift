@@ -54,11 +54,8 @@ class ScheduleViewController: UITableViewController {
     var scheduleData: schData?
     var week = [[]]
     
-    func DisplayDay(letterDay: Int)
-    {
-        let currentDay = week[letterDay]
-        print(currentDay)
-    }
+   
+    
     
     override func viewDidLoad() {
         
@@ -77,37 +74,95 @@ class ScheduleViewController: UITableViewController {
             blue: CGFloat(colors.GetColor(color: "tan", RGBA: 2)),
             alpha: CGFloat(colors.GetColor(color: "tan", RGBA: 3)))
        
-        
-        super.viewDidLoad()
-        
         scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: "21")
         print("Data that I have now: \(scheduleData!.name)")
         
         week = scheduleData!.schedule
-        
+        let days = Days()
         var day = 0
+        var today: [Period]
         switch letterDay {
         case "A":
             day = 0
+             today = days.GetDay(LetterDay: "A")
         case "B":
             day = 1
+             today = days.GetDay(LetterDay: "B")
         case "C":
             day = 2
+             today = days.GetDay(LetterDay: "C")
         case "D":
             day = 3
+            today = days.GetDay(LetterDay: "D")
         case "E":
             day = 4
+             today = days.GetDay(LetterDay: "E")
         case "F":
             day = 5
+            today = days.GetDay(LetterDay: "F")
         case "G":
             day = 6
+             today = days.GetDay(LetterDay: "G")
         case "H":
             day = 7
+             today = days.GetDay(LetterDay: "H")
         default:
+             today = days.GetDay(LetterDay: "A")
             day = 0
-            
-            DisplayDay(letterDay:day)
+          
         }
+        DisplayDay(letterDay:day, today: today)
+        
+        super.viewDidLoad()
+        
+        
+        }
+    
+    func DisplayDay(letterDay: Int, today: [Period])
+    {
+        var WithFrees = [String]()
+        let currentDay = week[letterDay]
+        var referance = today
+        var compDay = [[String]]()
+        referance.remove(at: 0)
+        var Free = true
+        
+        print("Current Day befor: \(currentDay)")
+        
+        for classes in currentDay {
+            compDay.append((classes as AnyObject).components(separatedBy: ",,"))
+            }
+        
+        print("Current Day after: \(currentDay)")
+        
+        print(compDay)
+    var y = 0
+        for item in currentDay
+        {
+           let sItem = item as! String
+            print(sItem)
+            var splitItem = sItem.components(separatedBy: ",,")
+            let classColor = splitItem[0]
+            y = 0
+            Free = true
+            while (y < referance.count)
+            {
+                if (classColor == referance[y].color && Free )
+                {
+                WithFrees.append(classColor)
+                Free = false
+                }
+                
+                y += 1
+            }
+            if (!Free)
+            {
+                WithFrees.append("Free")
+            }
+            
+        }
+        print(WithFrees)
+    }
         
         
        
@@ -117,7 +172,6 @@ class ScheduleViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
     
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
