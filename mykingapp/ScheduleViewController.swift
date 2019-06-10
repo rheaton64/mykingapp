@@ -60,7 +60,7 @@ class ScheduleViewController: UITableViewController {
     override func viewDidLoad() {
         
         //use this to get the current letterday
-        //let letterDay = Letter.getLetterDay()
+        let letterDay = Letter.getLetterDay()
         
         class1.text = "Advaced Seminar Swift"
         class1.sizeToFit()

@@ -170,6 +170,10 @@ class SavedAssignments: Codable {
         return assignmentsList[day].count
     }
     
+    static func orderAssignments(day: Int) {
+        //finish this once Spencer does his stuff
+    }
+    
 }
 
 struct singleAssignment {
