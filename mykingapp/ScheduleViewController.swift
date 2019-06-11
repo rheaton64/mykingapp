@@ -51,210 +51,352 @@ class ScheduleViewController: UITableViewController {
     @IBOutlet weak var room7: UILabel!
     @IBOutlet weak var time7: UILabel!
     
+    @IBAction func Forwards(_ sender: Any) {
+        if (day < 7){day += 1} else {day = 0}
+        LetterUpdate()
+        ParseDay(letterDay:3, today: today)
+        DisplayDay(letterDay: 3, today: today)
+    }
+    
+    @IBAction func Backwards(_ sender: Any) {
+    }
+    
+     let letterDay = Letter.getLetterDay()
+    
     var scheduleData: schData?
     var week = [[]]
-    
-   
-    
+    var withFrees = [[String]]()
+    var day = 0
+    var today = [Period]()
     
     override func viewDidLoad() {
         
         //use this to get the current letterday
-        //let letterDay = Letter.getLetterDay()
-        
-        class1.text = "Advaced Seminar Swift"
-        class1.sizeToFit()
-        time1.text = "1:15 (60)"
-        teacher1.text = "Dionisius, Isabelle"
-        teacher1.sizeToFit()
-        room1.text = "Rm: 215"
-        let colors = Colors()
-        Cell1.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: "tan", RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: "tan", RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: "tan", RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: "tan", RGBA: 3)))
+       
 
+        
         super.viewDidLoad()
         
         scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
-
+        
         print("Data that I have now: \(scheduleData!.name)")
         
         week = scheduleData!.schedule
-        let days = Days()
-        var day = 0
-        var today: [Period]
-        switch letterDay {
-        case "A":
-            day = 0
-             today = days.GetDay(LetterDay: "A")
-        case "B":
-            day = 1
-             today = days.GetDay(LetterDay: "B")
-        case "C":
-            day = 2
-             today = days.GetDay(LetterDay: "C")
-        case "D":
-            day = 3
-            today = days.GetDay(LetterDay: "D")
-        case "E":
-            day = 4
-             today = days.GetDay(LetterDay: "E")
-        case "F":
-            day = 5
-            today = days.GetDay(LetterDay: "F")
-        case "G":
-            day = 6
-             today = days.GetDay(LetterDay: "G")
-        case "H":
-            day = 7
-             today = days.GetDay(LetterDay: "H")
-        default:
-             today = days.GetDay(LetterDay: "A")
-            day = 0
-          
-        }
-        DisplayDay(letterDay:day, today: today)
-        
+        convertday()
+        ParseDay(letterDay:day, today: today)
+        DisplayDay(letterDay: day, today: today)
         super.viewDidLoad()
-        
-        
-        }
-    
-    func DisplayDay(letterDay: Int, today: [Period])
+    }
+
+    func LetterUpdate()
     {
-        var WithFrees = [String]()
+        let days = Days()
+        switch day {
+        case 0:
+            today = days.GetDay(LetterDay: "A")
+        case 1:
+            today = days.GetDay(LetterDay: "B")
+        case 2:
+            today = days.GetDay(LetterDay: "C")
+        case 3:
+            today = days.GetDay(LetterDay: "D")
+        case 4:
+            today = days.GetDay(LetterDay: "E")
+        case 5:
+            today = days.GetDay(LetterDay: "F")
+        case 6:
+            today = days.GetDay(LetterDay: "G")
+        case 7:
+            today = days.GetDay(LetterDay: "H")
+        default:
+            today = days.GetDay(LetterDay: "A")
+        }
+    }
+
+    
+    
+func convertday()
+{
+    let days = Days()
+    
+    switch letterDay {
+    case "A":
+        day = 0
+        today = days.GetDay(LetterDay: "A")
+    case "B":
+        day = 1
+        today = days.GetDay(LetterDay: "B")
+    case "C":
+        day = 2
+        today = days.GetDay(LetterDay: "C")
+    case "D":
+        day = 3
+        today = days.GetDay(LetterDay: "D")
+    case "E":
+        day = 4
+        today = days.GetDay(LetterDay: "E")
+    case "F":
+        day = 5
+        today = days.GetDay(LetterDay: "F")
+    case "G":
+        day = 6
+        today = days.GetDay(LetterDay: "G")
+    case "H":
+        day = 7
+        today = days.GetDay(LetterDay: "H")
+    default:
+        today = days.GetDay(LetterDay: "A")
+        day = 0
+        }
+    }
+    
+    func ParseDay(letterDay: Int, today: [Period])
+    {
+        
         let currentDay = week[letterDay]
         var referance = today
         var compDay = [[String]]()
-        referance.remove(at: 0)
-        var Free = true
         
-        print("Current Day befor: \(currentDay)")
+        referance.remove(at: 0)
         
         for classes in currentDay {
             compDay.append((classes as AnyObject).components(separatedBy: ",,"))
-            }
-        
-        print("Current Day after: \(currentDay)")
-        
-        print(compDay)
-    var y = 0
-        for item in currentDay
-        {
-           let sItem = item as! String
-            print(sItem)
-            var splitItem = sItem.components(separatedBy: ",,")
-            let classColor = splitItem[0]
-            y = 0
-            Free = true
-            while (y < referance.count)
-            {
-                if (classColor == referance[y].color && Free )
-                {
-                WithFrees.append(classColor)
-                Free = false
-                }
-                
-                y += 1
-            }
-            if (!Free)
-            {
-                WithFrees.append("Free")
-            }
-            
         }
-        print(WithFrees)
+        print (compDay)
+        
+        var f = 0
+        var r = 0
+        while(f < compDay.count && r < referance.count)
+        {
+            if compDay[f][0] == referance[r].color
+            {
+                withFrees.append(compDay[f])
+                f += 1
+            }
+            else if (r != 2)
+            {
+                withFrees.append([referance[r].color,"Free","              ", "              "])
+            }
+            else if (r == 2)
+            {
+                withFrees.append(["grey","Flex","              ", "              "])
+            }
+            r += 1
+        }
+        print(withFrees)
     }
-        
-        
+    
+    
+    
+    
+    
+    func DisplayDay(letterDay: Int, today: [Period])
+    {
+        let colors = Colors()
+        var classes = 0
        
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        class1.text = withFrees[classes][1]
+        class1.sizeToFit()
+        time1.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher1.text = withFrees[classes][2]
+        teacher1.sizeToFit()
+        if(withFrees[classes][3] != "              "){room1.text =  "Rm:" + withFrees[classes][3]}
+        Cell1.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        
+        
+        classes += 1
+        
+        
+        Class2.text = withFrees[classes][1]
+        Class2.sizeToFit()
+        time2.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher2.text = withFrees[classes][2]
+        teacher2.sizeToFit()
+        if(withFrees[classes][3] != "              "){room2.text =  "Rm:" + withFrees[classes][3]}
+        Cell2.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        
+        
+        classes += 1
+        
+        
+        class3.text = withFrees[classes][1]
+        class3.sizeToFit()
+        time3.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher3.text = withFrees[classes][2]
+        teacher3.sizeToFit()
+        if(withFrees[classes][3] != "              "){room3.text =  "Rm:" + withFrees[classes][3]}
+        Cell3.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        
+        
+        classes += 1
+        
+        
+        class4.text = withFrees[classes][1]
+        class4.sizeToFit()
+        time4.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher4.text = withFrees[classes][2]
+        teacher4.sizeToFit()
+        if(withFrees[classes][3] != "              "){room4.text =  "Rm:" + withFrees[classes][3]}
+        Cell4.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        
+        
+        classes += 1
+        
+        
+        class5.text = withFrees[classes][1]
+        class5.sizeToFit()
+        time5.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher5.text = withFrees[classes][2]
+        teacher5.sizeToFit()
+        if(withFrees[classes][3] != "              "){room5.text =  "Rm:" + withFrees[classes][3]}
+        Cell5.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        
+        
+        classes += 1
+        
+        
+        class6.text = withFrees[classes][1]
+        class6.sizeToFit()
+        time6.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher6.text = withFrees[classes][2]
+        teacher6.sizeToFit()
+        if(withFrees[classes][3] != "              "){room6.text =  "Rm:" + withFrees[classes][3]}
+        Cell6.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        
+        
+        classes += 1
+        
+        
+        class7.text = withFrees[classes][1]
+        class7.sizeToFit()
+        time7.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        teacher7.text = withFrees[classes][2]
+        teacher7.sizeToFit()
+        if(withFrees[classes][3] != "              "){room7.text =  "Rm:" + withFrees[classes][3]}
+        Cell7.backgroundColor = UIColor(
+            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+        classes += 1
+    }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        let cell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath)
-//        cell!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-//    }
     
     
     
-   
+    // Uncomment the following line to preserve selection between presentations
+    // self.clearsSelectionOnViewWillAppear = false
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        let cell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath)
+    //        cell!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+    //    }
+    
+    
+    
+    
     
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 8
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 
