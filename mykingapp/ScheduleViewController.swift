@@ -55,14 +55,15 @@ class ScheduleViewController: UITableViewController {
         if (day < 7){day += 1} else {day = 0}
         LetterUpdate()
         ParseDay(letterDay:day, today: today)
-        DisplayDay(letterDay: day, today: today)
+        DisplayDay(today: today)
     }
+    @IBOutlet weak var dayLabel: UILabel!
     
     @IBAction func Backwards(_ sender: Any) {
         if (day > 0){day -= 1} else {day = 7}
         LetterUpdate()
         ParseDay(letterDay:day, today: today)
-        DisplayDay(letterDay: day, today: today)
+        DisplayDay(today: today)
     }
     
   
@@ -90,7 +91,7 @@ class ScheduleViewController: UITableViewController {
         week = scheduleData!.schedule
         convertday()
         ParseDay(letterDay:day, today: today)
-        DisplayDay(letterDay: day, today: today)
+        DisplayDay(today: today)
         super.viewDidLoad()
     }
 
@@ -197,11 +198,11 @@ func convertday()
             }
             else if (r != 2)
             {
-                withFrees.append([referance[r].color,"Free","              ", "              "])
+                withFrees.append([referance[r].color,"Free","                      ", "                      "])
             }
             else if (r == 2)
             {
-                withFrees.append(["grey","Flex","              ", "              "])
+                withFrees.append(["grey","Flex","                      ", "                      "])
             }
             r += 1
         }
@@ -216,18 +217,19 @@ func convertday()
     
     
     
-    func DisplayDay(letterDay: Int, today: [Period])
+    func DisplayDay(today: [Period])
     {
         let colors = Colors()
         var classes = 0
-       
+        
+       dayLabel.text = letterDay + " Day"
         
         class1.text = withFrees[classes][1]
         class1.sizeToFit()
-        time1.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time1.text = GetTime(count: classes)
         teacher1.text = withFrees[classes][2]
         teacher1.sizeToFit()
-        if(withFrees[classes][3] != "              "){room1.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room1.text =  "Rm:" + withFrees[classes][3]}
         Cell1.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -240,10 +242,10 @@ func convertday()
         
         Class2.text = withFrees[classes][1]
         Class2.sizeToFit()
-        time2.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time2.text = GetTime(count: classes)
         teacher2.text = withFrees[classes][2]
         teacher2.sizeToFit()
-        if(withFrees[classes][3] != "              "){room2.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room2.text =  "Rm:" + withFrees[classes][3]}
         Cell2.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -256,10 +258,10 @@ func convertday()
         
         class3.text = withFrees[classes][1]
         class3.sizeToFit()
-        time3.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time3.text = GetTime(count: classes)
         teacher3.text = withFrees[classes][2]
         teacher3.sizeToFit()
-        if(withFrees[classes][3] != "              "){room3.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room3.text =  "Rm:" + withFrees[classes][3]}
         Cell3.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -272,10 +274,10 @@ func convertday()
         
         class4.text = withFrees[classes][1]
         class4.sizeToFit()
-        time4.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time4.text = GetTime(count: classes)
         teacher4.text = withFrees[classes][2]
         teacher4.sizeToFit()
-        if(withFrees[classes][3] != "              "){room4.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room4.text =  "Rm:" + withFrees[classes][3]}
         Cell4.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -288,10 +290,10 @@ func convertday()
         
         class5.text = withFrees[classes][1]
         class5.sizeToFit()
-        time5.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time5.text = GetTime(count: classes)
         teacher5.text = withFrees[classes][2]
         teacher5.sizeToFit()
-        if(withFrees[classes][3] != "              "){room5.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room5.text =  "Rm:" + withFrees[classes][3]}
         Cell5.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -304,10 +306,10 @@ func convertday()
         
         class6.text = withFrees[classes][1]
         class6.sizeToFit()
-        time6.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time6.text = GetTime(count: classes)
         teacher6.text = withFrees[classes][2]
         teacher6.sizeToFit()
-        if(withFrees[classes][3] != "              "){room6.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room6.text =  "Rm:" + withFrees[classes][3]}
         Cell6.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -320,16 +322,41 @@ func convertday()
         
         class7.text = withFrees[classes][1]
         class7.sizeToFit()
-        time7.text = ("\(today[classes+1].start/100):\(today[classes+1].start%100) - \(today[classes+1].end/100):\(today[classes+1].end%100)")
+        time7.text = GetTime(count: classes)
         teacher7.text = withFrees[classes][2]
         teacher7.sizeToFit()
-        if(withFrees[classes][3] != "              "){room7.text =  "Rm:" + withFrees[classes][3]}
+        if(withFrees[classes][3] != "                      "){room7.text =  "Rm:" + withFrees[classes][3]}
         Cell7.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
             blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
             alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         classes += 1
+    }
+    
+    func GetTime (count: Int) -> String
+    {
+        var time = ""
+        var leading = 0
+        var trailing = 0
+        var leading2 = 0
+        var trailing2 = 0
+        var changer1 = today[count+1].start
+        var changer2 = today[count+1].end
+        
+        if (changer1 >= 1300) {changer1 -= 1200}
+        leading = changer1 / 100
+        trailing = changer1 % 100
+        while (trailing < 10 && trailing != 0) {trailing = trailing * 10}
+        
+        if (changer2 >= 1300) {changer2 -= 1200}
+        leading2 = changer2 / 100
+        trailing2 = changer2 % 100
+        while (trailing2 < 10 && trailing2 != 0) {trailing2 = trailing2 * 10}
+        
+        time += "\(leading):\(trailing) - \(leading2):\(trailing2)"
+        
+        return time
     }
     
     
