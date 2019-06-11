@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+// the lables for all of the static cells
 class ScheduleViewController: UITableViewController {
      @IBOutlet weak var Cell1: UITableViewCell!
     @IBOutlet weak var class1: UILabel!
@@ -50,7 +50,7 @@ class ScheduleViewController: UITableViewController {
     @IBOutlet weak var teacher7: UILabel!
     @IBOutlet weak var room7: UILabel!
     @IBOutlet weak var time7: UILabel!
-    
+    //updates the day value and as a result re calculates the day and displays the next day schedulale
     @IBAction func Forwards(_ sender: Any) {
         if (day < 7){day += 1} else {day = 0}
         LetterUpdate()
@@ -67,9 +67,8 @@ class ScheduleViewController: UITableViewController {
     }
     
   
-    
+    //seting up variables for later
     var letterDay = Letter.getLetterDay()
-    
     var scheduleData: schData?
     var week = [[]]
     var withFrees = [[String]]()
@@ -83,18 +82,17 @@ class ScheduleViewController: UITableViewController {
 
         
         super.viewDidLoad()
-        
+        //get the schedule data. will be replaced for a user by user baisis
         scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
-        
-        print("Data that I have now: \(scheduleData!.name)")
-        
+        // getting this weeks schedule
         week = scheduleData!.schedule
+        //calling functions
         convertday()
         ParseDay(letterDay:day, today: today)
         DisplayDay(today: today)
         super.viewDidLoad()
     }
-
+    // this func updates my variables once the user presses the change day button
     func LetterUpdate()
     {
         let days = Days()
@@ -133,7 +131,7 @@ class ScheduleViewController: UITableViewController {
     }
 
     
-    
+ //this function traslates the leter day into a numerical value (only run on first display)
 func convertday()
 {
     let days = Days()
@@ -169,7 +167,7 @@ func convertday()
         
         }
     }
-    
+    //this function takes the broken shedule data and fills in frees and fles
     func ParseDay(letterDay: Int, today: [Period])
     {
         
@@ -180,7 +178,7 @@ func convertday()
         var compDay = [[String]]()
         
         referance.remove(at: 0)
-        
+        //breaking the json into an array
         for classes in currentDay {
             compDay.append((classes as AnyObject).components(separatedBy: ",,"))
         }
@@ -188,48 +186,54 @@ func convertday()
         
         var f = 0
         var r = 0
+        //goes throug all of the refrence shedule and broke shedule and creates a mended one fit for display
         while(f < compDay.count && r < referance.count)
         {
-            
+            //checking if the students shedule has class at a given color
             if compDay[f][0] == referance[r].color
             {
+                //if so it adds it to the fixed shedule
                 withFrees.append(compDay[f])
                 f += 1
             }
             else if (r != 2)
             {
+                //if not and its not the flex block it adds a free into the fixed schedule
                 withFrees.append([referance[r].color,"Free","                      ", "                      "])
             }
             else if (r == 2)
             {
+                //if its flex it adds a flex block into the fixed schedule
                 withFrees.append(["grey","Flex","                      ", "                      "])
             }
             r += 1
         }
+        // if the user has free last my logic skips it so this just adds on the missing free
         if ( withFrees.count < 7)
         {
-         withFrees.append([referance[r].color,"Free","              ", "              "])
+         withFrees.append([referance[r].color,"Free","                      ", "                      "])
         }
-        print("dem free \(withFrees)")
     }
     
     
     
     
-    
+    // this function goes througe and takes the amended schedule and displays it int the cells
     func DisplayDay(today: [Period])
     {
         let colors = Colors()
         var classes = 0
-        
+        //updating the top label to the proper day
        dayLabel.text = letterDay + " Day"
-        
-        class1.text = withFrees[classes][1]
+        //i am only doing comments on the first one because they are the same
+        class1.text = withFrees[classes][1] //gets the class name form fixed schedule
         class1.sizeToFit()
-        time1.text = GetTime(count: classes)
-        teacher1.text = withFrees[classes][2]
+        time1.text = GetTime(count: classes) //uses ger time func to display start stop in 12 hour format
+        teacher1.text = withFrees[classes][2] //displays teacher name
         teacher1.sizeToFit()
+        // chcks if it a free or not and then displays room number
         if(withFrees[classes][3] != "                      "){room1.text =  "Rm:" + withFrees[classes][3]}
+       // sets backgound coller based of period color and saved values in color struct
         Cell1.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -333,7 +337,7 @@ func convertday()
             alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         classes += 1
     }
-    
+    // this function splits the time thats saved like (xxxx) into (xx xx) ie 1230 goes to 12 30 it then covets 24 hour into 12 houre ie 1330 goes to 1 30 and then it returns it as a combind string
     func GetTime (count: Int) -> String
     {
         var time = ""
@@ -344,17 +348,17 @@ func convertday()
         var changer1 = today[count+1].start
         var changer2 = today[count+1].end
         
-        if (changer1 >= 1300) {changer1 -= 1200}
-        leading = changer1 / 100
-        trailing = changer1 % 100
-        while (trailing < 10 && trailing != 0) {trailing = trailing * 10}
+        if (changer1 >= 1300) {changer1 -= 1200} // coverting 24 hour time to 12 hour time
+        leading = changer1 / 100// gettig the leading num
+        trailing = changer1 % 100 //getting the trailing num
+        while (trailing < 10 && trailing != 0) {trailing = trailing * 10} //fixing the issue where perfect 10s retun one value
         
-        if (changer2 >= 1300) {changer2 -= 1200}
+        if (changer2 >= 1300) {changer2 -= 1200} //same as above
         leading2 = changer2 / 100
         trailing2 = changer2 % 100
         while (trailing2 < 10 && trailing2 != 0) {trailing2 = trailing2 * 10}
         
-        time += "\(leading):\(trailing) - \(leading2):\(trailing2)"
+        time += "\(leading):\(trailing) - \(leading2):\(trailing2)" //combining the two
         
         return time
     }
