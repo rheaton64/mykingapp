@@ -54,14 +54,20 @@ class ScheduleViewController: UITableViewController {
     @IBAction func Forwards(_ sender: Any) {
         if (day < 7){day += 1} else {day = 0}
         LetterUpdate()
-        ParseDay(letterDay:3, today: today)
-        DisplayDay(letterDay: 3, today: today)
+        ParseDay(letterDay:day, today: today)
+        DisplayDay(letterDay: day, today: today)
     }
     
     @IBAction func Backwards(_ sender: Any) {
+        if (day > 0){day -= 1} else {day = 7}
+        LetterUpdate()
+        ParseDay(letterDay:day, today: today)
+        DisplayDay(letterDay: day, today: today)
     }
     
-     let letterDay = Letter.getLetterDay()
+  
+    
+    var letterDay = Letter.getLetterDay()
     
     var scheduleData: schData?
     var week = [[]]
@@ -91,25 +97,37 @@ class ScheduleViewController: UITableViewController {
     func LetterUpdate()
     {
         let days = Days()
+        
         switch day {
         case 0:
             today = days.GetDay(LetterDay: "A")
+            letterDay = "A"
         case 1:
             today = days.GetDay(LetterDay: "B")
+            letterDay = "B"
         case 2:
             today = days.GetDay(LetterDay: "C")
+            letterDay = "C"
         case 3:
             today = days.GetDay(LetterDay: "D")
+            letterDay = "D"
         case 4:
             today = days.GetDay(LetterDay: "E")
+            letterDay = "E"
         case 5:
             today = days.GetDay(LetterDay: "F")
+            letterDay = "F"
         case 6:
             today = days.GetDay(LetterDay: "G")
+            letterDay = "G"
         case 7:
             today = days.GetDay(LetterDay: "H")
+            letterDay = "H"
         default:
             today = days.GetDay(LetterDay: "A")
+            letterDay = "A"
+            
+           
         }
     }
 
@@ -147,11 +165,14 @@ func convertday()
     default:
         today = days.GetDay(LetterDay: "A")
         day = 0
+        
         }
     }
     
     func ParseDay(letterDay: Int, today: [Period])
     {
+        
+        withFrees = [[String]]()
         
         let currentDay = week[letterDay]
         var referance = today
@@ -162,12 +183,13 @@ func convertday()
         for classes in currentDay {
             compDay.append((classes as AnyObject).components(separatedBy: ",,"))
         }
-        print (compDay)
+        
         
         var f = 0
         var r = 0
         while(f < compDay.count && r < referance.count)
         {
+            
             if compDay[f][0] == referance[r].color
             {
                 withFrees.append(compDay[f])
@@ -183,7 +205,11 @@ func convertday()
             }
             r += 1
         }
-        print(withFrees)
+        if ( withFrees.count < 7)
+        {
+         withFrees.append([referance[r].color,"Free","              ", "              "])
+        }
+        print("dem free \(withFrees)")
     }
     
     
