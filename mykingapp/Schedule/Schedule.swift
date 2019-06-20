@@ -52,7 +52,7 @@ struct Days
                 Period(Color: "Yellow", Start: 1035, End: 1130),
                 Period(Color: "Pink", Start: 1130, End: 1320),
                 Period(Color: "Red", Start: 1320, End: 1415),
-                Period(Color: "Green", Start: 1415, End: 1515)]
+                Period(Color: "Orange", Start: 1415, End: 1515)]
     
     let dDay = [Period(Color: "Grey", Start: 800, End: 810),
                 Period(Color: "Blue", Start: 810, End: 905),
