@@ -50,11 +50,13 @@ class ScheduleViewController: UITableViewController {
     @IBOutlet weak var teacher7: UILabel!
     @IBOutlet weak var room7: UILabel!
     @IBOutlet weak var time7: UILabel!
+    
     //updates the day value and as a result re calculates the day and displays the next day schedulale
     @IBAction func Forwards(_ sender: Any) {
         if (day < 7){day += 1} else {day = 0}
         LetterUpdate()
         ParseDay(letterDay:day, today: today)
+        stringformat()
         DisplayDay(today: today)
     }
     @IBOutlet weak var dayLabel: UILabel!
@@ -63,6 +65,7 @@ class ScheduleViewController: UITableViewController {
         if (day > 0){day -= 1} else {day = 7}
         LetterUpdate()
         ParseDay(letterDay:day, today: today)
+        stringformat()
         DisplayDay(today: today)
     }
     
@@ -89,7 +92,9 @@ class ScheduleViewController: UITableViewController {
         //calling functions
         convertday()
         ParseDay(letterDay:day, today: today)
+        stringformat()
         DisplayDay(today: today)
+        
         super.viewDidLoad()
     }
     // this func updates my variables once the user presses the change day button
@@ -364,6 +369,31 @@ func convertday()
     }
     
     
+    func stringformat()
+    {
+        var x = 0
+        for words in withFrees
+        {
+            let temp = words[2]
+            let cut = temp.firstIndex(of: " ")
+            let end = temp.endIndex
+            let start = temp.startIndex
+            let first = temp[start]
+            let new = temp[cut!..<end]
+            var anotherFuckingVariableFuckYouXcode = " "
+            if (first != " ")
+            {
+             anotherFuckingVariableFuckYouXcode = "\(first).\(new)"
+            }
+            
+            withFrees[x][2] = anotherFuckingVariableFuckYouXcode
+            
+            x += 1
+           
+        }
+    }
+    
+    
     
     
     // Uncomment the following line to preserve selection between presentations
@@ -392,7 +422,7 @@ func convertday()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 8
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
