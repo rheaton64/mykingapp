@@ -316,9 +316,9 @@ func convertday()
         classes += 1
         
         
-        if(lunchData[day]){
+        if(lunchData[day]){ //checking if it is first lunch
             timeLunch1.text = "11:30 - 12:00"
-            lunch1.backgroundColor = UIColor(
+            lunch1.backgroundColor = UIColor( //setting the first lunch block as a blank
                 red: CGFloat(0.502),
                 green: CGFloat(0.502),
                 blue: CGFloat(0.502),
@@ -326,7 +326,7 @@ func convertday()
             classLunch1.text = "Lunch"
             teacherlunch1.text = ""
             
-            classLunch2.text = ""
+            classLunch2.text = ""  //setting up the second lunch block as the three bottom labels
             timeLunch2.text = "12:00 - 1:20"
             teacherLunch2.text = withFrees[classes][2]
             teacherLunch2.sizeToFit()
@@ -340,7 +340,7 @@ func convertday()
           
         }
         else {
-            classLunch1.text = withFrees[classes][1]
+            classLunch1.text = withFrees[classes][1] //setting the first block as the top half of the class
             classLunch1.sizeToFit()
              timeLunch1.text = ""
             lunch1.backgroundColor = UIColor(
@@ -349,7 +349,7 @@ func convertday()
                 blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
                 alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
             
-            timeLunch2.text = "12:50 - 1:20"
+            timeLunch2.text = "12:50 - 1:20" //setting the second block as the lunch
             lunch2.backgroundColor = UIColor(
                 red: CGFloat(0.502),
                 green: CGFloat(0.502),
@@ -360,7 +360,7 @@ func convertday()
             
         }
         class5.text = ""
-        time5.text = ""
+        time5.text = "" //setting the block as an aproprite middle section depending on first or second lunch.
         teacher5.text = ""
         room5.text = ""
         
