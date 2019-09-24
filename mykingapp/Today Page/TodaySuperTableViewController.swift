@@ -21,10 +21,11 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     var classColor: [UIColor] = [UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple, UIColor(red: 1, green: 0.0784, blue: 0.5765, alpha: 1.0), .orange, .purple]
 //    var assignmentHeader: [String] = ["5.1 B", "AP Review Questions", "Rotational Motion", "5.1 B", "AP Review Questions", "Rotational Motion"]
     
-
+    let letter = Letter.getLetterDay() // replace with json request
     
+    var schData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
     
-    var assignmentIsDone = Array(repeating: false, count: SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay()))
+    var assignmentIsDone = Array(repeating: false, count: SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay(), letter: Letter.getLetterDay()))
     
     var assignmentsToday = SavedAssignments.assignmentsList[AssignmentData.getCurrentDay()]
 
@@ -32,7 +33,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay())
+        return SavedAssignments.initAndDayCount(day: AssignmentData.getCurrentDay(), letter: letter)
         
     }
     
@@ -44,7 +45,7 @@ class DataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
         subcell.assignmentNumber.layer.borderWidth = 2
         subcell.assignmentNumber.text = "\(indexPath.row + 1)"
         subcell.assignmentClassLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).className
-        subcell.assignmentClassLbl.textColor = classColor[indexPath.row]
+        subcell.assignmentClassLbl.textColor = UIColor(red: CGFloat(Color.GetColor(color: (assignmentsToday[indexPath.row] as! singleAssignment).classColor.lowercased(), RGBA: 0)), green: CGFloat(Color.GetColor(color: (assignmentsToday[indexPath.row] as! singleAssignment).classColor.lowercased(), RGBA: 1)), blue: CGFloat(Color.GetColor(color: (assignmentsToday[indexPath.row] as! singleAssignment).classColor.lowercased(), RGBA: 2)), alpha: 1.0)
         subcell.assignmentHeaderLbl.text = (assignmentsToday[indexPath.row] as! singleAssignment).name
         subcell.assignmentDetailLbl.text = "This is a description"
         
@@ -120,13 +121,13 @@ class TodaySuperTableViewController: UITableViewController {
     @IBOutlet weak var periodProgressBar: UIProgressView!
 
     let sections: [String] = ["", "TODAY", "ASSIGNMENTS"]
-    let colors: [UIColor] = [.white, .red, .orange]
+    let Colors: [UIColor] = [.white, .red, .orange]
     var datasource = DataSource()
     
     func ProgressBar()
     {
         let day = Days() // creating instance of day struct
-        let letter = Letter.getLetterDay() // replace with json request
+        let letter = Letter.getLetterDay()
         let schedule = day.GetDay(LetterDay: letter)//getting array of the curent scheduale
         let date = Date()// creating date object
         let calendar = Calendar.current// creating calender object
@@ -134,7 +135,6 @@ class TodaySuperTableViewController: UITableViewController {
         let minutes = calendar.component(.minute, from: date)// getting the current min
         let time = (hour * 100) + minutes// combinding hours is HHMM format as int
         let period = day.GetPeriod(time: time)//requetsting current period giving time HHMM
-        let colors = Colors() //Creating instace of color struct
         
         letterDayLabel.text? = letter
         
@@ -142,18 +142,18 @@ class TodaySuperTableViewController: UITableViewController {
         //I provide the current period's.color object for the color parameter
         // i the provide the respective number for the rgba paramater
         periodProgressBar.trackTintColor = UIColor(
-            red: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: schedule[period].color, RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: schedule[period].color, RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: schedule[period].color, RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: schedule[period].color, RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: schedule[period].color, RGBA: 3)))
         
         if period < 7 {
             //same as above
         periodProgressBar.progressTintColor = UIColor(
-            red: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: schedule[period+1].color, RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: schedule[period+1].color, RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: schedule[period+1].color, RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: schedule[period+1].color, RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: schedule[period+1].color, RGBA: 3)))
         }
         else {
             //displaying white for no class
@@ -166,6 +166,14 @@ class TodaySuperTableViewController: UITableViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        
+        //code to fix header for IPhone X
+        let dummyViewHeight = CGFloat(45)
+        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+    }
+    
    
     override func viewDidLoad() {
 
@@ -176,14 +184,11 @@ class TodaySuperTableViewController: UITableViewController {
         dynamicTableView.dataSource = datasource
         dynamicTableView.delegate = datasource
         
-        //code to fix header for IPhone X
-        let dummyViewHeight = CGFloat(45)
-        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+        
         
         //STRINGS HOLDING NAME AND GRADE, FOR JSON
-        let name = String(describing: loginInfo.name!)
-        let grade = String(describing: loginInfo.grade!)
-        print("Entered Name: \(name), Entered Grade: \(grade)")
+        let email = String(describing: loginInfo.email!)
+        let pass = String(describing: loginInfo.pass!)
     }
     
     //UI Stuff
@@ -218,7 +223,7 @@ class TodaySuperTableViewController: UITableViewController {
         label.text = sections[section]
         label.frame = CGRect(x: 16, y: 5, width: 200, height: 35)
         label.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
-        label.textColor = colors[section]
+        label.textColor = Colors[section]
         view.addSubview(label)
         return view
     }

@@ -10,7 +10,7 @@ import Foundation
 
 //struct holds 
 struct loginInfo {
-    static var name: String?
-    static var grade: String?
+    static var email: String?
+    static var pass: String?
     
 }
