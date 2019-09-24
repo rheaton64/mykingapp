@@ -151,7 +151,7 @@ class SavedAssignments: Codable {
             }
             let dayData = getClassData(dayArray: arr)
             for assignInfo in dayData {
-                let tempAssign = singleAssignment(className: assignInfo[0], type: assignInfo[1], name: assignInfo[2], dateAssigned: assignInfo[3], weekdayDue: Int(assignInfo[4])!, isDone: false)
+                let tempAssign = singleAssignment(className: assignInfo[0], type: assignInfo[1], name: assignInfo[2], dateAssigned: assignInfo[3], weekdayDue: Int(assignInfo[4])!, classColor: "", isDone: false)
                 assignmentsList[count].append(tempAssign)
             }
         count += 1
@@ -161,17 +161,67 @@ class SavedAssignments: Codable {
         }
     }
     
-    static func initAndDayCount(day: Int) -> Int{
+    static func initAndDayCount(day: Int, letter: String) -> Int{
         if !isInit {
         AssignmentData.getAssignmentData(fName: "Ryan", lName: "Heaton", grade: 21)
         SavedAssignments.parseToArrObs(classData: decodeAssignments(JSON: AssignmentData.assignmentJsonData!))
         isInit = true
         }
+        orderAssignments(day: day, letter: letter)
         return assignmentsList[day].count
     }
     
-    static func orderAssignments(day: Int) {
-        //finish this once Spencer does his stuff
+    static func orderAssignments(day: Int, letter: String) {
+        let schData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
+        var schedule = [[String]](repeating: [String](repeating: "", count: 4), count: 8)
+        for item in schData.schedule {
+            for list in item {
+                schedule.append(list.components(separatedBy: ",,"))
+            }
+        }
+        var dayNum = convertLetterToNum(letterDay: letter)
+        for _ in 1...day {
+            dayNum -= 1
+            if dayNum == -1 {
+                dayNum = 7
+            }
+        }
+
+        let days = Days()
+        var newAssignmentsList = assignmentsList
+        for i in 0...6 {
+            newAssignmentsList[i].removeAll()
+        }
+        var dayNumber = 0
+        for singleDay in assignmentsList {
+            
+            let workingDay = days.GetDay(LetterDay: convertNumToLetter(letterDay: dayNum))
+            for period in workingDay {
+                var workingClassName = ""
+                for item in schedule {
+                    if item.contains(period.color) {
+                        workingClassName = item[1]
+                        //print(workingClassName)
+                    }
+                }
+                for item in singleDay {
+                    var dayItem = item as! singleAssignment
+                    let end = dayItem.className.index(dayItem.className.endIndex, offsetBy: -4)
+                    let range = ...end
+                    let tempName = dayItem.className[range]
+                    let name = String(tempName)
+                    print("\(name) =--= \(workingClassName)")
+                    if name == workingClassName {
+                        dayItem.classColor = period.color
+                        newAssignmentsList[dayNumber].append(dayItem)
+                    }
+                    
+                }
+            }
+            dayNumber += 1
+        }
+        print(newAssignmentsList)
+        assignmentsList = newAssignmentsList
     }
     
 }
@@ -182,6 +232,7 @@ struct singleAssignment {
     let name: String
     let dateAssigned: String
     let weekdayDue: Int
+    var classColor: String
     var isDone = false
     
     mutating func toggleDone() {
@@ -200,6 +251,64 @@ func decodeAssignments(JSON: studentData) -> [[String]] {
 //(days of the week start on sunday)
 func getIndivAssignmentArray(assignmentArray: [[String]], dayIndex: Int) -> [String] {
     return assignmentArray[dayIndex]
+}
+
+func convertLetterToNum(letterDay: String) -> Int
+{
+    var day = 0
+    switch letterDay {
+    
+    case "A":
+        day = 0
+    case "B":
+        day = 1
+    case "C":
+        day = 2
+    case "D":
+        day = 3
+    case "E":
+        day = 4
+    case "F":
+        day = 5
+    case "G":
+        day = 6
+    case "H":
+        day = 7
+    default:
+        day = 0
+        
+
+    }
+        return day
+}
+
+func convertNumToLetter(letterDay: Int) -> String
+{
+    var day = ""
+    switch letterDay {
+        
+    case 0:
+        day = "A"
+    case 1:
+        day = "B"
+    case 2:
+        day = "C"
+    case 3:
+        day = "D"
+    case 4:
+        day = "E"
+    case 5:
+        day = "F"
+    case 6:
+        day = "G"
+    case 7:
+        day = "H"
+    default:
+        day = "A"
+        
+        
+    }
+    return day
 }
 
 //This returns an array that has each part of the classInfo strings separated into different strings by using the ",," dividers as separation

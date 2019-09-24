@@ -10,7 +10,7 @@ import Foundation
 
 //need this
 
-struct Colors {
+struct Color {
     // array of all colors we use stored as [red,green,blue,alpha]
     //used for UIColor(red:CGFloat , green:CGFloat, blue:CGFloat, alpha:CGFloat)
     var white =  [1.0, 1.0, 1.0, 1.0]
@@ -28,9 +28,9 @@ struct Colors {
     // by inputing the collor you want and a number for the respective rgba value it will return it
     //example GetColor(color: tan, RGBA: 1) will return the blue value of tan
     // 0 = red, 1 = green, 2 = blue, 3 = alpha
-    func GetColor(color: String, RGBA: Int) -> Double
+    static func GetColor(color: String, RGBA: Int) -> Double
     {
-        let colors = Colors()
+        let colors = Color()
         switch color {
         case "tan":
             return colors.tan[RGBA]

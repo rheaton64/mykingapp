@@ -221,7 +221,6 @@ func convertday()
     // this function goes througe and takes the amended schedule and displays it int the cells
     func DisplayDay(today: [Period])
     {
-        let colors = Colors()
         var classes = 0
         //updating the top label to the proper day
        dayLabel.text = letterDay + " Day"
@@ -235,10 +234,10 @@ func convertday()
         if(withFrees[classes][3] != "                      "){room1.text =  "Rm:" + withFrees[classes][3]}
        // sets backgound coller based of period color and saved values in color struct
         Cell1.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         
         
         classes += 1
@@ -251,10 +250,10 @@ func convertday()
         teacher2.sizeToFit()
         if(withFrees[classes][3] != "                      "){room2.text =  "Rm:" + withFrees[classes][3]}
         Cell2.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         
         
         classes += 1
@@ -267,10 +266,10 @@ func convertday()
         teacher3.sizeToFit()
         if(withFrees[classes][3] != "                      "){room3.text =  "Rm:" + withFrees[classes][3]}
         Cell3.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         
         
         classes += 1
@@ -283,10 +282,10 @@ func convertday()
         teacher4.sizeToFit()
         if(withFrees[classes][3] != "                      "){room4.text =  "Rm:" + withFrees[classes][3]}
         Cell4.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         
         
         classes += 1
@@ -299,10 +298,10 @@ func convertday()
         teacher5.sizeToFit()
         if(withFrees[classes][3] != "                      "){room5.text =  "Rm:" + withFrees[classes][3]}
         Cell5.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         
         
         classes += 1
@@ -315,10 +314,10 @@ func convertday()
         teacher6.sizeToFit()
         if(withFrees[classes][3] != "                      "){room6.text =  "Rm:" + withFrees[classes][3]}
         Cell6.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         
         
         classes += 1
@@ -331,10 +330,10 @@ func convertday()
         teacher7.sizeToFit()
         if(withFrees[classes][3] != "                      "){room7.text =  "Rm:" + withFrees[classes][3]}
         Cell7.backgroundColor = UIColor(
-            red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-            green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-            blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-            alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+            green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+            blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+            alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
         classes += 1
     }
     // this function splits the time thats saved like (xxxx) into (xx xx) ie 1230 goes to 12 30 it then covets 24 hour into 12 houre ie 1330 goes to 1 30 and then it returns it as a combind string
