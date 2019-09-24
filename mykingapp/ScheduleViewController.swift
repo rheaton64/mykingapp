@@ -331,10 +331,10 @@ func convertday()
             teacherLunch2.sizeToFit()
             if(withFrees[classes][3] != "                      "){room5.text =  "Rm:" + withFrees[classes][3]}
             lunch2.backgroundColor = UIColor(
-                red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-                green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-                blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-                alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+                red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+                green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+                blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+                alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
             
           
         }
@@ -343,10 +343,10 @@ func convertday()
             classLunch1.sizeToFit()
              timeLunch1.text = ""
             lunch1.backgroundColor = UIColor(
-                red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
-                green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
-                blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
-                alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+                red: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+                green: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+                blue: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+                alpha: CGFloat(Color.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
             
             timeLunch2.text = "12:50 - 1:20" //setting the second block as the lunch
             lunch2.backgroundColor = UIColor(
