@@ -50,11 +50,29 @@ class ScheduleViewController: UITableViewController {
     @IBOutlet weak var teacher7: UILabel!
     @IBOutlet weak var room7: UILabel!
     @IBOutlet weak var time7: UILabel!
+    
+    @IBOutlet weak var lunch1: UITableViewCell!
+    @IBOutlet weak var classLunch1: UILabel!
+    @IBOutlet weak var teacherlunch1: UILabel!
+    @IBOutlet weak var roomLunch1: UILabel!
+    @IBOutlet weak var timeLunch1: UILabel!
+    
+    @IBOutlet weak var lunch2: UITableViewCell!
+    @IBOutlet weak var classLunch2: UILabel!
+    @IBOutlet weak var teacherLunch2: UILabel!
+    @IBOutlet weak var roomLunch2: UILabel!
+    @IBOutlet weak var timeLunch2: UILabel!
+    
+    
+    
+    
+    
     //updates the day value and as a result re calculates the day and displays the next day schedulale
     @IBAction func Forwards(_ sender: Any) {
         if (day < 7){day += 1} else {day = 0}
         LetterUpdate()
         ParseDay(letterDay:day, today: today)
+        stringformat()
         DisplayDay(today: today)
     }
     @IBOutlet weak var dayLabel: UILabel!
@@ -63,6 +81,7 @@ class ScheduleViewController: UITableViewController {
         if (day > 0){day -= 1} else {day = 7}
         LetterUpdate()
         ParseDay(letterDay:day, today: today)
+        stringformat()
         DisplayDay(today: today)
     }
     
@@ -74,7 +93,7 @@ class ScheduleViewController: UITableViewController {
     var withFrees = [[String]]()
     var day = 0
     var today = [Period]()
-    
+    var lunchData = [Bool]()
     override func viewDidLoad() {
         
         //use this to get the current letterday
@@ -84,12 +103,16 @@ class ScheduleViewController: UITableViewController {
         super.viewDidLoad()
         //get the schedule data. will be replaced for a user by user baisis
         scheduleData = ScheduleData.getScheduleData(fName: "Ryan", lName: "Heaton", grade: 21)
+        
         // getting this weeks schedule
         week = scheduleData!.schedule
+        lunchData = scheduleData!.isFirstLunch
         //calling functions
         convertday()
         ParseDay(letterDay:day, today: today)
+        stringformat()
         DisplayDay(today: today)
+        
         super.viewDidLoad()
     }
     // this func updates my variables once the user presses the change day button
@@ -174,6 +197,7 @@ func convertday()
         withFrees = [[String]]()
         
         let currentDay = week[letterDay]
+        print(currentDay)
         var referance = today
         var compDay = [[String]]()
         
@@ -292,12 +316,65 @@ func convertday()
         classes += 1
         
         
+        if(lunchData[day]){ //checking if it is first lunch
+            timeLunch1.text = "11:30 - 12:00"
+            lunch1.backgroundColor = UIColor( //setting the first lunch block as a blank
+                red: CGFloat(0.502),
+                green: CGFloat(0.502),
+                blue: CGFloat(0.502),
+                alpha: CGFloat(1.0))
+            classLunch1.text = "Lunch"
+            teacherlunch1.text = ""
+            
+            classLunch2.text = ""  //setting up the second lunch block as the three bottom labels
+            timeLunch2.text = "12:00 - 1:20"
+            teacherLunch2.text = withFrees[classes][2]
+            teacherLunch2.sizeToFit()
+            if(withFrees[classes][3] != "                      "){room5.text =  "Rm:" + withFrees[classes][3]}
+            lunch2.backgroundColor = UIColor(
+                red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+                green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+                blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+                alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            
+          
+        }
+        else {
+            classLunch1.text = withFrees[classes][1] //setting the first block as the top half of the class
+            classLunch1.sizeToFit()
+             timeLunch1.text = ""
+            lunch1.backgroundColor = UIColor(
+                red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
+                green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
+                blue: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 2)),
+                alpha: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 3)))
+            
+            timeLunch2.text = "12:50 - 1:20" //setting the second block as the lunch
+            lunch2.backgroundColor = UIColor(
+                red: CGFloat(0.502),
+                green: CGFloat(0.502),
+                blue: CGFloat(0.502),
+                alpha: CGFloat(1.0))
+            classLunch2.text = "Lunch"
+            teacherLunch2.text = ""
+            
+        }
+        class5.text = ""
+        time5.text = "" //setting the block as an aproprite middle section depending on first or second lunch.
+        teacher5.text = ""
+        room5.text = ""
+        
+        if (lunchData[day]){
         class5.text = withFrees[classes][1]
         class5.sizeToFit()
+            }
+        else {
+        class5.text = ""
         time5.text = GetTime(count: classes)
         teacher5.text = withFrees[classes][2]
         teacher5.sizeToFit()
         if(withFrees[classes][3] != "                      "){room5.text =  "Rm:" + withFrees[classes][3]}
+        }
         Cell5.backgroundColor = UIColor(
             red: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 0)),
             green: CGFloat(colors.GetColor(color: withFrees[classes][0].lowercased(), RGBA: 1)),
@@ -364,6 +441,31 @@ func convertday()
     }
     
     
+    func stringformat()
+    {
+        var x = 0
+        for words in withFrees
+        {
+            let temp = words[2]
+            let cut = temp.firstIndex(of: " ")
+            let end = temp.endIndex
+            let start = temp.startIndex
+            let first = temp[start]
+            let new = temp[cut!..<end]
+            var anotherFuckingVariableFuckYouXcode = " "
+            if (first != " ")
+            {
+             anotherFuckingVariableFuckYouXcode = "\(first).\(new)"
+            }
+            
+            withFrees[x][2] = anotherFuckingVariableFuckYouXcode
+            
+            x += 1
+           
+        }
+    }
+    
+    
     
     
     // Uncomment the following line to preserve selection between presentations
@@ -392,7 +494,7 @@ func convertday()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 8
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
